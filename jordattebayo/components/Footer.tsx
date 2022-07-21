@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import styles from "./footer.module.sass";
 
 export default function AboutPage() {
 
@@ -31,7 +30,7 @@ export default function AboutPage() {
   }
 
   return (
-    <footer className={styles.footer}>
+    <footer >
      {/*  <div className={styles.container}>
         <p className={styles.ctaText}>If you're picking up what I'm putting down join my mailing list.</p>
         <div className={styles.inputContainer}>
@@ -66,8 +65,8 @@ export default function AboutPage() {
         }
         </div>
       </div> */}
-      <p className={styles.ftText}>┻━┻ ︵ ¯\ (ツ)/¯ ︵ ┻━┻</p>
-      <h6 className={styles.ftText}>Jordan Booker &copy;2020</h6>
+      <p >┻━┻ ︵ ¯\ (ツ)/¯ ︵ ┻━┻</p>
+      <h6>Jordan Booker &copy;2020</h6>
     </footer>
   );
 }

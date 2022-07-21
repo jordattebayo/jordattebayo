@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSpring, animated } from "react-spring"
 import Link from "next/link";
-import styles from "./navbar.module.sass";
 
 export default function Navbar () {
 
@@ -19,43 +17,40 @@ export default function Navbar () {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollTop]);
-
-  const props = useSpring({ opacity: 1 })
   
   return (
-  <nav className={styles.nav}>
-    <ul className={styles.navContainer}>
-      <animated.li style={props} className={styles.navLinkContainer}>
+  <nav>
+    <ul>
+      <li>
         <Link href="/">
-          <a className={styles.navLinkHome} tabIndex={0}>
+          <a tabIndex={0}>
             <span>Home</span>
           </a>
         </Link>
-      </animated.li>
-      <animated.li style={props} className={styles.navLinkContainer}>
+      </li>
+      <li >
         <Link href="/about">
-          <a className={styles.navLinkAbout} tabIndex={0}>
+          <a tabIndex={0}>
             <span>About</span>
           </a>
         </Link>
-      </animated.li>
-      <animated.li style={props} className={styles.navLinkContainer}>
+      </li>
+      <li>
         <a
-          className={styles.navLinkGit}
           href="https://www.github.com/jordattebayo"
           target="_blank"
           tabIndex={0}
         >
           <span>GitHub</span>
         </a>
-      </animated.li>
-      <animated.li style={props} className={styles.navLinkContainer}>
+      </li>
+      <li>
         <Link href="/#projects">
-          <a tabIndex={0} className={styles.navLinkProjects}>
+          <a tabIndex={0}>
             <span>Projects</span>
           </a>
         </Link>
-      </animated.li>
+      </li>
     </ul>
   </nav>
   );
