@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
-import GlobalStyle from '../components/globalstyles'
+import { GlobalStyle } from '../components'
+import Head from 'next/head'
 
 const theme: DefaultTheme = {
   colors: {
@@ -19,9 +20,26 @@ const theme: DefaultTheme = {
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
+    <>
+    <Head>
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="RSS"
+        href="/feed.xml"
+      />
+      <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,700;1,400&family=Roboto+Mono&display=swap"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+    </Head>
     <ThemeProvider theme={theme}>
     <GlobalStyle />
     <Component {...pageProps} />
     </ThemeProvider>
+  </>
   )
 }

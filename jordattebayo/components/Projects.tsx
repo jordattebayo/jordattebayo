@@ -6,6 +6,7 @@ function ProjectCard ({ data }) {
   const [showProject, setShowProject] = useState(false)
   const [viewImage, setViewImage] = useState(false)
   const { title, image, role, difficulties, solution, features, tech, live, git, screenshots } = data
+  
   return (
     <>
       <button

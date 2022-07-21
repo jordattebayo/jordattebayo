@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ContactButton() {
+export function ContactButton() {
 
   const [showContact, setShowContact] = useState(false)
   

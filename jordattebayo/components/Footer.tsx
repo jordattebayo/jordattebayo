@@ -66,7 +66,7 @@ export default function AboutPage() {
         </div>
       </div> */}
       <p >┻━┻ ︵ ¯\ (ツ)/¯ ︵ ┻━┻</p>
-      <h6>Jordan Booker &copy;2020</h6>
+      <h6>Jordan Booker &copy;2022</h6>
     </footer>
   );
 }

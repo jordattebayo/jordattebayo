@@ -1,15 +1,15 @@
-import Layout from "../components/Layout";
-import ContactButton from "../components/ContactButton";
+import { ContactButton, Layout } from "../components";
+
 
 export default function About() {
 
   return (
     <Layout>
-      <main className="grid">
-        <div className="hero-container">
-          <h1 className="hero-heading">About</h1>
-          <div className="hero-subheading--container">
-            <p className="hero-subheading">
+      <main >
+        <div >
+          <h1>About</h1>
+          <div>
+            <p>
               I am Frontend Web Developer with Full Stack dreams. I love so much
               about the web and want to do my best in building it out further into
               the unknown.
