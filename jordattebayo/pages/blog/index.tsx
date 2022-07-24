@@ -1,37 +1,60 @@
 import Link from "next/link";
-import { Layout } from "../../components";
+import { Layout, timeToReadCalculator } from "../../components";
+import styled from "styled-components"
+
+interface Content {
+  type: string;
+  value: string;
+}
 
 interface BlogPost {
     id: string;
     slug: string;
     title: string;
-    image: string;
-    role: string;
+    content: Array<Content>
   }
 
 interface BlogPostProps  {
     blogPosts: Array<BlogPost>
   }
 
+const BlogList = styled.ul`
+  margin: 0;
+  padding: 0;
+`
+
+const BlogPost = styled.li`
+  margin: 1em 0;
+  list-style: none;
+`
+
+const BlogLink = styled.a`
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 export default function Blog({ blogPosts } : BlogPostProps){
     return (
         <>
         <Layout>
-            <h1>Blog</h1>
-            <ul>
+            <h1>/Blog</h1>
+            <BlogList>
             {blogPosts.map((blogPost) => {
                 return (
-                    <li key={blogPost.id}>
+                    <BlogPost key={blogPost.id}>
                         <Link href={{
                             pathname: '/blog/[slug]',
                             query: { slug: blogPost.slug },
                             }} passHref>
-                            <a>{blogPost.title}</a>
+                            <BlogLink>{blogPost.title + " (" + timeToReadCalculator(blogPost.content) + " minute read)"}</BlogLink>
+                            
                         </Link>
-                    </li>
+                    </BlogPost>
                 )
             })}
-            </ul>
+            </BlogList>
         </Layout>
         </>
     )

@@ -36,7 +36,7 @@ export default function Home( { projects }: PortfolioPageProps) {
       <main>
       <ProjectsWrapper>
         {projects.map((project) => {
-          return <ProjectCard data={project} key={project.id} />
+          return <ProjectCard key={project.id} data={project}/>
         })}
       </ProjectsWrapper>
       </main>

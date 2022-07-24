@@ -82,7 +82,7 @@ export default function ProjectCard ({ data }) {
   const { id, title, slug, image, role, difficulties, solution, features, tech, live, git, screenshots } = data
   
   return (
-    <Wrapper key={id}>
+    <Wrapper >
       <Link href={{
               pathname: '/portfolio/[slug]',
               query: { slug: slug },

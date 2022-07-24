@@ -52,7 +52,6 @@ interface Params {
 export async function loadProject(slug: string) {
   try {
     const getProjectBySlug = await fetch(`http://localhost:3000/api/projects/${slug}`)
-    console.log(getProjectBySlug.body)
     const project = await getProjectBySlug.json()
     return project;
   } catch (error){ 

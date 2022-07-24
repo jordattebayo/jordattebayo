@@ -128,7 +128,6 @@ export default function Navbar () {
 
   function openNav(e){
     e.preventDefault();
-    console.log("nav is: ", open ? "open" : "closed")
     setOpen(!open)
   }
 
