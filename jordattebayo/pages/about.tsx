@@ -1,4 +1,4 @@
-import { ContactButton, Layout } from "../components";
+import { ContactButton, Layout, Resume } from "../components";
 
 
 export default function About() {
@@ -20,8 +20,9 @@ export default function About() {
             </p>
           </div>
         </div>
-        <ContactButton />
       </main>
+      <ContactButton />
+      <Resume />
     </Layout>
   );
 }

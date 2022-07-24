@@ -3,7 +3,7 @@ export default function Resume() {
     <div>
       <div>
         <p>
-          Want to find out more, but in a way that's less fun?
+          Are you a Recruiter?
         </p>
         <a
           href='/Jordan_Booker_Website_Resume.pdf'

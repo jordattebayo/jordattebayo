@@ -15,6 +15,10 @@ const theme: DefaultTheme = {
   fonts: {
     primary: 'Roboto Mono, monospace',
     secondary: 'Arimo, sans-serif'
+  },
+  widths: {
+    desktop: '1180px',
+    tablet: '768px'
   }
 }
 
