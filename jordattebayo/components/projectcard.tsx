@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link"
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 interface DetailsTabProps {
   show?: boolean;
@@ -15,6 +16,9 @@ const Wrapper = styled.li`
   position: relative;
 `
 
+
+
+
 const Box = styled.div<BoxProps>`
   margin: 2em 0;
   height: clamp(200px, 40vw, 522px);
@@ -22,7 +26,6 @@ const Box = styled.div<BoxProps>`
   border: 1px solid ${(props) => props.theme.colors.primary};
   box-shadow: -16px 16px ${(props) => props.theme.colors.quaternary};
   padding: 2em;
-  transition: background-color background-image 0.25s;
   &:hover {
     background-color: ${(props) => props.theme.colors.primary};
     background-image: url(${(props) => props.image});
@@ -82,7 +85,7 @@ export default function ProjectCard ({ data }) {
   const { id, title, slug, image, role, difficulties, solution, features, tech, live, git, screenshots } = data
   
   return (
-    <Wrapper >
+    <Wrapper>
       <Link href={{
               pathname: '/portfolio/[slug]',
               query: { slug: slug },

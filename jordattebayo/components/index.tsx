@@ -5,6 +5,7 @@ import ProjectCard from "./projectcard";
 import Footer from "./Footer";
 import GlobalStyle from "./globalstyles";
 import Resume from "./Resume";
+import StyledAnimatedTest from "./StyledAnimatedTest";
 
 interface Content {
     type: string;
@@ -28,5 +29,6 @@ export {
     Footer,
     GlobalStyle,
     Resume,
-    timeToReadCalculator
+    timeToReadCalculator,
+    StyledAnimatedTest
 }

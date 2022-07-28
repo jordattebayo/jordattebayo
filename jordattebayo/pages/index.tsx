@@ -1,6 +1,13 @@
-import { Layout, ProjectCard }from '../components'
+import { Layout, ProjectCard, StyledAnimatedTest }from '../components'
 import styled from "styled-components";
 
+/* Todo 
+    - Add cms to blog for formatting support of codeblocks and rich text
+    - Integrate react spring for animations on homepage
+    - Update styles for portfolio cards
+    - Style PortfolioPage
+    - Rewrite some of the project descriptions
+ */
 const ProjectsWrapper = styled.ul`
   display: flex;
   flex-direction: column;
@@ -34,6 +41,7 @@ export default function Home( { projects }: PortfolioPageProps) {
   return (
     <Layout>
       <main>
+      <StyledAnimatedTest></StyledAnimatedTest>
       <ProjectsWrapper>
         {projects.map((project) => {
           return <ProjectCard key={project.id} data={project}/>
