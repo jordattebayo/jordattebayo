@@ -2,7 +2,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link"
 import styled from "styled-components";
-import { useSpring, animated } from "react-spring";
 
 interface DetailsTabProps {
   show?: boolean;

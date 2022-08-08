@@ -24,8 +24,8 @@ const NewWrapper = (props) => {
 } 
 
 const Text = styled.p`
-font-size: 20px;
-color: red;
+  font-size: 20px;
+  color: red;
 `
 
   export default function StyledAnimatedTest(){

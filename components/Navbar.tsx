@@ -12,7 +12,6 @@ const NavWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.primary};
-
 `
 
 const Nav = styled.nav`
