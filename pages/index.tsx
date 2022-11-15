@@ -1,5 +1,7 @@
 import { Layout, ProjectCard, StyledAnimatedTest }from '../components'
 import styled from "styled-components";
+import Project from '../interfaces/project'
+import Hero from '../components/hero'
 
 /* Todo 
     - Add cms to blog for formatting support of codeblocks and rich text
@@ -8,6 +10,7 @@ import styled from "styled-components";
     - Style PortfolioPage
     - Rewrite some of the project descriptions
  */
+
 const ProjectsWrapper = styled.ul`
   display: flex;
   flex-direction: column;
@@ -16,22 +19,6 @@ const ProjectsWrapper = styled.ul`
   list-style: none;
   padding: 0;
 `
-
-interface Project {
-  id: string;
-  slug: string;
-  title: string;
-  image: string;
-  role: string;
-  difficulties: string;
-  solution: string;
-  features: string;
-  tech: string;
-  live: string;
-  git: string;
-  screenshots?: any;
-}
-
 interface PortfolioPageProps  {
   projects: Array<Project>
 }
@@ -41,7 +28,7 @@ export default function Home( { projects }: PortfolioPageProps) {
   return (
     <Layout>
       <main>
-      <StyledAnimatedTest></StyledAnimatedTest>
+      <Hero />
       <ProjectsWrapper>
         {projects.map((project) => {
           return <ProjectCard key={project.id} data={project}/>

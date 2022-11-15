@@ -1,120 +1,89 @@
 import { useRouter } from 'next/router'
-import { Layout} from "../../components";
-import Image from "next/image"
-import styled from "styled-components"
+import ErrorPage from 'next/error'
+import { getPostBySlug, getAllPosts } from '../../lib/api'
+import Head from 'next/head'
+import markdownToHtml from '../../lib/markdownToHtml'
+import type PostType from '../../interfaces/post'
+import PostBody from '../../components/post-body'
 
-interface Content {
-  type: string;
-  value: string;
+type Props = {
+  post: PostType
+  morePosts: PostType[]
+  preview?: boolean
 }
 
-interface BlogPost {
-    id: string;
-    slug: string;
-    title: string;
-    content: Array<Content>
+export default function Post({ post, morePosts, preview }: Props) {
+  const router = useRouter()
+  if (!router.isFallback && !post?.slug) {
+    return <ErrorPage statusCode={404} />
   }
-
-
-interface BlogPostProps  {
-    blogPost: BlogPost
-  }
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const CodeBlock = styled.code`
-  color: ${(props) => props.theme.colors.senary};
-  background-color: ${(props) => props.theme.colors.primary};
-  margin: 2em 0;
-  padding: 2em;
-`
-
-const BlogPost = ( {blogPost}: BlogPostProps) => {
-    const router = useRouter()
-
-    return (
-        <>
-        <Layout>
+  return (
+    <main >
+      <div>
         {router.isFallback ? (
-          <h1>Loading…</h1>
+          <div>Loading…</div>
         ) : (
-        <>
-          <h1>{blogPost.title}</h1>
-          <ContentWrapper>
-            {blogPost.content.map(({ type, value },index) => {
-              if(type == "text" ){
-                return (
-                  <p key={index}>{value}</p>
-                )
-              } 
-              if (type == "codeblock") {
-                return (
-                  <CodeBlock key={index}>{value}</CodeBlock>
-                )
-              } else {
-                return (
-                  <div key={index}><Image src={value}  width="1" height="1" layout="responsive" /></div>
-                )
-              }
-
-            })}
-          </ContentWrapper>
-        
-        </>
+          <>
+            <article className="mb-32">
+              <Head>
+                <title>
+                  {post.title} | Next.js Blog Example
+                </title>
+                <meta property="og:image" content={post.ogImage.url} />
+              </Head>
+              <div>{post.title}</div>
+              <div>{post.coverImage}</div>
+              <div>{post.date}</div>
+              <div>{post.author.name}</div>
+              <div>{post.author.picture}</div>
+              <PostBody content={post.content} />
+            </article>
+          </>
         )}
-        </Layout>
-      </>
-    )
+      </div>
+    </main>
+  )
 }
 
-interface Params {
-    params: {
-      slug: string
-    }
+type Params = {
+  params: {
+    slug: string
   }
-
-export async function loadBlogPost(slug: string) {
-  try {
-    const getBlogPostBySlug = await fetch(`http://localhost:3000/api/blog/${slug}`)
-    console.log(getBlogPostBySlug.body)
-    const blogPost = await getBlogPostBySlug.json()
-    return blogPost;
-  } catch (error){ 
-    console.log(error)
-    return ""
-  }
-
 }
-  
+
 export async function getStaticProps({ params }: Params) {
-  const blogPost = await loadBlogPost(params.slug || '')
+  const post = getPostBySlug(params.slug, [
+    'title',
+    'date',
+    'slug',
+    'author',
+    'content',
+    'ogImage',
+    'coverImage',
+  ])
+  const content = await markdownToHtml(post.content || '')
+
   return {
     props: {
-      blogPost,
+      post: {
+        ...post,
+        content,
+      },
     },
   }
 }
 
 export async function getStaticPaths() {
-  try {
-    const getAllBlogPosts = await fetch("http://localhost:3000/api/blog")
-    const blogPosts = await getAllBlogPosts.json()
-    const paths = blogPosts.map((blogPost) => {
-      return { params: { slug: blogPost.slug.toString()}}
-    })
-    return {
-      paths: paths,
-      fallback: false,
-    }
+  const posts = getAllPosts(['slug'])
 
-  } catch (err) {
-    console.error(err)
-    return { paths: [], fallback: false 
-    } 
+  return {
+    paths: posts.map((post) => {
+      return {
+        params: {
+          slug: post.slug,
+        },
+      }
+    }),
+    fallback: false,
   }
 }
-
-export default BlogPost
