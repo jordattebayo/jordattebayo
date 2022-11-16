@@ -1,4 +1,4 @@
-import { Layout, ProjectCard, StyledAnimatedTest }from '../components'
+import { Layout, ProjectCard, StyledAnimatedTest, ThemeShape }from '../components'
 import styled from "styled-components";
 import Project from '../interfaces/project'
 import Hero from '../components/hero'
@@ -19,6 +19,8 @@ const ProjectsWrapper = styled.ul`
   align-items: center;
   list-style: none;
   padding: 0;
+  margin-top: 0;
+  background-color: ${({theme}) => theme.colors.primary};
 `
 interface HomeProps {
   projects: Project[]
@@ -29,6 +31,7 @@ export default function Home({ projects }: HomeProps) {
     <Layout>
       <main>
       <Hero />
+      <ThemeShape bottomAligned/>
       <ProjectsWrapper>
         {projects && projects.map((project) => {
           return <ProjectCard key={project.id} data={project}/>

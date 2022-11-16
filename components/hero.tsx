@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components";
-
+import { Wrapper, Content } from "./shared";
 
 const Intro = styled.p`
     max-width: 850px;
@@ -33,10 +33,13 @@ function Hero(){
     },[])
 
     return (
-        <>
-            <h2>{greet(date)},</h2>
-            <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
-        </>
+        <Wrapper>
+            <Content>
+                <h2>{greet(date)},</h2>
+                <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
+            </Content>
+        </Wrapper>
+
     )
 }
 

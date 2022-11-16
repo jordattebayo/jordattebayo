@@ -9,6 +9,7 @@ interface DetailsTabProps {
 
 interface BoxProps {
   image?: any;
+  open: boolean;
 }
 
 const Wrapper = styled.li`
@@ -17,17 +18,29 @@ const Wrapper = styled.li`
 
 const Box = styled.div<BoxProps>`
   margin: 2em 0;
-  height: clamp(200px, 40vw, 522px);
-  width: clamp(250px, 48vw, 626px);
+  height: ${({open}) => open ? "clamp(400px, 80vw, 1044px)" : "clamp(200px, 40vw, 522px)"};
+  width: ${({open}) => open ? "clamp(400px, 80vw, 1044px)" : "clamp(250px, 48vw, 626px)"};
   border: 1px solid ${(props) => props.theme.colors.primary};
   box-shadow: -16px 16px ${(props) => props.theme.colors.quaternary};
   padding: 2em;
+  background-color: ${(props) => props.theme.colors.senary};
+  transition: height 0.25s, width 0.25s;
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    background-image: url(${(props) => props.image});
-    background-size: clamp(250px, 48vw, 640px);
-    background-repeat: no-repeat;
   }
+`
+
+const RoleCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: ${(props) => props.theme.colors.quaternary};
+`
+
+const RoleText = styled.p`
+  color: ${(props) => props.theme.colors.senary};
 `
 
 const DetailsTab = styled.div<DetailsTabProps>`
@@ -59,7 +72,6 @@ const CardTextBottom = styled.p`
 const H3 = styled.h3`
   color:  ${(props) => props.theme.colors.primary};
   ${Box}:hover & {
-    color:  transparent;
   }
 `
 
@@ -77,14 +89,19 @@ export default function ProjectCard ({ data }) {
   
   return (
     <Wrapper>
-          <Box onClick={() => setViewDetails(!viewDetails)} image={image}>
+        <Box onClick={() => setViewDetails(!viewDetails)} open={viewDetails}>
            <H3>{title}</H3>
-          </Box>
-        <DetailsTab show={viewDetails}>
+           <RoleCircle>
+              <RoleText>
+              {role}
+              </RoleText>
+           </RoleCircle>
+        </Box>
+        {/* <DetailsTab show={viewDetails}>
           <H3Details>{title}</H3Details>
           <p>{tech}</p>
           <CardTextBottom>View More</CardTextBottom>
-        </DetailsTab>
+        </DetailsTab> */}
     </Wrapper>
 
   );

@@ -1,11 +1,12 @@
-import { ContactButton } from "./shared";
-import Layout from "./Layout";
-import Navbar from "./Navbar";
-import ProjectCard from "./projectcard";
-import Footer from "./Footer";
-import GlobalStyle from "./globalstyles";
-import Resume from "./Resume";
-import StyledAnimatedTest from "./StyledAnimatedTest";
+import { ContactButton } from "./contact";
+import BlogLayout from "./blog-layout";
+import Layout from "./layout"
+import Navbar from "./navbar";
+import ProjectCard from "./project-card";
+import Footer from "./footer";
+import GlobalStyle from "./global-styles";
+import StyledAnimatedTest from "./styled-animation-test";
+import ThemeShape from "./theme-shape";
 
 interface Content {
     type: string;
@@ -24,11 +25,12 @@ function timeToReadCalculator(contentArray: Array<Content>) {
 export {
     ContactButton,
     Layout,
+    BlogLayout,
     Navbar,
     ProjectCard,
     Footer,
     GlobalStyle,
-    Resume,
     timeToReadCalculator,
-    StyledAnimatedTest
+    StyledAnimatedTest,
+    ThemeShape
 }
