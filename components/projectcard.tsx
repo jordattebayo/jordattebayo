@@ -15,9 +15,6 @@ const Wrapper = styled.li`
   position: relative;
 `
 
-
-
-
 const Box = styled.div<BoxProps>`
   margin: 2em 0;
   height: clamp(200px, 40vw, 522px);
@@ -53,10 +50,6 @@ const DetailsTab = styled.div<DetailsTabProps>`
   }
 `
 
-const CardLink = styled.a`
-
-`
-
 const CardTextBottom = styled.p`
   margin-top: auto;
   text-decoration: underline;
@@ -74,7 +67,6 @@ const H3Details = styled(H3)`
   color:  ${(props) => props.theme.colors.senary};
 `
 
-
 export default function ProjectCard ({ data }) {
 
   const [showProject, setShowProject] = useState(false)
@@ -85,11 +77,6 @@ export default function ProjectCard ({ data }) {
   
   return (
     <Wrapper>
-      <Link href={{
-              pathname: '/portfolio/[slug]',
-              query: { slug: slug },
-            }} passHref>
-          <CardLink>
           <Box onClick={() => setViewDetails(!viewDetails)} image={image}>
            <H3>{title}</H3>
           </Box>
@@ -98,9 +85,6 @@ export default function ProjectCard ({ data }) {
           <p>{tech}</p>
           <CardTextBottom>View More</CardTextBottom>
         </DetailsTab>
-          </CardLink>
-
-      </Link>
     </Wrapper>
 
   );

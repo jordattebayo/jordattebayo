@@ -4,6 +4,7 @@ import Project from '../interfaces/project'
 import Hero from '../components/hero'
 
 /* Todo 
+    - refactor layout to allow for each section to span full length of page
     - Add cms to blog for formatting support of codeblocks and rich text
     - Integrate react spring for animations on homepage
     - Update styles for portfolio cards
@@ -19,18 +20,17 @@ const ProjectsWrapper = styled.ul`
   list-style: none;
   padding: 0;
 `
-interface PortfolioPageProps  {
-  projects: Array<Project>
+interface HomeProps {
+  projects: Project[]
 }
 
-export default function Home( { projects }: PortfolioPageProps) {
-
+export default function Home({ projects }: HomeProps) {
   return (
     <Layout>
       <main>
       <Hero />
       <ProjectsWrapper>
-        {projects.map((project) => {
+        {projects && projects.map((project) => {
           return <ProjectCard key={project.id} data={project}/>
         })}
       </ProjectsWrapper>
@@ -45,7 +45,6 @@ export async function loadProjects() {
     const projects = await getAllProjects.json()
     return projects;
   } catch (error){ 
-    console.log(error)
     return ""
   }
 }

@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react"
+import styled from "styled-components";
 
+
+const Intro = styled.p`
+    max-width: 850px;
+`
 
 function greet(time): string{
-    console.log(time)
     switch(true){
         case (time < 12):
             return "Good morning";
         case (time < 18 && time >= 12):
             return "Afternoon";
         case (time >= 18):
-            console.log("good evening should be returned")
             return "Good evening";
         default:
             return "Hello"
@@ -30,10 +33,10 @@ function Hero(){
     },[])
 
     return (
-        <div>
+        <>
             <h2>{greet(date)},</h2>
-            <p>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</p>
-        </div>
+            <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
+        </>
     )
 }
 

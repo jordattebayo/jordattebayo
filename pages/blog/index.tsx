@@ -35,14 +35,16 @@ export default function Blog({ allPosts } : BlogProps){
         </Head> */}
         <>
           
-          {allPosts && allPosts.map((post) => {
+          {allPosts && allPosts.map((post, index) => {
             return (
-              <PostPreview 
-              title={post.title}
-              date={post.date}
-              excerpt={post.excerpt}
-              slug={post.slug}
-              />
+              <div key={index}>
+                <PostPreview 
+                title={post.title}
+                date={post.date}
+                excerpt={post.excerpt}
+                slug={post.slug}
+                />
+              </div>
             )
           })}
         </>

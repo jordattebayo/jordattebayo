@@ -12,6 +12,7 @@ const NavWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.primary};
+
 `
 
 const Nav = styled.nav`
@@ -92,27 +93,29 @@ const MobileNav = styled.div<MobileNavProps>`
 `;
 
 
+
 const NavList = () => {
   return (
       <NavUl>
         <NavListItem>
-          <Link href="/" passHref>
+          <Link href="/" passHref legacyBehavior>
             <NavLink tabIndex={0}>
               /Portfolio
             </NavLink>
           </Link>
         </NavListItem>
         <NavListItem >
-          <Link href="/about" passHref>
+          <Link href="/about" passHref legacyBehavior>
             <NavLink tabIndex={0}>
               /About
             </NavLink>
           </Link>
         </NavListItem>
         <NavListItem>
-          <Link href="/blog" passHref>
+          <Link href="/blog" passHref legacyBehavior>
           <NavLink
             tabIndex={0}
+            
           >
             /Blog
           </NavLink>
@@ -123,19 +126,18 @@ const NavList = () => {
 }
 
 export default function Navbar () {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   function openNav(e){
     e.preventDefault();
     setOpen(!open)
   }
-
   return (
     <NavWrapper>
       <Nav>
         <NavWidthLimit>
-        <Link href="/" passHref>
-          <HomeWrapper>
+        <Link href="/" passHref legacyBehavior>
+          <HomeWrapper >
             jordan booker <br/>dot com
           </HomeWrapper>
         </Link>
@@ -147,7 +149,7 @@ export default function Navbar () {
         </MobileNavButtonWrapper>
         </NavWidthLimit>
         <MobileNav open={open}>
-        <NavList />      
+          <NavList />    
         </MobileNav>
       </Nav>
     </NavWrapper>

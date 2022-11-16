@@ -1,5 +1,4 @@
-{ 
-  "projects": [
+[
     {
       "id": "0",
       "slug": "amplifier-creative",
@@ -97,4 +96,3 @@
       "git": "https://github.com/jordattebayo/Udacity-Blog-Project"
     }
   ]
-}

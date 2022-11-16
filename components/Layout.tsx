@@ -1,6 +1,7 @@
 import { Navbar, Footer } from "./";
 import styled from "styled-components"
 import ErrorBoundary from "./ErrorBoundary";
+import ThemeShape from "./ThemeShape"
 
 const AppWrapper = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ export default function Layout(props) {
   return (
     <AppWrapper>
       <Navbar />
+      <ThemeShape />
       <Wrapper>
         <Content>
           <ErrorBoundary>
