@@ -8,7 +8,7 @@
       "difficulties": "Creating a meaningful user interface with animations and unique scroll experiences",
       "solution": "Used a combination of research and trial and error to develop a from scratch solution",
       "features": "Complete website with CMS integration",
-      "tech": "JavaScript, ReactJS, GraphQL, Gatsby, Netlify CMS",
+      "tech": "JavaScript, ReactJS, GraphQL, Gatsby, and Netlify CMS",
       "live": "https://amplifiercreative.com",
       "git": "https://github.com/AmplifierCreative/website"
     },
@@ -71,6 +71,19 @@
     },
     {
       "id": "5",
+      "slug": "weather-journal",
+      "title": "Weather Journal App",
+      "image": "/weatherScreenshot.JPG",
+      "role": "Developer",
+      "difficulties": "Understanding API calls",
+      "solution": "Use tutorials available online to build personal API's",
+      "features": "Provides current weather and records it with each journal entry",
+      "tech": "HTML, CSS, JavaScript, NodeJS",
+      "live": "",
+      "git": "https://github.com/jordattebayo/fend/tree/refresh-2019/projects/weather-journal-app"
+    },
+    {
+      "id": "6",
       "slug": "photo-blog",
       "title": "Photo Blog",
       "image": "/blogScreenshot.JPG",

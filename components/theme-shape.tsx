@@ -28,11 +28,11 @@ const StepOne = styled(Step)`
 `
 
 const StepTwo = styled(Step)`
-  width: 20%;
+  width: 25%;
 `
 
 const StepThree = styled(Step)`
-  width: 10%;
+  width: 20%;
 `
 
 export default function ThemeShape(props: ThemeShapeProps){
