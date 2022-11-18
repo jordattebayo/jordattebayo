@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import styled from "styled-components";
 import amplifier from '../public/assets/projects/amplifierScreenshot.png';
@@ -14,6 +14,10 @@ interface BoxProps {
 }
 
 interface RoleProps {
+  open: boolean;
+}
+
+interface ButtonProps {
   open: boolean;
 }
 
@@ -33,7 +37,8 @@ const Box = styled.div<BoxProps>`
   background-color: ${(props) => props.theme.colors.senary};
   transition: height 0.25s, width 0.25s, box-shadow 0.25s;
   &:hover {
-    box-shadow: 16px -16px ${(props) => props.theme.colors.quaternary};
+    box-shadow: 16px -16px ${(props) => props.theme.colors.septenary};
+    cursor: ${({open}) => open ? "unset" : "pointer"};
   }
 `
 
@@ -41,28 +46,36 @@ const CardContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 70%;
+  position: relative;
 ` 
 const RoleCircle = styled.div<RoleProps>`
-  display: flex;
+  display: ${({open}) => open ? "none" : "flex"};
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   width: 175px;
   height: 175px;
-  background: ${(props) => props.theme.colors.quaternary};
-  position: ${({open}) => open ? "absolute" : "static"};
-  top: ${({open}) => open ? "42vh" : ""};
-  left: ${({open}) => open ? "32vw" : ""};
+  background-color: ${(props) => props.theme.colors.quaternary};
+  transition: background-color 0.25s;
+  ${Box}:hover &{
+    background-color: ${(props) => props.theme.colors.septenary};
+  }
 `
 
 const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 686px;
+  height: 514px;
+  border: 3px solid ${(props) => props.theme.colors.primary};
 `
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
+  box-shadow: -16px 16px ${(props) => props.theme.colors.septenary};
+  border: 1px solid ${(props) => props.theme.colors.primary};
 `
 
 const RoleText = styled.p`
@@ -79,6 +92,7 @@ const H3 = styled.h3`
   font-size: 48px;
   max-width: 300px;
   text-decoration: underline;
+  margin-bottom: 1rem;
   color:  ${(props) => props.theme.colors.primary};
   ${Box}:hover & {
 
@@ -117,7 +131,7 @@ const TechText = styled.p`
   margin: .5rem;
 `
 
-const CaroselColumn = styled.div`
+const CaroselColumn = styled.ul`
   padding-left: 2rem;
 `
 
@@ -130,15 +144,42 @@ const CaroselText = styled.p`
   
 `
 
-const ToggleDetails = styled.button`
+const ToggleDetails = styled.button<ButtonProps>`
   font-size: 20px;
   background: none;
   border: none;
   align-self: flex-end;
-  ${Box}:hover & {
+  margin-top: auto;
+  &:hover{
+    cursor: pointer;
     text-decoration: underline;
-
   }
+  ${Box}:hover & {
+    cursor: ${({open}) => open ? "unset" : "pointer"};
+    text-decoration: ${({open}) => open ? "unset" : "underline"};
+  }
+
+`
+interface CNavProps {
+  active: boolean;
+}
+
+const CaroselSlide = styled.li<CNavProps>`
+  list-style: none;
+  display: ${({active}) => active ? "unset" : "none"};
+`
+
+const CaroselNav = styled.div`
+  display: flex;
+  flex-direction: row;
+
+`
+
+const CNavItem = styled.div<CNavProps>`
+  height: 10px;
+  width: 60px;
+  margin: 2rem 1rem;
+  background-color: ${({theme, active}) => active ? theme.colors.primary : theme.colors.octenary};
 `
 
 function matchPhotoSource(id: string): StaticImageData{
@@ -173,16 +214,89 @@ function CreateTechList(tech: string){
   )
 }
 
+function useOnClickOutside(ref, handler) {
+  useEffect(
+    () => {
+      const listener = (event) => {
+        if (!ref.current || ref.current.contains(event.target)) {
+          return;
+        }
+        handler(event);
+      };
+      document.addEventListener("mousedown", listener);
+      document.addEventListener("touchstart", listener);
+      return () => {
+        document.removeEventListener("mousedown", listener);
+        document.removeEventListener("touchstart", listener);
+      };
+    },
+    [ref, handler]
+  );
+}
+
+function checkActive(id): boolean{
+  let active;
+  switch(id){
+    case 0:
+      active = false
+      break;
+    case 2:
+      active = true
+      break;
+    case 3:
+      active = false
+    default: 
+      active = false
+      break;
+  }
+  return active;
+}
+
 export default function ProjectCard ({ data }) {
+  const { id, title, image, role, difficulties, solution, features, tech, live, git,  } = data
+
+  const ref = useRef();
+  useOnClickOutside(ref, () => setViewDetails(false));
 
   const [viewDetails, setViewDetails] = useState(false)
+  const [slideOne, setSlideOne] = useState(true)
+  const [slideTwo, setSlideTwo] = useState(false)
+  const [slideThree, setSlideThree] = useState(false)
 
-  const [viewImage, setViewImage] = useState(false)
-  const { id, title, slug, image, role, difficulties, solution, features, tech, live, git, screenshots } = data
-  
+  function toggleDetails(): void{
+    if(!viewDetails){
+      setViewDetails(!viewDetails)
+    }
+  }
+
+  function updateSlide(id: number): void {
+    switch(id){
+      case 1:
+        setSlideOne(true)
+        setSlideTwo(false)
+        setSlideThree(false)
+        break;
+      case 2:
+        setSlideOne(false)
+        setSlideTwo(true)
+        setSlideThree(false)
+        break;
+      case 3:
+        setSlideOne(false)
+        setSlideTwo(false)
+        setSlideThree(true)
+        break;
+      default: 
+        setSlideOne(true)
+        setSlideTwo(false)
+        setSlideThree(false)
+        break;
+    }
+  }
+
   return (
     <Wrapper>
-        <Box onClick={() => setViewDetails(!viewDetails)} open={viewDetails}>
+        <Box onClick={() => toggleDetails()} open={viewDetails} ref={ref}>
            <CardContentWrapper>
            <H3>{title}</H3>
            {viewDetails &&
@@ -191,9 +305,9 @@ export default function ProjectCard ({ data }) {
            <Image 
             placeholder={title}
             src={matchPhotoSource(id)} 
-            alt={title} 
-            height={400}
-            width={700}
+            alt={image.placeholder} 
+            height={image.dimensions.height}
+            width={image.dimensions.width}
             />
            </ImageContainer>
            </ImageWrapper>
@@ -210,16 +324,35 @@ export default function ProjectCard ({ data }) {
               {CreateTechList(tech)}
             </TechColumn>
             <CaroselColumn>
-              <CaroselHeader>
-                Project Difficulties
-              </CaroselHeader>
-              <CaroselText>{difficulties}</CaroselText>
+              <CaroselSlide active={slideOne}>
+                <CaroselHeader>
+                  Project Difficulties
+                </CaroselHeader>
+                <CaroselText>{difficulties}</CaroselText>
+              </CaroselSlide>
+              <CaroselSlide active={slideTwo}>
+                <CaroselHeader>
+                  Solution
+                </CaroselHeader>
+                <CaroselText>{solution}</CaroselText>
+              </CaroselSlide>
+              <CaroselSlide active={slideThree}>
+                <CaroselHeader>
+                  Features
+                </CaroselHeader>
+                <CaroselText>{features}</CaroselText>
+              </CaroselSlide>
+              <CaroselNav>
+                <CNavItem active={slideOne} onClick={(e) => {updateSlide(1)}}></CNavItem>
+                <CNavItem active={slideTwo} onClick={(e) => {updateSlide(2)}}></CNavItem>
+                <CNavItem active={slideThree} onClick={(e) => {updateSlide(3)}}></CNavItem>
+              </CaroselNav>
             </CaroselColumn>
            </Details>
            }
            </CardContentWrapper>
 
-           <ToggleDetails>
+           <ToggleDetails open={viewDetails} onClick={() => setViewDetails(!viewDetails)}>
               { viewDetails ? "Hide Details -" : "See Details +"}
            </ToggleDetails>
         </Box>

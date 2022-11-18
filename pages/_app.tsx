@@ -11,6 +11,8 @@ const theme: DefaultTheme = {
     quaternary: '#29db7c',
     quinary: '#ff6831',
     senary: '#fff',
+    septenary: '#B324E0',
+    octenary: '#D9D9D9'
   },
   fonts: {
     primary: 'Roboto Mono, monospace',

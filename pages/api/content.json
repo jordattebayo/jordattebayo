@@ -3,7 +3,13 @@
       "id": "0",
       "slug": "amplifier-creative",
       "title": "Amplifier Creative",
-      "image": "/amplifierScreenshot.PNG",
+      "image": {
+        "placeholder": "Amplifier Creative's website",
+        "dimensions": {
+          "width": "620",
+          "height": "358"
+        }
+      },
       "role": "Developer",
       "difficulties": "Creating a meaningful user interface with animations and unique scroll experiences",
       "solution": "Used a combination of research and trial and error to develop a from scratch solution",
@@ -16,7 +22,13 @@
       "id": "1",
       "slug": "slate",
       "title": "React Line Chart for Slate.host",
-      "image": "/chartScreenshot.png",
+      "image":  {
+        "placeholder": "An SVG Line Chart",
+        "dimensions": {
+          "width": "384",
+          "height": "358"
+        }
+      },
       "role": "Developer",
       "difficulties": "Creating logic to graphically represent differences in dynamically loaded content",
       "solution": "Use a variety of sorting functions and algorithms to parse incoming data using as few fixed numbers as possible",
@@ -29,7 +41,13 @@
       "id": "2",
       "slug": "travel-planner-app",
       "title": "Travel Planner App",
-      "image": "/travel-app.gif",
+      "image":  {
+        "placeholder": "A gif of the travel planner app being used",
+        "dimensions": {
+          "width": "473",
+          "height": "409"
+        }
+      },
       "role": "Developer",
       "difficulties": "API calls dependent on other API calls",
       "solution": "Utilize local storage and a set timeout function to store data and run subsequent API calls",
@@ -42,7 +60,13 @@
       "id": "3",
       "slug": "lee",
       "title": "Lee® Indigood",
-      "image": "/desktopLeeIndigoodMock.png",
+      "image":  {
+        "placeholder": "A mockup of a Lee Webpage",
+        "dimensions": {
+          "width": "600",
+          "height": "408"
+        }
+      },
       "role": "Developer",
       "difficulties": "Creating responsive layouts between mobile, tablet, and desktop views.",
       "solution": "Using Bootstrap's grid system to create responsive layouts based on popular viewport breakpoints.",
@@ -60,7 +84,13 @@
       "id": "4",
       "slug": "news",
       "title": "Evaluate News NLP",
-      "image": "/languageScreenshot.JPG",
+      "image":  {
+        "placeholder": "A small news api integration app",
+        "dimensions": {
+          "width": "540",
+          "height": "347"
+        }
+      },
       "role": "Developer",
       "difficulties": "Making sure that text submitted was valid to pass along to Aylien API",
       "solution": "Used regular expressions and JavaScript uri methods to validate text",
@@ -73,7 +103,13 @@
       "id": "5",
       "slug": "photo-blog",
       "title": "Photo Blog",
-      "image": "/blogScreenshot.JPG",
+      "image":  {
+        "placeholder": "A sample photo blog",
+        "dimensions": {
+          "width": "420",
+          "height": "350"
+        }
+      },
       "role": "Developer",
       "difficulties": "Layout and design of photos within article",
       "solution": "Utilized large size photos to pause the reader while still showing some text to indicate there is more to read.",
