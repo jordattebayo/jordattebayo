@@ -2,18 +2,30 @@ import { useState, useEffect } from "react"
 import styled from "styled-components";
 import { Wrapper, Content } from "./shared";
 
+const HomeContent= styled(Content)`
+    min-height: 38vh;
+`
+
+const H2 = styled.h2`
+  font-size: clamp(20px, 3vw, 48px);
+  margin-bottom: 0;
+  color:  ${(props) => props.theme.colors.quaternary};
+`
 const Intro = styled.p`
     max-width: 850px;
+    font-size: clamp(20px, 1.5vw, 22px);
+    line-height: clamp(22px, 2vw, 30px);
+
 `
 
 function greet(time): string{
     switch(true){
         case (time < 12):
-            return "Good morning";
+            return "Morning";
         case (time < 18 && time >= 12):
             return "Afternoon";
         case (time >= 18):
-            return "Good evening";
+            return "Evening";
         default:
             return "Hello"
     }
@@ -34,10 +46,10 @@ function Hero(){
 
     return (
         <Wrapper>
-            <Content>
-                <h2>{greet(date)},</h2>
+            <HomeContent>
+                <H2>{greet(date)},</H2>
                 <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
-            </Content>
+            </HomeContent>
         </Wrapper>
 
     )

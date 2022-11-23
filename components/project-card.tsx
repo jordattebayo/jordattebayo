@@ -1,64 +1,62 @@
 import { useState, useRef, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 import amplifier from '../public/assets/projects/amplifierScreenshot.png';
 import blog from "../public/assets/projects/blogScreenshot.jpg";
 import chart from "../public/assets/projects/chartScreenshot.png";
-import lee from "../public/assets/projects/desktopLeeIndigoodMock.png"
-import travel from "../public/assets/projects/travel-app.gif"
-import news from "../public/assets/projects/languageScreenshot.jpg"
+import lee from "../public/assets/projects/desktopLeeIndigoodMock.png";
+import travel from "../public/assets/projects/travel-app.gif";
+import news from "../public/assets/projects/languageScreenshot.jpg";
+import CardCarousel from './card-carousel';
 
-interface BoxProps {
-  image?: any;
-  open: boolean;
-}
 
-interface RoleProps {
-  open: boolean;
-}
-
-interface ButtonProps {
-  open: boolean;
+interface ImageContainerProps {
+  maxWidth: string;
+  maxHeight: string;
+  id: string;
 }
 
 const Wrapper = styled.li`
   position: relative;
 `
 
-const Box = styled.div<BoxProps>`
+const Box = styled.div<{ open: boolean, id: string}>`
   display: flex;
   flex-direction: column;
   align-items: ${({open}) => open ? "center" : "start"};
   margin: 2em 0;
   height: ${({open}) => open ? "clamp(400px, 80vw, 1044px)" : "clamp(200px, 40vw, 522px)"};
-  width: ${({open}) => open ? "clamp(400px, 80vw, 1044px)" : "clamp(250px, 48vw, 626px)"};
-  box-shadow: -16px 16px ${(props) => props.theme.colors.quaternary};
+  width: ${({open}) => open ? "clamp(300px, 80vw, 1044px)" : "clamp(250px, 48vw, 626px)"};
+  box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
   padding: 2em;
   background-color: ${(props) => props.theme.colors.senary};
   transition: height 0.25s, width 0.25s, box-shadow 0.25s;
   &:hover {
-    box-shadow: 16px -16px ${(props) => props.theme.colors.septenary};
+    box-shadow: 16px -16px ${(props) => (chooseSecondaryColor(props.id, props.theme))};
     cursor: ${({open}) => open ? "unset" : "pointer"};
   }
+
 `
 
-const CardContentWrapper = styled.div`
+const CardContentWrapper = styled.div<{ open: boolean}>`
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  width: clamp(300px, 100%, 686px);
   position: relative;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding: ${({ open }) => open ? "0 2rem" : "0"};
+  }
 ` 
-const RoleCircle = styled.div<RoleProps>`
+const RoleCircle = styled.div<{ open: boolean, id: string}>`
   display: ${({open}) => open ? "none" : "flex"};
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   width: 175px;
   height: 175px;
-  background-color: ${(props) => props.theme.colors.quaternary};
-  transition: background-color 0.25s;
-  ${Box}:hover &{
-    background-color: ${(props) => props.theme.colors.septenary};
+  background-color: ${(props) => choosePrimaryColor(props.id, props.theme)};
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+      display: none;
   }
 `
 
@@ -66,16 +64,23 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 686px;
+  width: clamp(300px, 100%, 686px);
   height: 514px;
   border: 3px solid ${(props) => props.theme.colors.primary};
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    display: none;
+  }
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<ImageContainerProps>`
   display: flex;
   justify-content: center;
-  box-shadow: -16px 16px ${(props) => props.theme.colors.septenary};
+  box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
   border: 1px solid ${(props) => props.theme.colors.primary};
+  width: ${({maxWidth}) => `clamp(100px, 100%, ${maxWidth}px)`};
+  height: ${({maxHeight}) => `clamp(200px, 100%, ${maxHeight}px)`};
+  position: relative;
+
 `
 
 const RoleText = styled.p`
@@ -83,14 +88,9 @@ const RoleText = styled.p`
   color: ${(props) => props.theme.colors.senary};
 `
 
-const CardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
 const H3 = styled.h3`
-  font-size: 48px;
-  max-width: 300px;
+  font-size: clamp(20px, 3vw, 48px);
+  max-width: clamp(200px, 50vw, 300px);
   text-decoration: underline;
   margin-bottom: 1rem;
   color:  ${(props) => props.theme.colors.primary};
@@ -99,11 +99,14 @@ const H3 = styled.h3`
   }
 `
 
-const Details = styled.div`
+const DesktopDetails = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 2rem;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+      display: none;
+  }
 `
 
 const TechColumn = styled.div`
@@ -131,28 +134,16 @@ const TechText = styled.p`
   margin: .5rem;
 `
 
-const CaroselColumn = styled.ul`
-  padding-left: 2rem;
-`
 
-const CaroselHeader = styled.p`
-  text-decoration: underline;
-  font-weight: 700;
-`
-
-const CaroselText = styled.p`
-  
-`
-
-const ToggleDetails = styled.button<ButtonProps>`
-  font-size: 20px;
+const ToggleDetails = styled.button<{ open: boolean}>`
+  font-size: clamp(16px, 2vw, 20px);
   background: none;
   border: none;
   align-self: flex-end;
   margin-top: auto;
   &:hover{
-    cursor: pointer;
-    text-decoration: underline;
+    cursor: pointer !important;
+    text-decoration: underline !important;
   }
   ${Box}:hover & {
     cursor: ${({open}) => open ? "unset" : "pointer"};
@@ -160,27 +151,7 @@ const ToggleDetails = styled.button<ButtonProps>`
   }
 
 `
-interface CNavProps {
-  active: boolean;
-}
 
-const CaroselSlide = styled.li<CNavProps>`
-  list-style: none;
-  display: ${({active}) => active ? "unset" : "none"};
-`
-
-const CaroselNav = styled.div`
-  display: flex;
-  flex-direction: row;
-
-`
-
-const CNavItem = styled.div<CNavProps>`
-  height: 10px;
-  width: 60px;
-  margin: 2rem 1rem;
-  background-color: ${({theme, active}) => active ? theme.colors.primary : theme.colors.octenary};
-`
 
 function matchPhotoSource(id: string): StaticImageData{
   switch(id){
@@ -234,34 +205,34 @@ function useOnClickOutside(ref, handler) {
   );
 }
 
-function checkActive(id): boolean{
-  let active;
-  switch(id){
-    case 0:
-      active = false
-      break;
-    case 2:
-      active = true
-      break;
-    case 3:
-      active = false
-    default: 
-      active = false
-      break;
+function choosePrimaryColor(id: string, theme: DefaultTheme): DefaultTheme {
+  let n = parseInt(id)
+  if(theme){
+    if( n % 2 == 0){
+      return theme.colors.secondary
+    } else {
+      return theme.colors.tertiary
+    }
   }
-  return active;
+}
+
+function chooseSecondaryColor(id: string, theme: DefaultTheme): DefaultTheme {
+  let n = parseInt(id)
+  if(theme){
+    if( n % 2 == 0){
+      return theme.colors.tertiary
+    } else {
+      return theme.colors.secondary
+    }
+  }
 }
 
 export default function ProjectCard ({ data }) {
   const { id, title, image, role, difficulties, solution, features, tech, live, git,  } = data
-
   const ref = useRef();
   useOnClickOutside(ref, () => setViewDetails(false));
 
   const [viewDetails, setViewDetails] = useState(false)
-  const [slideOne, setSlideOne] = useState(true)
-  const [slideTwo, setSlideTwo] = useState(false)
-  const [slideThree, setSlideThree] = useState(false)
 
   function toggleDetails(): void{
     if(!viewDetails){
@@ -269,89 +240,38 @@ export default function ProjectCard ({ data }) {
     }
   }
 
-  function updateSlide(id: number): void {
-    switch(id){
-      case 1:
-        setSlideOne(true)
-        setSlideTwo(false)
-        setSlideThree(false)
-        break;
-      case 2:
-        setSlideOne(false)
-        setSlideTwo(true)
-        setSlideThree(false)
-        break;
-      case 3:
-        setSlideOne(false)
-        setSlideTwo(false)
-        setSlideThree(true)
-        break;
-      default: 
-        setSlideOne(true)
-        setSlideTwo(false)
-        setSlideThree(false)
-        break;
-    }
-  }
-
   return (
     <Wrapper>
-        <Box onClick={() => toggleDetails()} open={viewDetails} ref={ref}>
-           <CardContentWrapper>
+        <Box onClick={() => toggleDetails()} open={viewDetails} ref={ref} id={id}>
+           <CardContentWrapper open={viewDetails}>
            <H3>{title}</H3>
            {viewDetails &&
            <ImageWrapper>
-           <ImageContainer>
+           <ImageContainer id={id} maxHeight={image.dimensions.height} maxWidth={image.dimensions.width}>
            <Image 
             placeholder={title}
             src={matchPhotoSource(id)} 
             alt={image.placeholder} 
-            height={image.dimensions.height}
-            width={image.dimensions.width}
+            fill
             />
            </ImageContainer>
            </ImageWrapper>
            }
-           <RoleCircle open={viewDetails}>
+           <RoleCircle open={viewDetails} id={id}>
               <RoleText open={viewDetails}>
                 {role}
               </RoleText>
            </RoleCircle>
            {viewDetails && 
-           <Details>
+           <DesktopDetails>
             <TechColumn>
               <TechHeader>Tech:</TechHeader>
               {CreateTechList(tech)}
             </TechColumn>
-            <CaroselColumn>
-              <CaroselSlide active={slideOne}>
-                <CaroselHeader>
-                  Project Difficulties
-                </CaroselHeader>
-                <CaroselText>{difficulties}</CaroselText>
-              </CaroselSlide>
-              <CaroselSlide active={slideTwo}>
-                <CaroselHeader>
-                  Solution
-                </CaroselHeader>
-                <CaroselText>{solution}</CaroselText>
-              </CaroselSlide>
-              <CaroselSlide active={slideThree}>
-                <CaroselHeader>
-                  Features
-                </CaroselHeader>
-                <CaroselText>{features}</CaroselText>
-              </CaroselSlide>
-              <CaroselNav>
-                <CNavItem active={slideOne} onClick={(e) => {updateSlide(1)}}></CNavItem>
-                <CNavItem active={slideTwo} onClick={(e) => {updateSlide(2)}}></CNavItem>
-                <CNavItem active={slideThree} onClick={(e) => {updateSlide(3)}}></CNavItem>
-              </CaroselNav>
-            </CaroselColumn>
-           </Details>
+            <CardCarousel difficulties={difficulties} solution={solution} features={features}/>
+           </DesktopDetails>
            }
            </CardContentWrapper>
-
            <ToggleDetails open={viewDetails} onClick={() => setViewDetails(!viewDetails)}>
               { viewDetails ? "Hide Details -" : "See Details +"}
            </ToggleDetails>

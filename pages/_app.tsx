@@ -28,12 +28,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
     <Head>
-      <link
+      {/* <link
         rel="alternate"
         type="application/rss+xml"
         title="RSS"
         href="/feed.xml"
-      />
+      /> */}
       <link
         rel="preload"
         href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,700;1,400&family=Roboto+Mono&display=swap"
