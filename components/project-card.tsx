@@ -47,6 +47,28 @@ const CardContentWrapper = styled.div<{ open: boolean}>`
     padding: ${({ open }) => open ? "0 2rem" : "0"};
   }
 ` 
+
+const CardHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+`
+
+const CardLinkContainer = styled(CardHeader)`
+  justify-content: normal;
+`
+
+const CardLinks = styled.a<{strikethrough: boolean}>`
+  font-size: clamp(18px, 2vw, 24px);
+  text-decoration: ${({strikethrough}) => strikethrough ? "" : "line-through"};
+`
+
+const CardLinkSeperator = styled.p`
+  font-size: clamp(18px, 2vw, 24px);
+`
+
 const RoleCircle = styled.div<{ open: boolean, id: string}>`
   display: ${({open}) => open ? "none" : "flex"};
   justify-content: center;
@@ -106,6 +128,15 @@ const DesktopDetails = styled.div`
   margin-top: 2rem;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
       display: none;
+  }
+`
+const MobileDetails = styled.div`
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+      display: flex;
   }
 `
 
@@ -244,7 +275,12 @@ export default function ProjectCard ({ data }) {
     <Wrapper>
         <Box onClick={() => toggleDetails()} open={viewDetails} ref={ref} id={id}>
            <CardContentWrapper open={viewDetails}>
-           <H3>{title}</H3>
+            <CardHeader>
+              <H3>{title}</H3>
+              { viewDetails && <CardLinkContainer><CardLinks target="_blank" href={live} strikethrough={!(live == "")}>Live</CardLinks>
+              <CardLinkSeperator> | </CardLinkSeperator>
+              <CardLinks strikethrough={!(git == "")} target="_blank"  href={git}>Git</CardLinks></CardLinkContainer>}
+            </CardHeader>
            {viewDetails &&
            <ImageWrapper>
            <ImageContainer id={id} maxHeight={image.dimensions.height} maxWidth={image.dimensions.width}>
@@ -263,6 +299,7 @@ export default function ProjectCard ({ data }) {
               </RoleText>
            </RoleCircle>
            {viewDetails && 
+            <>
            <DesktopDetails>
             <TechColumn>
               <TechHeader>Tech:</TechHeader>
@@ -270,6 +307,13 @@ export default function ProjectCard ({ data }) {
             </TechColumn>
             <CardCarousel difficulties={difficulties} solution={solution} features={features}/>
            </DesktopDetails>
+           <MobileDetails>
+              <p><b>Tech: </b>{tech}</p>
+              <p><b>Difficulties: </b>{difficulties}</p>
+              <p><b>Solution: </b>{solution}</p>
+              <p><b>Features: </b>{features}</p>
+           </MobileDetails>
+           </>
            }
            </CardContentWrapper>
            <ToggleDetails open={viewDetails} onClick={() => setViewDetails(!viewDetails)}>

@@ -3,13 +3,16 @@ import styled from "styled-components";
 import { Wrapper, Content } from "./shared";
 
 const HomeContent= styled(Content)`
-    min-height: 38vh;
+    height: 38vh;
+    @media(max-width: ${(props) => props.theme.widths.tablet}) {
+        height: 23vh;
+  }
 `
 
 const H2 = styled.h2`
   font-size: clamp(20px, 3vw, 48px);
   margin-bottom: 0;
-  color:  ${(props) => props.theme.colors.quaternary};
+  color:  ${(props) => props.theme.colors.secondary};
 `
 const Intro = styled.p`
     max-width: 850px;
