@@ -6,14 +6,10 @@ export function ContactButton() {
   
   return (
     <div >
-      <div >
-        Email: jordan@jordanbooker.com
-      </div>
-      <button tabIndex={0} onClick={() => setShowContact(!showContact)}>
-        <a >
-          <span>Contact</span>
-        </a>
-      </button>
+      <span>Contact</span>
+      <a href="mailto:jordan@jordanbooker.com" >
+        jordan@jordanbooker.com
+      </a>
     </div>
   );
 }

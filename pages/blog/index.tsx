@@ -1,25 +1,18 @@
-import Link from "next/link";
-import { Layout, timeToReadCalculator } from "../../components";
+import { BlogLayout, PostCard } from "../../components";
 import styled from "styled-components"
+import Head from 'next/head'
 import type Post from '../../interfaces/post'
-import PostPreview from "../../components/post-preview";
 import { getAllPosts } from "../../lib/api";
 
-const BlogList = styled.ul`
-  margin: 0;
-  padding: 0;
+const CardList = styled.ul`
+  
 `
 
-const HeroPost = styled.li`
-  margin: 1em 0;
+const CenterPostCards = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   list-style: none;
-`
-
-const BlogLink = styled.a`
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 type BlogProps = {
@@ -29,26 +22,25 @@ type BlogProps = {
 export default function Blog({ allPosts } : BlogProps){
   return (
     <>
-      <Layout>
-        {/* <Head>
-          <title>Next.js Blog Example with </title>
-        </Head> */}
-        <>
-          
+      <BlogLayout>
+        <Head>
+          <title>Jordan's blog</title>
+        </Head>
+        <CardList>          
           {allPosts && allPosts.map((post, index) => {
             return (
-              <div key={index}>
-                <PostPreview 
+              <CenterPostCards key={index}>
+                <PostCard 
                 title={post.title}
                 date={post.date}
                 excerpt={post.excerpt}
                 slug={post.slug}
                 />
-              </div>
+              </CenterPostCards>
             )
           })}
-        </>
-      </Layout>
+        </CardList>
+      </BlogLayout>
     </>
   )
 }

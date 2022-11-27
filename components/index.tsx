@@ -7,20 +7,11 @@ import Footer from "./footer";
 import GlobalStyle from "./global-styles";
 import StyledAnimatedTest from "./styled-animation-test";
 import ThemeShape from "./theme-shape";
-
-interface Content {
-    type: string;
-    value: string;
-}
-
-function timeToReadCalculator(contentArray: Array<Content>) {
-    const wpm = 125;
-    const textConentArray = contentArray.filter(({ type }) => type === "text")
-    const textArray = Array.from(textConentArray,({value}) => value)
-    const text = textArray.join()
-    const words = text.trim().split(" ").length;
-    return Math.ceil(words / wpm);
-}
+import PostBody from "./post-body";
+import PostPreview from "./post-preview";
+import BlogThemeShape from "./blog-theme-shape";
+import BlogNavbar from "./blog-navbar";
+import PostCard from "./post-card";
 
 export {
     ContactButton,
@@ -30,7 +21,11 @@ export {
     ProjectCard,
     Footer,
     GlobalStyle,
-    timeToReadCalculator,
     StyledAnimatedTest,
-    ThemeShape
+    ThemeShape,
+    PostBody,
+    PostPreview,
+    BlogThemeShape,
+    BlogNavbar,
+    PostCard
 }

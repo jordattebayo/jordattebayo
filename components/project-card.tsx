@@ -298,7 +298,7 @@ export default function ProjectCard ({ data }) {
                 {role}
               </RoleText>
            </RoleCircle>
-           {viewDetails && 
+           {viewDetails ? 
             <>
            <DesktopDetails>
             <TechColumn>
@@ -313,7 +313,7 @@ export default function ProjectCard ({ data }) {
               <p><b>Solution: </b>{solution}</p>
               <p><b>Features: </b>{features}</p>
            </MobileDetails>
-           </>
+           </> : null
            }
            </CardContentWrapper>
            <ToggleDetails open={viewDetails} onClick={() => setViewDetails(!viewDetails)}>

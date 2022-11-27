@@ -114,8 +114,7 @@ const NavList = () => {
         <NavListItem>
           <Link href="/blog" passHref legacyBehavior>
           <NavLink
-            tabIndex={0}
-            
+            tabIndex={0}   
           >
             /Blog
           </NavLink>

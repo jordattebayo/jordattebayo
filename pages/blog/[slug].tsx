@@ -2,9 +2,11 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import Head from 'next/head'
+import Image from 'next/image'
+import styled from 'styled-components'
 import markdownToHtml from '../../lib/markdownToHtml'
 import type PostType from '../../interfaces/post'
-import PostBody from '../../components/post-body'
+import { BlogLayout, PostBody } from "../../components";
 
 type Props = {
   post: PostType
@@ -12,36 +14,55 @@ type Props = {
   preview?: boolean
 }
 
+const H2 = styled.h3`
+  font-size: 4rem;
+  max-width: 750px;
+`
+
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: clamp(200px, 50vh, 814px);
+  position: relative;
+
+`
+
 export default function Post({ post, morePosts, preview }: Props) {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <main >
+    <BlogLayout >
       <div>
         {router.isFallback ? (
           <div>Loading…</div>
         ) : (
           <>
-            <article className="mb-32">
+            <article >
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example
+                  {post.title}
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
-              <div>{post.title}</div>
-              <div>{post.coverImage}</div>
+              <H2>{post.title}</H2>
+              <ImageContainer>
+                <Image
+                  src={post.coverImage} 
+                  fill
+                  alt="image for post"
+                />
+              </ImageContainer>
+              <PostBody content={post.content} />
               <div>{post.date}</div>
               <div>{post.author.name}</div>
-              <div>{post.author.picture}</div>
-              <PostBody content={post.content} />
             </article>
           </>
         )}
       </div>
-    </main>
+    </BlogLayout>
   )
 }
 

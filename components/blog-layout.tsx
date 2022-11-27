@@ -1,7 +1,6 @@
 import styled from "styled-components"
-import { Navbar, Footer } from ".";
+import { BlogNavbar, BlogThemeShape } from ".";
 import ErrorBoundary from "./error-boundary";
-import ThemeShape from "./theme-shape"
 
 const AppWrapper = styled.div`
   display: flex;
@@ -30,8 +29,8 @@ const Content = styled.div`
 export default function BlogLayout(props) {
   return (
     <AppWrapper>
-      <Navbar />
-      <ThemeShape />
+      <BlogNavbar />
+      <BlogThemeShape />
       <Wrapper>
         <Content>
           <ErrorBoundary>
@@ -39,7 +38,7 @@ export default function BlogLayout(props) {
           </ErrorBoundary>
         </Content>
       </Wrapper>
-      <Footer />
+      <BlogThemeShape bottomAligned/>
     </AppWrapper>
   );
 }
