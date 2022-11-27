@@ -12,6 +12,7 @@ import PostPreview from "./post-preview";
 import BlogThemeShape from "./blog-theme-shape";
 import BlogNavbar from "./blog-navbar";
 import PostCard from "./post-card";
+import StickyFooter from "./sticky-footer"
 
 export {
     ContactButton,
@@ -27,5 +28,6 @@ export {
     PostPreview,
     BlogThemeShape,
     BlogNavbar,
-    PostCard
+    PostCard,
+    StickyFooter
 }

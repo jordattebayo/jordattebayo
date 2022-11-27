@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { BlogNavbar, BlogThemeShape } from ".";
+import { BlogNavbar, BlogThemeShape, StickyFooter } from ".";
 import ErrorBoundary from "./error-boundary";
 
 const AppWrapper = styled.div`
@@ -38,6 +38,7 @@ export default function BlogLayout(props) {
           </ErrorBoundary>
         </Content>
       </Wrapper>
+      <StickyFooter></StickyFooter>
       <BlogThemeShape bottomAligned/>
     </AppWrapper>
   );

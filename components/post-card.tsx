@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import styled, { DefaultTheme } from "styled-components";
+import { useContext } from "react";
+import styled, { DefaultTheme, ThemeContext } from "styled-components";
 import DateFormatter from './date-formatter'
 import Link from 'next/link'
 import type Author from '../interfaces/author'
@@ -8,21 +8,19 @@ const Wrapper = styled.div`
   position: relative;
 `
 
-const Box = styled.div<{ open: boolean, id: string}>`
+const Box = styled.div<{ open: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: ${({open}) => open ? "center" : "start"};
   margin: 2em 0;
   height: clamp(200px, 40vw, 522px);
   width: clamp(250px, 48vw, 626px);
-/*   box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
- */  padding: 2em;
+  padding: 2em;
   background-color: transparent;
   transition: height 0.25s, width 0.25s, box-shadow 0.25s;
   border: 3px solid ${(props) => props.theme.colors.primary};
   &:hover {
-/*     box-shadow: 16px -16px ${(props) => (choosePrimaryColor(props.id, props.theme))};
- */    cursor: ${({open}) => open ? "unset" : "pointer"};
+   cursor: ${({open}) => open ? "unset" : "pointer"};
   }
 
 `
@@ -60,16 +58,17 @@ const CardHoverText = styled.div`
   
 `
 
-const ShadowBox = styled.div`
-  box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
+const ShadowBox = styled.div<{ color: string}>`
+  box-shadow: -16px 16px ${({color}) => color};
   margin: 2em 0;
   height: clamp(200px, 40vw, 522px);
   width: clamp(250px, 48vw, 626px);
   position: absolute;
   top: 0;
   z-index: -2;
-  ${Box}:hover &{
-    box-shadow: 16px -16px ${(props) => (choosePrimaryColor(props.id, props.theme))};
+  transition: box-shadow .25s;
+  ${Wrapper}:hover &{
+    box-shadow: 16px -16px ${({color}) => color};
   }
 `
 
@@ -90,13 +89,17 @@ const BottomLines = styled.line`
   stroke-width: .25px;
 `
 
-function choosePrimaryColor(id: string, theme: DefaultTheme): DefaultTheme {
-  let n = parseInt(id)
+function choosePrimaryColor(id: number, theme: DefaultTheme): string {
+  console.log(id);
   if(theme){
-    if( n % 2 == 0){
-      return theme.colors.secondary
-    } else {
-      return theme.colors.tertiary
+    if (id === 0 || id === 4) {
+      return  theme.colors.secondary;
+    } else if(id === 1 || id === 5) {
+      return theme.colors.tertiary;
+    } else if(id === 2 || id === 6) {
+      return theme.colors.quaternary;
+    } else if(id === 3 || id === 7) {
+      return theme.colors.septenary;
     }
   }
 }
@@ -108,12 +111,14 @@ type Props = {
   excerpt: string
   author?: Author
   slug: string
+  id: number
 }
 
 export default function PostCard (props: Props) {
-  const { title, coverImage, date, excerpt, author, slug } = props
+  const { title, coverImage, date, excerpt, author, slug, id } = props
 
-
+  const themeContext = useContext(ThemeContext)
+  let color = choosePrimaryColor(id, themeContext)
   return (
     <Wrapper>
         <Box>
@@ -130,8 +135,7 @@ export default function PostCard (props: Props) {
            <DateFormatter dateString={date} />
            <CardHoverText>{excerpt}</CardHoverText>
         </Box>
-        <ShadowBox>
-
+        <ShadowBox color={color}>
         </ShadowBox>
         <Lines viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <TopLine x1="18" y1="0" x2="0" y2="17" stroke="black" stroke-width=".25px" />

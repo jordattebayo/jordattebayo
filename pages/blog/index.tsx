@@ -35,6 +35,7 @@ export default function Blog({ allPosts } : BlogProps){
                 date={post.date}
                 excerpt={post.excerpt}
                 slug={post.slug}
+                id={index}
                 />
               </CenterPostCards>
             )
