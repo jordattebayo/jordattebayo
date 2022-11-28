@@ -90,7 +90,6 @@ const BottomLines = styled.line`
 `
 
 function choosePrimaryColor(id: number, theme: DefaultTheme): string {
-  console.log(id);
   if(theme){
     if (id === 0 || id === 4) {
       return  theme.colors.secondary;

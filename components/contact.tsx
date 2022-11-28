@@ -6,7 +6,7 @@ export function ContactButton() {
   
   return (
     <div >
-      <span>Contact</span>
+      <span id="#contact">Contact</span>
       <a href="mailto:jordan@jordanbooker.com" >
         jordan@jordanbooker.com
       </a>

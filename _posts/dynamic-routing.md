@@ -1,6 +1,6 @@
 ---
 title: 'Hello World'
-excerpt: 'Here's an example of how a blog post could look if I wrote one'
+excerpt: 'Heres an example of how a blog post could look if I wrote one'
 coverImage: '/assets/blog/amplifierScreenshot.png'
 date: '2020-03-16T05:35:07.322Z'
 author:

@@ -17,9 +17,10 @@ const Nav = styled.nav`
   max-width: ${(props) => props.theme.widths.desktop};
 `;
 
-const DesktopNav = styled.div`
+const MobileNav = styled.div`
+  display: none;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
-    display: none;
+    display: unset;
   }
 `
 
@@ -27,9 +28,14 @@ const NavWidthLimit = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const NavLink = styled.a`
+  font-size: clamp(16px, 4vw, 24px);
   color: ${(props) => props.theme.colors.primary};
 `
 
@@ -39,15 +45,60 @@ const HomeWrapper = styled(NavLink)`
   text-decoration: underline;
   line-height: 37px;
   text-align: center;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    text-align: left;
+  }
 `
 
-export default function BlogNavbar () {
-  const [open, setOpen] = useState<boolean>(false);
-
-  function openNav(e){
-    e.preventDefault();
-    setOpen(!open)
+const NavUl = styled.ul`
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    flex-direction: column;
+    display: flex;
+    padding-left: 0;
   }
+`
+
+const NavListItem = styled.li`
+  padding: 0 1rem;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding: 0;
+  }
+`
+const NavList = () => {
+  return (
+      <NavUl>
+        <NavListItem>
+          <Link href="/" passHref legacyBehavior>
+            <NavLink tabIndex={0}>
+              /Portfolio
+            </NavLink>
+          </Link>
+        </NavListItem>
+        <NavListItem >
+          <Link href="/about" passHref legacyBehavior>
+            <NavLink tabIndex={0}>
+              /About
+            </NavLink>
+          </Link>
+        </NavListItem>
+        <NavListItem>
+          <Link href="/blog" passHref legacyBehavior>
+          <NavLink
+            tabIndex={0}   
+          >
+            /Blog
+          </NavLink>
+          </Link>
+        </NavListItem>
+      </NavUl>
+  )
+}
+
+export default function BlogNavbar () {
+
   return (
     <NavWrapper>
       <Nav>
@@ -57,8 +108,9 @@ export default function BlogNavbar () {
             jordan booker <br/>dot com/blog
           </HomeWrapper>
         </Link>
-        <DesktopNav>
-        </DesktopNav>
+        <MobileNav>
+          <NavList />
+        </MobileNav>
         </NavWidthLimit>
       </Nav>
     </NavWrapper>
