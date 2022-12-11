@@ -28,7 +28,9 @@ const SVGWrapper = styled.span`
     display: block;
     height: 51px;
     width: 40px;
-    border-bottom: 4px solid black;
+    ${Button}:hover & {
+        border-bottom: 4px solid black;
+    }
 `
 
 const ButtonText = styled.span`
