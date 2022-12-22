@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Wrapper, Content } from "./shared";
 
 const HomeContent= styled(Content)`
-    height: 38vh;
+    min-height: 38vh;
     @media(max-width: ${(props) => props.theme.widths.tablet}) {
         min-height: 23vh;
   }
@@ -18,7 +18,6 @@ const Intro = styled.p`
     max-width: 850px;
     font-size: clamp(20px, 1.5vw, 22px);
     line-height: clamp(22px, 2vw, 30px);
-
 `
 
 function greet(time): string{
