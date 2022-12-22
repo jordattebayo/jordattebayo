@@ -18,17 +18,23 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     [key: string]: string
   }
 
+
+
   const items: Items = {}
 
-  // Ensure only the minimal needed data is exposed
+  // Ensure only the minimal needed data is exposed 
   fields.forEach((field) => {
+
     if (field === 'slug') {
       items[field] = realSlug
     }
     if (field === 'content') {
       items[field] = content
     }
-
+    if(field === 'timeToRead'){
+      items[field] = timeToReadCalculator(content)
+    }
+    
     if (typeof data[field] !== 'undefined') {
       items[field] = data[field]
     }
@@ -44,4 +50,13 @@ export function getAllPosts(fields: string[] = []) {
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
   return posts
+}
+
+function timeToReadCalculator(content: string): string {
+  const wpm = 125;
+  const text = content[0].replace(/<\/?[^>]+(>|$)/g, "");
+  const words = text.trim().split(" ").length;
+  const time = Math.ceil(words / wpm);
+  const min = (time === 1) ? "minute" : "minutes"
+  return time.toString() + " " + min;
 }

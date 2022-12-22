@@ -1,7 +1,7 @@
 import { BlogLayout, PostCard } from "../../components";
 import styled from "styled-components"
 import Head from 'next/head'
-import type Post from '../../interfaces/post'
+import type PostType from '../../interfaces/post'
 import { getAllPosts } from "../../lib/api";
 
 const CardList = styled.ul`
@@ -16,7 +16,7 @@ const CenterPostCards = styled.li`
 `
 
 type BlogProps = {
-  allPosts: Post[]
+  allPosts: PostType[]
 }
 
 export default function Blog({ allPosts } : BlogProps){
@@ -36,6 +36,8 @@ export default function Blog({ allPosts } : BlogProps){
                 excerpt={post.excerpt}
                 slug={post.slug}
                 id={index}
+                author={post.author}
+                timeToRead={post.timeToRead}
                 />
               </CenterPostCards>
             )
@@ -54,8 +56,8 @@ export const getStaticProps = async () => {
     'author',
     'coverImage',
     'excerpt',
+    'timeToRead'
   ])
-
   return {
     props: { allPosts },
   }

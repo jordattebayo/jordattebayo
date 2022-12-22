@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
 const FooterWrapper = styled.div`
@@ -50,6 +51,15 @@ const FooterLink = styled.a`
     }
 `
 
+const SettingsButton = styled.button`
+    background: none;
+    border: none;
+    padding: 1rem 0;
+    &:hover{
+        border: 1px solid black;
+    }
+`
+
 function scrollToTop(){
     if(window){
         window.scroll({
@@ -60,8 +70,62 @@ function scrollToTop(){
 }
 
 export default function StickyFooter() {
+    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
+
+    const handleUserKeyPress = useCallback(event => {
+        const { key } = event;
+        if(event.ctrlKey == true){
+            if(key === "Enter"){
+                setOpenSettings(true);
+
+            } 
+        }
+        if (key === "Escape"){
+            setOpenSettings(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener("keydown", handleUserKeyPress);
+        return () => {
+            window.removeEventListener("keydown", handleUserKeyPress);
+        };
+    }, [handleUserKeyPress]);
 
     return (
+        <>
+        <dialog id="favDialog" open={openSettings}>
+        <form method="dialog">
+            {/* <label>Theme
+                <select>
+                <option value="default">Choose…</option>
+                <option>Brine shrimp</option>
+                <option>Red panda</option>
+                <option>Spider monkey</option>
+                </select>
+            </label> */}
+            <fieldset>
+                <legend>Theme:</legend>
+                <div>
+                <input type="radio" id="light" name="theme" value="light" defaultChecked />
+                <label htmlFor="light">Light</label>
+                </div>
+                <div>
+                <input type="radio" id="dark" name="theme" value="dark" />
+                <label htmlFor="dark">Dark</label>
+                </div>
+                <div>
+                <input type="radio" id="crazy" name="theme" value="crazy" />
+                <label htmlFor="crazy">Crazy</label>
+                </div>
+            </fieldset>
+            <div>
+            <button value="cancel" onClick={() => setOpenSettings(false)} >Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+            </div>
+        </form>
+        </dialog>
         <FooterWrapper>
             <Footer>
                 <Button onClick={(e) => {
@@ -81,7 +145,15 @@ export default function StickyFooter() {
                         Contact Me
                     </FooterLink>
                 </Link>
+                <SettingsButton
+                    type="button"
+                    onClick={() => setOpenSettings(!openSettings)}
+                        tabIndex={0}   
+                    >
+                        Settings: <span>CTRL</span> + ENTER
+                </SettingsButton>
             </Footer>
         </FooterWrapper>
+        </>
     )
 }

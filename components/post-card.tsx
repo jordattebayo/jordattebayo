@@ -50,12 +50,34 @@ const H3 = styled.h3`
   margin-bottom: 1rem;
   color:  ${(props) => props.theme.colors.primary};
   ${Box}:hover & {
+  }
+`
 
+const DateContainer = styled.span`
+  transition: all .3s;
+  ${Wrapper}:hover & {
+    transform: translate(0, 1rem);
   }
 `
 
 const CardHoverText = styled.div`
-  
+  visibility: hidden;
+  height: 0;
+  transition: all .25s;
+  ${Wrapper}:hover &{
+    visibility: unset;
+    height: auto;
+  }
+  ${Wrapper}:not(:hover) &{
+    transition: none;
+  }
+`
+
+const CardText = styled.p`
+`
+
+const ReadTimeText = styled(CardText)`
+  margin-top: auto;
 `
 
 const ShadowBox = styled.div<{ color: string}>`
@@ -108,13 +130,14 @@ type Props = {
   coverImage?: string
   date: string
   excerpt: string
-  author?: Author
+  author: Author
   slug: string
   id: number
+  timeToRead: string
 }
 
 export default function PostCard (props: Props) {
-  const { title, coverImage, date, excerpt, author, slug, id } = props
+  const { title, coverImage, date, excerpt, author, slug, id, timeToRead } = props
 
   const themeContext = useContext(ThemeContext)
   let color = choosePrimaryColor(id, themeContext)
@@ -131,8 +154,10 @@ export default function PostCard (props: Props) {
             </Link>
             </CardHeader>
            </CardContentWrapper>
-           <DateFormatter dateString={date} />
            <CardHoverText>{excerpt}</CardHoverText>
+           {/* <p>{author?.name}</p> */}
+           <DateContainer><DateFormatter dateString={date} /></DateContainer>
+           <ReadTimeText>{timeToRead} read</ReadTimeText>
         </Box>
         <ShadowBox color={color}>
         </ShadowBox>
@@ -143,7 +168,6 @@ export default function PostCard (props: Props) {
           <BottomLines x1="100" y1="80" x2="80" y2="100" stroke="black" />
         </Lines>
     </Wrapper>
-
   );
 }
 
