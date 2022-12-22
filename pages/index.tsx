@@ -146,7 +146,7 @@ export default function Home() {
       <main>
       <Hero />
       <ThemeShape bottomAligned/>
-      <ProjectsWrapper>
+      <ProjectsWrapper id="portfolio">
         {projects.map((project) => {
           return <ProjectCard key={project.id} data={project}/>
         })}

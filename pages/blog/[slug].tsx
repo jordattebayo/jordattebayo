@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import markdownToHtml from '../../lib/markdownToHtml'
 import type PostType from '../../interfaces/post'
 import { BlogLayout, PostBody } from "../../components";
+import DateFormatter from '../../components/date-formatter'
+
 
 type Props = {
   post: PostType
@@ -14,9 +16,14 @@ type Props = {
   preview?: boolean
 }
 
+const Heading = styled.div`
+  margin: 4rem 0;
+`
+
 const H2 = styled.h3`
   font-size: 4rem;
   max-width: 750px;
+  margin: 0;
 `
 
 const ImageContainer = styled.div`
@@ -25,7 +32,12 @@ const ImageContainer = styled.div`
   width: 100%;
   height: clamp(200px, 50vh, 814px);
   position: relative;
+`
 
+const CardText = styled.p`
+`
+
+const ReadTimeText = styled(CardText)`
 `
 
 export default function Post({ post, morePosts, preview }: Props) {
@@ -47,17 +59,20 @@ export default function Post({ post, morePosts, preview }: Props) {
                 </title>
                 <meta property="og:image" content={post.ogImage.url} />
               </Head>
-              <H2>{post.title}</H2>
+              <Heading>
+                <H2>{post.title}</H2>
+                <ReadTimeText>{post.timeToRead} read</ReadTimeText>
+              </Heading>
               <ImageContainer>
                 <Image
-                  src={post.coverImage} 
+                  src={post.coverImage.path} 
                   fill
-                  alt="image for post"
+                  alt={post.coverImage.alt} 
                 />
               </ImageContainer>
               <PostBody content={post.content} />
-              <div>{post.date}</div>
-              <div>{post.author.name}</div>
+              <DateFormatter dateString={post.date} />
+              <div>By: {post.author.name}</div>
             </article>
           </>
         )}
@@ -81,8 +96,10 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
     'coverImage',
+    'timeToRead'
   ])
   const content = await markdownToHtml(post.content || '')
+  console.log(content)
   return {
     props: {
       post: {

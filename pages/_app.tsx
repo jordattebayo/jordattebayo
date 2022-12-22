@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
 import { GlobalStyle } from '../components'
 import Head from 'next/head'
+import '../blog-styles.css'
 
 const theme: DefaultTheme = {
   colors: {

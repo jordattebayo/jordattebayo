@@ -8,7 +8,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  margin: 0;
+  max-width: 100%;
 `
 
 export default function Layout(props) {

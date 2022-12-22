@@ -98,7 +98,7 @@ const NavList = () => {
   return (
       <NavUl>
         <NavListItem>
-          <Link href="/" passHref legacyBehavior>
+          <Link href="#portfolio" passHref legacyBehavior>
             <NavLink tabIndex={0}>
               /Portfolio
             </NavLink>

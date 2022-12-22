@@ -5,10 +5,10 @@ export function ContactButton() {
   const [showContact, setShowContact] = useState(false)
   
   return (
-    <div >
-      <span id="#contact">Contact</span>
-      <a href="mailto:jordan@jordanbooker.com" >
-        jordan@jordanbooker.com
+    <div>
+      <span id="#contact">You can reach me @ </span>
+      <a href="mailto:jordan@jordanbooker.dev" >
+        jordan@jordanbooker.dev
       </a>
     </div>
   );

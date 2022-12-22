@@ -1,15 +1,21 @@
+import styled from 'styled-components'
 
 type Props = {
   content: string
 }
 
+const BodyContainer = styled.div`
+	max-width: 740px;
+	margin: 0 auto;
+`
+
 const PostBody = ({ content }: Props) => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <BodyContainer className="max-w-2xl mx-auto">
       <div
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </div>
+    </BodyContainer>
   )
 }
 

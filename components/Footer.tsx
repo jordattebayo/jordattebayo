@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import ThemeShape from './theme-shape';
 
 const Footer = styled.footer`
   width: 100%;
@@ -18,7 +19,7 @@ const TextWrapper = styled.div`
   width: 100vw;
 `
 
-const FooterText = styled.p`
+const FooterText = styled.span`
   font-size: 12px;
 `
 
@@ -28,11 +29,13 @@ const LinkItem = styled.a`
 
 export default function AboutPage() {
   return (
+    <>
     <Footer>
       <TextWrapper>
       <FooterText>Jordan Booker &copy;2022</FooterText> 
       <FooterText>Built with <LinkItem href="https://nextjs.org/" target="_blank">NextJS</LinkItem>. Hosted on <LinkItem href="https://vercel.com/" target="_blank">Vercel.</LinkItem></FooterText>
       </TextWrapper>    
     </Footer>
+    </>
   );
 }
