@@ -143,15 +143,15 @@ export default function PostCard (props: Props) {
   let color = choosePrimaryColor(id, themeContext)
   return (
     <Wrapper>
-        <Box>
-           <CardContentWrapper>
-            <CardHeader>
-            <Link
+              <Link
                 as={`/blog/${slug}`}
                 href="/blog/[slug]"
               >
+        <Box>
+           <CardContentWrapper>
+            <CardHeader>
+    
               <H3>{title}</H3>
-            </Link>
             </CardHeader>
            </CardContentWrapper>
            <CardHoverText>{excerpt}</CardHoverText>
@@ -167,6 +167,7 @@ export default function PostCard (props: Props) {
           <BottomLines x1="100" y1="66" x2="65" y2="100" stroke="black" />
           <BottomLines x1="100" y1="80" x2="80" y2="100" stroke="black" />
         </Lines>
+        </Link>
     </Wrapper>
   );
 }

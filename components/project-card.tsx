@@ -25,7 +25,7 @@ const Box = styled.div<{ open: boolean, id: string}>`
   flex-direction: column;
   align-items: ${({open}) => open ? "center" : "start"};
   margin: 2em 0;
-  height: ${({open}) => open ? "clamp(400px, 80vw, 1044px)" : "clamp(200px, 40vw, 522px)"};
+  height: ${({open}) => open ? "clamp(400px, 80vw, auto)" : "clamp(200px, 40vw, 522px)"};
   width: ${({open}) => open ? "clamp(300px, 80vw, 1044px)" : "clamp(250px, 48vw, 626px)"};
   box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
   padding: 2em;

@@ -14,7 +14,6 @@ class Dialog extends React.Component {
     }
   
     handleSubmit(event) {
-      alert('A name was submitted: ' + this.state.value);
       event.preventDefault();
     }
 
@@ -51,7 +50,7 @@ class Dialog extends React.Component {
                     </fieldset>
                     <div>
                     <button value="cancel" onClick={this.closeDialog} >Cancel</button>
-                    <button id="confirmBtn" value={this.state.value}>Confirm</button>
+                    <button id="confirmBtn" >Confirm</button>
                     </div>
                 </form>
                 </dialog>

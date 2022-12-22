@@ -1,6 +1,6 @@
-p {
+.mx-auto > div >  p {
 	margin: 3rem 0;
-	line-height: ;
+	line-height: 22px;
 }
 
 /**
