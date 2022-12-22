@@ -9,6 +9,9 @@ const FooterWrapper = styled.div`
     top: 85vh;
     right: 10vw;
     z-index: 5;
+    @media(max-width: ${(props) => props.theme.widths.mobile}) {
+        display: none;
+  }
 `
 
 const Footer = styled.div`

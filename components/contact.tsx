@@ -1,15 +1,24 @@
 import { useState } from "react";
+import styled from "styled-components"
+
+const LinkText = styled.p`
+  font-size: clamp(20px, 1.5vw, 22px);
+  line-height: clamp(22px, 2vw, 30px);
+`
+
+const Link = styled.a`
+  &:hover{
+    text-decoration: underline;
+  }
+`
 
 export function ContactButton() {
-
-  const [showContact, setShowContact] = useState(false)
-  
   return (
-    <div>
+    <LinkText>
       <span id="#contact">You can reach me @ </span>
-      <a href="mailto:jordan@jordanbooker.dev" >
+      <Link href="mailto:jordan@jordanbooker.dev">
         jordan@jordanbooker.dev
-      </a>
-    </div>
+      </Link>
+    </LinkText>
   );
 }

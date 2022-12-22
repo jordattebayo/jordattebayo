@@ -28,7 +28,7 @@ const Box = styled.div<{ open: boolean}>`
 const CardContentWrapper = styled.div<{ open: boolean}>`
   display: flex;
   flex-direction: column;
-  width: clamp(300px, 100%, 686px);
+  width: clamp(100px, 100%, 686px);
   position: relative;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
     padding: ${({ open }) => open ? "0 2rem" : "0"};

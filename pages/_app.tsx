@@ -21,7 +21,8 @@ const theme: DefaultTheme = {
   },
   widths: {
     desktop: '1180px',
-    tablet: '768px'
+    tablet: '768px',
+    mobile: '450px'
   }
 }
 

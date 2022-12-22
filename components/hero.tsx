@@ -5,7 +5,7 @@ import { Wrapper, Content } from "./shared";
 const HomeContent= styled(Content)`
     height: 38vh;
     @media(max-width: ${(props) => props.theme.widths.tablet}) {
-        height: 23vh;
+        min-height: 23vh;
   }
 `
 
