@@ -5,7 +5,8 @@ import type PostType from '../../interfaces/post'
 import { getAllPosts } from "../../lib/api";
 
 const CardList = styled.ul`
-  
+  padding: 0;
+  margin: 0;
 `
 
 const CenterPostCards = styled.li`

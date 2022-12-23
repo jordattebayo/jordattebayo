@@ -19,7 +19,7 @@ const ProjectsWrapper = styled.ul`
   align-items: center;
   list-style: none;
   padding: 0;
-  margin-top: 0;
+  margin: 0 auto;
   background-color: ${({theme}) => theme.colors.primary};
 `
 
@@ -140,11 +140,12 @@ const projects: Project[] = [
   }
 ]
 
-export default function Home() {
+export default function Home({ setSelectedTheme }) {
+  console.log("setSelectedTheme: ", setSelectedTheme)
   return (
     <Layout>
       <main>
-      <Hero />
+      <Hero updateTheme={setSelectedTheme} />
       <ThemeShape bottomAligned/>
       <ProjectsWrapper id="portfolio">
         {projects.map((project) => {

@@ -8,6 +8,7 @@ const NavWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 3px solid ${(props) => props.theme.colors.primary};
+  
 `
 
 const Nav = styled.nav`
@@ -15,6 +16,9 @@ const Nav = styled.nav`
   min-height: 115px;
   padding: 2rem;
   max-width: ${(props) => props.theme.widths.desktop};
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding-bottom: 1rem;
+  }
 `;
 
 const MobileNav = styled.div`
@@ -35,8 +39,9 @@ const NavWidthLimit = styled.div`
 `
 
 const NavLink = styled.a`
-  font-size: clamp(16px, 4vw, 24px);
+  font-size: clamp(18px, 4vw, 24px);
   color: ${(props) => props.theme.colors.primary};
+  padding: .5rem 0;
 `
 
 const HomeWrapper = styled(NavLink)`

@@ -28,12 +28,18 @@ const Box = styled.div<{ open: boolean, id: string}>`
   height: ${({open}) => open ? "clamp(400px, 80vw, auto)" : "clamp(200px, 40vw, 522px)"};
   width: ${({open}) => open ? "clamp(300px, 80vw, 1044px)" : "clamp(250px, 48vw, 626px)"};
   box-shadow: -16px 16px ${(props) => choosePrimaryColor(props.id, props.theme)};
-  padding: 2em;
+  padding: 2rem;
   background-color: ${(props) => props.theme.colors.senary};
   transition: height 0.25s, width 0.25s, box-shadow 0.25s;
   &:hover {
     box-shadow: 16px -16px ${(props) => (chooseSecondaryColor(props.id, props.theme))};
     cursor: ${({open}) => open ? "unset" : "pointer"};
+  }
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding: 1rem;
+    &:hover {
+    box-shadow: -16px 16px ${(props) => (chooseSecondaryColor(props.id, props.theme))};
+  } 
   }
 
 `
@@ -44,7 +50,7 @@ const CardContentWrapper = styled.div<{ open: boolean}>`
   width: clamp(100px, 100%, 686px);
   position: relative;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
-    padding: ${({ open }) => open ? "0 2rem" : "0"};
+    padding: 0;
   }
 ` 
 
@@ -67,6 +73,9 @@ const CardLinks = styled.a<{strikethrough: boolean}>`
 
 const CardLinkSeperator = styled.p`
   font-size: clamp(18px, 2vw, 24px);
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    margin: 0;
+  }
 `
 
 const RoleCircle = styled.div<{ open: boolean, id: string}>`

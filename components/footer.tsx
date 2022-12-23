@@ -3,7 +3,6 @@ import ThemeShape from './theme-shape';
 
 const Footer = styled.footer`
   width: 100%;
-  min-height: 100px;
   display: flex;
   justify-content: center;
   margin-top: auto;
@@ -13,7 +12,7 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2em;
+  padding: 1rem 2rem;
   margin-top: auto;
   max-width: ${(props) => props.theme.widths.desktop};
   width: 100vw;
