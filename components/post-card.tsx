@@ -58,6 +58,11 @@ const DateContainer = styled.span`
   ${Wrapper}:hover & {
     transform: translate(0, 1rem);
   }
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    ${Wrapper}:hover &{
+      transform: translate(0, 0);
+    }
+  } 
 `
 
 const CardHoverText = styled.div`
@@ -71,6 +76,12 @@ const CardHoverText = styled.div`
   ${Wrapper}:not(:hover) &{
     transition: none;
   }
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    ${Wrapper}:hover &{
+      visibility: hidden;
+      height: 0;
+    }
+  } 
 `
 
 const CardText = styled.p`
@@ -92,6 +103,11 @@ const ShadowBox = styled.div<{ color: string}>`
   ${Wrapper}:hover &{
     box-shadow: 16px -16px ${({color}) => color};
   }
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    ${Wrapper}:hover &{
+    box-shadow: -16px 16px ${({color}) => color};
+  } 
+  }
 `
 
 const Lines = styled.svg`
@@ -99,6 +115,9 @@ const Lines = styled.svg`
   z-index: -1;
   top: 0; 
   overflow: overlay;
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    top: 16px; 
+  }
 `
 
 const TopLine = styled.line`

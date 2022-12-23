@@ -12,13 +12,14 @@ const NavWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.primary};
-
+  width: 100vw;
+  max-width: 100%;
 `
 
 const Nav = styled.nav`
-  width: 100vw;
+  width: 100%;
   min-height: 115px;
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   max-width: ${(props) => props.theme.widths.desktop};
 `;
 
@@ -54,9 +55,9 @@ const NavUl = styled.ul`
 `
 
 const NavListItem = styled.li`
-  padding: 0 1rem;
+  padding: .5rem 1rem;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
-    padding: 0;
+    padding: .5rem 0;
   }
 `
 
@@ -83,7 +84,7 @@ const MobileNav = styled.div<MobileNavProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 2em;
+  padding: 2rem;
   padding-top: 0;
   background-color:  ${(props) => props.theme.colors.primary};
   display: none;

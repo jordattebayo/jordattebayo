@@ -6,7 +6,7 @@ import ThemeShape from "./theme-shape"
 const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   max-width: 100%;
 `

@@ -29,9 +29,9 @@ const H2 = styled.h3`
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  height: clamp(200px, 50vh, 814px);
   position: relative;
+  height: 1600px;
+  width: 1068px;
 `
 
 const CardText = styled.p`
