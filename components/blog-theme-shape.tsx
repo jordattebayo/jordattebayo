@@ -9,6 +9,7 @@ const StepsWrapper = styled.div<{ leftAlign?: boolean }>`
   position: relative;
   padding-bottom: ${({leftAlign}) => leftAlign ? "4rem" : 0 };
   margin-top: ${({leftAlign}) => leftAlign ? "auto" : 0 };
+  background-color:${(props) => props.theme.colors.senary};
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
       display: none;
   }

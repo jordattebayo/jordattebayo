@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color:${(props) => props.theme.colors.senary};
 `;
 
 const Content = styled.div`
@@ -23,7 +24,9 @@ const Content = styled.div`
   width: 100vw;
   max-width: ${(props) => props.theme.widths.desktop};
   padding: 2rem;
-
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding: 2rem 0;
+  }
 `
 
 export default function BlogLayout(props) {

@@ -8,7 +8,7 @@ const NavWrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 3px solid ${(props) => props.theme.colors.primary};
-  
+  background-color:${(props) => props.theme.colors.senary};
 `
 
 const Nav = styled.nav`
@@ -69,7 +69,7 @@ const NavUl = styled.ul`
 const NavListItem = styled.li`
   padding: 0 1rem;
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
-    padding: 0;
+    padding: .5rem 0;
   }
 `
 const NavList = () => {

@@ -11,10 +11,10 @@ const AppWrapper = styled.div`
   max-width: 100%;
 `
 
-export default function Layout(props) {
+export default function Layout({updateTheme , ...props}) {
   return (
     <AppWrapper>
-        <Navbar />
+        <Navbar updateTheme={updateTheme}  />
         <ThemeShape />
         <ErrorBoundary>
             {props.children}

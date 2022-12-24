@@ -7,6 +7,8 @@ import { getAllPosts } from "../../lib/api";
 const CardList = styled.ul`
   padding: 0;
   margin: 0;
+  min-height: 67vh;
+  background-color:${(props) => props.theme.colors.senary};
 `
 
 const CenterPostCards = styled.li`

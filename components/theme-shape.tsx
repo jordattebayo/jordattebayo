@@ -6,6 +6,7 @@ interface ThemeShapeProps {
 }
 
 const StepsWrapper = styled.div`
+  background-color: ${(props) => props.theme.colors.senary};
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
       display: none;
   }

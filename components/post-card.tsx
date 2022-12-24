@@ -19,6 +19,7 @@ const Box = styled.div<{ open: boolean}>`
   background-color: transparent;
   transition: height 0.25s, width 0.25s, box-shadow 0.25s;
   border: 3px solid ${(props) => props.theme.colors.primary};
+  z-index: 3;
   &:hover {
    cursor: ${({open}) => open ? "unset" : "pointer"};
   }
@@ -98,7 +99,7 @@ const ShadowBox = styled.div<{ color: string}>`
   width: clamp(250px, 48vw, 626px);
   position: absolute;
   top: 0;
-  z-index: -2;
+  z-index: 0;
   transition: box-shadow .25s;
   ${Wrapper}:hover &{
     box-shadow: 16px -16px ${({color}) => color};
@@ -112,9 +113,10 @@ const ShadowBox = styled.div<{ color: string}>`
 
 const Lines = styled.svg`
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   top: 0; 
   overflow: overlay;
+  fill: ${(props) => props.theme.colors.primary};
   @media(max-width: ${(props) => props.theme.widths.tablet}) {
     top: 16px; 
   }
@@ -123,11 +125,13 @@ const Lines = styled.svg`
 const TopLine = styled.line`
   transform: translate(-3px,2px);
   stroke-width: .25px;
+  stroke: ${(props) => props.theme.colors.primary};
 `
 
 const BottomLines = styled.line`
   transform: translate(5px,-8px);
   stroke-width: .25px;
+  stroke: ${(props) => props.theme.colors.primary};
 `
 
 function choosePrimaryColor(id: number, theme: DefaultTheme): string {
