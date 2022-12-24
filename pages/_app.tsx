@@ -9,9 +9,9 @@ export const theme: DefaultTheme = {
   colors: {
     primary: '#1c1c1c',
     secondary: '#4ea0e9',
-    tertiary: '#e7cf2e',
+    tertiary: '#ff6831',
     quaternary: '#29db7c',
-    quinary: '#ff6831',
+    quinary: '#e7cf2e',
     senary: '#fff',
     septenary: '#B324E0',
     octenary: '#D9D9D9'
@@ -29,13 +29,13 @@ export const theme: DefaultTheme = {
 
 export const themeTwo: DefaultTheme = {
   colors: {
-    primary: '#1c1c1c',
-    secondary: '#29db7c',
-    tertiary: '#B324E0',
-    quaternary: '#ff6831',
-    quinary: '#e7cf2e',
-    senary: '#fff',
-    septenary: '#4ea0e9',
+    primary: '#c7c7c7',
+    secondary: '#E84545',
+    tertiary: '#903749',
+    quaternary: '#3F0071',
+    quinary: '#FB2576',
+    senary: '#1c1c1c',
+    septenary: '#3F0071',
     octenary: '#D9D9D9'
   },
   fonts: {

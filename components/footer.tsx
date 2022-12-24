@@ -5,7 +5,9 @@ const Footer = styled.footer`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: auto;
+  flex-grow: 1;
+  background-color: ${({theme}) => theme.colors.senary};
+
 `;
 
 const TextWrapper = styled.div`
@@ -20,6 +22,7 @@ const TextWrapper = styled.div`
 
 const FooterText = styled.span`
   font-size: 12px;
+  color: ${({theme}) => theme.colors.primary};
 `
 
 const LinkItem = styled.a`

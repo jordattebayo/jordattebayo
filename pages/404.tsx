@@ -14,9 +14,9 @@ const Center = styled.div`
     color: ${(props) => props.theme.colors.primary};
 `
 
-export default function NotFound() {
+export default function NotFound({ setSelectedTheme }) {
     return (
-    <Layout> 
+    <Layout updateTheme={setSelectedTheme}> 
         <H1>404 - Page Not Found</H1>
         <Center>
             <p>┻━┻ ︵ ¯\ &#40;ツ&#41;/¯ ︵ ┻━┻</p>

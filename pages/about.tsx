@@ -1,6 +1,11 @@
 import { ContactButton, Layout } from "../components";
 import { Wrapper, Content } from "../components/shared";
 import styled from "styled-components"
+import Head from "next/head";
+
+const AboutWrapper =styled(Wrapper)`
+  background-color: ${({theme}) => theme.colors.senary};
+`
 
 const ExplainContainer = styled.div`
   margin: 0 auto;
@@ -11,14 +16,20 @@ const LongWindedExplaination = styled.p`
   margin: clamp(15px, 2rem, 25px) 0;
   font-size: clamp(20px, 1.5vw, 22px);
   line-height: clamp(22px, 2vw, 30px);
-
+  color: ${({theme}) => theme.colors.primary};
 `
 
-export default function About() {
+export default function About({ setSelectedTheme }) {
 
   return (
-    <Layout>
-      <Wrapper>
+    <>
+    <Head>
+      <title>
+        About Jordan Booker
+      </title>
+    </Head>
+    <Layout updateTheme={setSelectedTheme}>
+      <AboutWrapper>
         <Content >
           <ExplainContainer>
           <LongWindedExplaination>
@@ -34,7 +45,8 @@ export default function About() {
           <ContactButton />
           </ExplainContainer>
         </Content>
-      </Wrapper>
+      </AboutWrapper>
     </Layout>
+    </>
   );
 }

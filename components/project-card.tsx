@@ -116,7 +116,7 @@ const ImageContainer = styled.div<ImageContainerProps>`
 
 const RoleText = styled.p`
   font-size: 32px;
-  color: ${(props) => props.theme.colors.senary};
+  color: ${(props) => props.theme.colors.octenary};
 `
 
 const H3 = styled.h3`
@@ -181,6 +181,7 @@ const ToggleDetails = styled.button<{ open: boolean}>`
   border: none;
   align-self: flex-end;
   margin-top: auto;
+  color: ${({theme}) => theme.colors.primary};
   &:hover{
     cursor: pointer !important;
     text-decoration: underline !important;
@@ -260,9 +261,9 @@ function chooseSecondaryColor(id: string, theme: DefaultTheme): DefaultTheme {
   let n = parseInt(id)
   if(theme){
     if( n % 2 == 0){
-      return theme.colors.tertiary
+      return theme.colors.quinary
     } else {
-      return theme.colors.secondary
+      return theme.colors.septenary
     }
   }
 }

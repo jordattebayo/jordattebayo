@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -93,9 +93,78 @@ const MobileNav = styled.div<MobileNavProps>`
   }
 `;
 
+const ToggleWrapper = styled.div`
+    position: relative;
 
+`
+const ToggleLabel = styled.label`
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 42px;
+  height: 26px;
+  border-radius: 15px;
+  background: ${({theme}) => theme.colors.senary};
+  cursor: pointer;
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    background: ${({theme}) => theme.colors.primary};
+    box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+  }
+`
 
-const NavList = () => {
+const ToggleInput = styled.input`
+  opacity: 0;
+  z-index: 1;
+  border-radius: 15px;
+  width: 42px;
+  height: 26px;
+  &:checked + ${ToggleLabel} {
+    background: ${({theme}) => theme.colors.senary};
+    &::after {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-left: 21px;
+      transition: 0.2s;
+    }
+  }
+`
+
+/* const CrescentMoon = styled.span`
+  position: absolute;
+  margin: auto;
+  top: -3px;
+  right: 0px;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 5px 1px 0px 0px #fff; 
+`
+ */
+const NavList = ({toggle, setToggle}) => {
+
+  const toggleInput = () => {
+    setToggle(toggle => !toggle);
+  };
+
+  function handleKeyPress(e) {
+    if (e.key !== "Space") return;
+    e.preventDefault();
+    setToggle();
+  }
+
   return (
       <NavUl>
         <NavListItem>
@@ -121,17 +190,46 @@ const NavList = () => {
           </NavLink>
           </Link>
         </NavListItem>
+        <NavListItem>
+        <ToggleWrapper>
+          <ToggleInput 
+            type="checkbox" 
+            id="themeToggle"
+            name="themeToggle"
+            aria-label="toggleTheme"
+            disabled={false}
+            checked={toggle}
+            onChange={() => toggleInput()}
+              />
+        <ToggleLabel  
+          tabIndex={0}
+          onKeyDown={(e) => handleKeyPress(e)}
+          htmlFor="themeToggle">
+          {/* <CrescentMoon></CrescentMoon> */}
+          </ToggleLabel>
+        </ToggleWrapper>  
+        </NavListItem>
       </NavUl>
   )
 }
 
-export default function Navbar () {
+export default function Navbar ({updateTheme}) {
   const [open, setOpen] = useState<boolean>(false);
+  const [toggleTheme, setToggleTheme] = useState<boolean>(false);
+  const [blockOnLoad, setBlockOnLoad] = useState<boolean>(false);
 
   function openNav(e){
     e.preventDefault();
     setOpen(!open)
   }
+  
+  useEffect(() => {
+    if(blockOnLoad){
+      updateTheme()
+    }
+    setBlockOnLoad(true)
+  },[toggleTheme])
+
   return (
     <NavWrapper>
       <Nav>
@@ -142,14 +240,14 @@ export default function Navbar () {
           </HomeWrapper>
         </Link>
         <DesktopNav>
-          <NavList />
+          <NavList toggle={toggleTheme} setToggle={setToggleTheme}/>
         </DesktopNav>
         <MobileNavButtonWrapper>
           <NavButton onClick={(e) => openNav(e)}></NavButton>
         </MobileNavButtonWrapper>
         </NavWidthLimit>
         <MobileNav open={open}>
-          <NavList />    
+          <NavList toggle={toggleTheme} setToggle={setToggleTheme}/>  
         </MobileNav>
       </Nav>
     </NavWrapper>

@@ -1,7 +1,10 @@
 import { useState, useEffect, useContext  } from "react"
 import styled, { ThemeContext  } from "styled-components";
 import { Wrapper, Content } from "./shared";
-import { themeTwo } from "../pages/_app"
+
+const HeroWrapper = styled(Wrapper)`
+    background-color: ${(props) => props.theme.colors.senary};
+`
 
 const HomeContent= styled(Content)`
     width: 100%;
@@ -16,7 +19,7 @@ const HomeContent= styled(Content)`
 const H2 = styled.h2`
   font-size: clamp(20px, 3vw, 48px);
   margin-bottom: 0;
-  color:  ${(props) => props.theme.colors.secondary};
+  color:  ${(props) => props.theme.colors.tertiary};
 `
 const Intro = styled.p`
     max-width: 850px;
@@ -53,13 +56,13 @@ function Hero({ updateTheme }){
     },[])
 
     return (
-        <Wrapper>
+        <HeroWrapper>
             <HomeContent>
                 <H2>{greet(date)},</H2>
                 <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
                 {/* <button onClick={() => {updateTheme(); console.log("theme context: ", themeContext)}}>Change theme</button> */}
             </HomeContent>
-        </Wrapper>
+        </HeroWrapper>
 
     )
 }
