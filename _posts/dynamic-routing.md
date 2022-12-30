@@ -4,7 +4,7 @@ excerpt: 'Heres an example of how a blog post could look if I wrote one'
 coverImage:
   path: '/assets/blog/amplifierScreenshot.png'
   alt: Screenshot of amplifier creatives website
-date: '2020-03-16'
+date: '2020-03-16T02:00:00Z'
 author:
   name: Jordan Booker
   picture: '/assets/blog/amplifierScreenshot.png'

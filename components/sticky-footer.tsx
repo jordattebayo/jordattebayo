@@ -170,7 +170,7 @@ export default function StickyFooter() {
                     >
                         <SettingsText>settings</SettingsText> <Prompt>CTRL</Prompt> + <Prompt>ENTER</Prompt>
                 </SettingsButton>
-                <FooterText>&copy; 2022 By Jordan Booker</FooterText>
+                <FooterText>&copy; {() => {let date = new Date(); return date.getFullYear()}} By Jordan Booker</FooterText>
             </Footer>
         </FooterWrapper>
         </>

@@ -4,7 +4,7 @@ excerpt: ''
 coverImage:
   path: '/assets/blog/hello-world-header.jpg'
   alt: A photo of me and my dog
-date: '2022-12-23'
+date: '2022-12-23T02:00:00Z'
 author:
   name: Jordan Booker
   picture: '/assets/blog/amplifierScreenshot.png'
@@ -23,3 +23,8 @@ Here are some features I'm exited about working on:
 - dialog modal to change settings (like themes)
 - accessiblity score checker for each page
 - persist theme in local storage
+- adding a favicon + logo ;]
+- link to rss feed in sticky footer (design needed)
+- resize sticky footer settings prompt
+- add meta tagging for embeding links
+- email sign up
