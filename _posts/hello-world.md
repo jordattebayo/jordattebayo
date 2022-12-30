@@ -19,8 +19,7 @@ Prologue aside I'd really like to use this first post to outline my plans for th
 
 Here are some features I'm exited about working on:
 - fluid Image support in blog
-- theme picker
+- theme picker in blog settings
 - dialog modal to change settings (like themes)
-- better mobile support
-- accessiblity score checker
-- 
+- accessiblity score checker for each page
+- persist theme in local storage
