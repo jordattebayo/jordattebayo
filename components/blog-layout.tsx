@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { BlogNavbar, BlogThemeShape, StickyFooter } from ".";
+import Dialog from "./dialog";
 import ErrorBoundary from "./error-boundary";
 
 const AppWrapper = styled.div`
@@ -30,9 +31,11 @@ const Content = styled.div`
 `
 
 export default function BlogLayout(props) {
+
   return (
     <AppWrapper>
       <BlogNavbar />
+      <Dialog />
       <BlogThemeShape />
       <Wrapper>
         <Content>
