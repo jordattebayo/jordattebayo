@@ -20,6 +20,9 @@ const Heading = styled.div`
   margin: 4rem 0;
 `
 
+const Article = styled.article`
+`
+
 const H2 = styled.h3`
   font-size: 4rem;
   max-width: 750px;
@@ -30,8 +33,8 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  height: 1600px;
-  width: 1068px;
+  height: clamp(400px, 100vw, 1600px);
+  width: clamp(200px, 80vw, 1068px); 
 `
 
 const CardText = styled.p`
@@ -52,7 +55,7 @@ export default function Post({ post, morePosts, preview }: Props) {
           <div>Loading…</div>
         ) : (
           <>
-            <article >
+            <Article>
               <Head>
                 <title>
                   {post.title}
@@ -73,7 +76,7 @@ export default function Post({ post, morePosts, preview }: Props) {
               <PostBody content={post.content} />
               <DateFormatter dateString={post.date} />
               <div>By: {post.author.name}</div>
-            </article>
+            </Article>
           </>
         )}
       </div>

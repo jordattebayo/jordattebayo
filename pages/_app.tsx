@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ThemeProvider, DefaultTheme } from 'styled-components'
 import { GlobalStyle } from '../components'
 import Head from 'next/head'
@@ -10,9 +10,21 @@ import { AppContext } from '../lib/context'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [selectedTheme, setSelectedTheme] = useState<DefaultTheme>(lightTheme)
+  const [settingsDialogState, setSettingsDialogState] = useState<boolean>(false);
 
-  const [settingsDialogOpen, setSettingsDialogOpen] = useState<boolean>(false);
-  const [theme, setTheme] = useState<DefaultTheme>(lightTheme);
+
+  function chooseTheme(theme: string) {
+    switch(theme){
+      case "light":
+        setSelectedTheme(lightTheme)
+        break;
+      case 'dark':
+        setSelectedTheme(darkTheme)
+        break;
+      default:
+        break;
+    }
+  }
 
   function toggleTheme(){
     if(selectedTheme === lightTheme){
@@ -21,6 +33,22 @@ export default function App({ Component, pageProps }: AppProps) {
       setSelectedTheme(lightTheme)
     }
   }
+
+  function requestDialogOpen(){
+    if (settingsDialogState) return 
+    setSettingsDialogState(true)
+  }
+
+  function requestDialogClose(){
+    //if (!settingsDialogState) return 
+    console.log("request close called")
+    setSettingsDialogState(false)
+  }
+
+  function toggleDialog(){
+    setSettingsDialogState(settingsDialogState => !settingsDialogState)
+  }
+
 
   return (
     <>
@@ -41,7 +69,16 @@ export default function App({ Component, pageProps }: AppProps) {
     </Head>
     <ThemeProvider theme={selectedTheme}>
     <GlobalStyle />
-      <AppContext.Provider value={{settingsDialogOpen, setSettingsDialogOpen, theme, setTheme}}>
+      <AppContext.Provider value={{
+        settingsDialogState, 
+        requestDialogOpen, 
+        requestDialogClose,
+        toggleDialog,
+        setSettingsDialogState,
+        selectedTheme, 
+        toggleTheme, 
+        chooseTheme
+        }}>
         <Component {...pageProps} setSelectedTheme={toggleTheme} /> 
       </AppContext.Provider>
     </ThemeProvider>

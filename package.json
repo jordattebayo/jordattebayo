@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@types/node": "^18.0.6",
     "@types/react": "^18.0.15",
     "axios": "^0.21.1",

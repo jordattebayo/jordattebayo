@@ -1,19 +1,25 @@
 import { DefaultTheme } from 'styled-components'
-import { useState, createContext } from 'react'
-import { lightTheme, darkTheme } from './theme'
+import { createContext } from 'react'
+import { lightTheme } from './theme'
 
 interface AppContextProps {
-    settingsDialogOpen: boolean;
-    setSettingsDialogOpen: any;
-    theme: DefaultTheme;
-    setTheme: any;
+  settingsDialogState: boolean;
+  requestDialogOpen?: () => any;
+  requestDialogClose?: () => any;
+  toggleDialog?: () => any;
+  setSettingsDialogState?: any;
+  selectedTheme: DefaultTheme;
+  toggleTheme?: () => any;
+  chooseTheme?: (theme: string) => any;
 }
 
 const initialContext: AppContextProps = {
-    settingsDialogOpen: false,
-    setSettingsDialogOpen: () => null,
-    theme: lightTheme,
-    setTheme: () => null
+    settingsDialogState: false,
+    requestDialogOpen: () => null,
+    requestDialogClose: () => null,
+    selectedTheme: lightTheme,
+    toggleTheme: () => null,
+    chooseTheme: () => null
 }
   
 export const AppContext = createContext<AppContextProps>(initialContext);

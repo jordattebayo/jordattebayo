@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState, useEffect, useCallback , useContext} from "react";
 import styled from "styled-components";
 import { AppContext } from "../lib/context";
@@ -7,7 +6,7 @@ const FooterWrapper = styled.div<{active: boolean}>`
     position: fixed;
     margin-top: auto;
     margin-left: auto;
-    top: 80vh;
+    top: 85vh;
     right: 10vw;
     z-index: 5;
     background-color:${(props) => props.theme.colors.senary};
@@ -23,7 +22,6 @@ const Footer = styled.div`
     flex-direction: column;
 `
 
-
 const Button = styled.button`
     background-color: transparent;
     border: none;
@@ -32,6 +30,7 @@ const Button = styled.button`
     flex-direction: column;
     :hover{
         cursor: pointer;
+        color:${(props) => props.theme.colors.primary};
     }
 `
 
@@ -40,7 +39,7 @@ const SVGWrapper = styled.span`
     height: 51px;
     width: 40px;
     ${Button}:hover & {
-        border-bottom: 4px solid ${(props) => props.theme.colors.primary};
+        border-bottom: 4px solid black
     }
 `
 
@@ -52,15 +51,6 @@ const ButtonText = styled.span`
     font-size: clamp(16px, 5vw, 32px);
     color:${(props) => props.theme.colors.primary};
     ${Button}:hover & {
-        text-decoration: underline;
-    }
-`
-
-const FooterLink = styled.a`
-    font-size: clamp(16px, 5vw, 32px);
-    color: ${(props) => props.theme.colors.primary};
-    margin-top: .25rem;
-    :hover {
         text-decoration: underline;
     }
 `
@@ -126,28 +116,10 @@ function scrollToTop(){
 }
 
 export default function StickyFooter() {
-    const { setSettingsDialogOpen } = useContext(AppContext)
+    const { requestDialogOpen } = useContext(AppContext)
     const [active, setActive] = useState<boolean>(false)
     const date = new Date();
-    const handleUserKeyPress = useCallback(event => {
-        const { key } = event;
-        if(event.ctrlKey == true){
-            if(key === "Enter"){
-                setSettingsDialogOpen(true);
-            } 
-        }
-        if (key === "Escape"){
-            setSettingsDialogOpen(false);
-        }
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener("keydown", handleUserKeyPress);
-        return () => {
-            window.removeEventListener("keydown", handleUserKeyPress);
-        };
-    }, [handleUserKeyPress]);
-
+   
     useEffect(() => { 
         const checkPosition = () => {
             if(window.scrollY >= 10){
@@ -160,7 +132,7 @@ export default function StickyFooter() {
         return () => {
             window.removeEventListener('scroll', () => checkPosition())
         }
-      }, [active])
+      }, [])
 
     return (
         <>
@@ -175,26 +147,12 @@ export default function StickyFooter() {
                     </SVGWrapper>
                     <ButtonText style={{fontFamily: "Roboto Mono,monospace"}}>scroll to top</ButtonText>
                 </Button>
-                <Link href="/about#contact" passHref legacyBehavior>
-                    <FooterLink
-                        tabIndex={0}   
-                    >
-                        contact me
-                    </FooterLink>
-                </Link>
-                <Link href="/rss/feed.xml" passHref legacyBehavior>
-                    <FooterLink
-                        tabIndex={0}   
-                    >
-                        rss
-                    </FooterLink>
-                </Link>
                 <SettingsButton
                     type="button"
-                    onClick={() => setSettingsDialogOpen(settingsDialogOpen => !settingsDialogOpen)}
-                        tabIndex={0}   
+                    onClick={() => requestDialogOpen()}
+                    tabIndex={0}
                     >
-                        <SettingsText>open settings</SettingsText><PromptWrapper><Prompt>CTRL</Prompt> + <Prompt>↵ ENTER</Prompt></PromptWrapper>
+                        <SettingsText>open menu</SettingsText><PromptWrapper><Prompt>CTRL</Prompt> + <Prompt>↑ Shift</Prompt></PromptWrapper>
                 </SettingsButton>
                 <FooterText>&copy; {date.getFullYear()} By Jordan Booker</FooterText>
             </Footer>

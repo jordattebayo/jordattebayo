@@ -17,14 +17,16 @@ There is something so beautiful about a hello world application. It's the first 
 
 Prologue aside I'd really like to use this first post to outline my plans for the future. I mean I have big plans for this blog! Although implementing those plans will take time and I'm quite short on that these days. But you have my word I'll try my best to chip away at it the best I can. Along the way, I'd like to document my journey. 
 
-Here are some features I'm exited about working on:
-- fluid Image support in blog
-- theme picker in blog settings
-- dialog modal to change settings (like themes)
+Must haves before soft launch:
+- email sign up
+- add meta tagging for embeding links
+- adding a favicon + logo ;]
+
+Future implementations: 
 - accessiblity score checker for each page
 - persist theme in local storage
-- adding a favicon + logo ;]
-- link to rss feed in sticky footer (design needed)
-- resize sticky footer settings prompt
-- add meta tagging for embeding links
-- email sign up
+- theme picker in blog settings
+
+Thank you to -> 
+https://souporserious.com/build-a-dialog-component-in-react/
+https://sreetamdas.com/blog/rss-for-nextjs
