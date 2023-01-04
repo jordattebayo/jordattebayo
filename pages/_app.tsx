@@ -74,6 +74,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta property="og:type" content="website" key="type"/>
       <meta property="og:url" content="https://jordanbooker.dev" key="url" />
       <meta property="og:image" content={"/assets/defaultOG.png"} key="image" />
+      <meta name="description" content="It's where I keep all my stuff, that I want people to see?" key="description" />
+      <meta property="og:description" content="It's where I keep all my stuff, that I want people to see?" key="descriptionOG"/>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>

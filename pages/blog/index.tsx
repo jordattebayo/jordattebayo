@@ -35,6 +35,7 @@ export default function Blog({ allPosts } : BlogProps){
     <meta property="og:title" content="Jordan Booker's blog" key="title"/>
     <meta property="og:url" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} key="url" />
     <meta property="og:description" content="A lightly techincal frontend blog" key="descriptionOG"/>
+    <meta property="og:image" content={"/assets/blogOG.png"} key="image" />
     <meta name="twitter:card" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} />
     </Head>
       <BlogLayout>
