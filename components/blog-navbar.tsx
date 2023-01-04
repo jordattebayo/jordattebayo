@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import { AppContext } from "../lib/context";
+import SubscribeForm from "./subscribe";
+
 
 const NavWrapper = styled.div`
   display: flex;
@@ -72,7 +75,56 @@ const NavListItem = styled.li`
     padding: .5rem 0;
   }
 `
+
+const ToggleWrapper = styled.div`
+    position: relative;
+
+`
+const ToggleLabel = styled.label`
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 45px;
+  height: 28px;
+  border-radius: 15px;
+  background: ${({theme}) => theme.colors.senary};
+  border: 2px solid ${({theme}) => theme.colors.primary};
+  cursor: pointer;
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    background: ${({theme}) => theme.colors.primary};
+    box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+  }
+`
+
+const ToggleInput = styled.input`
+  opacity: 0;
+  z-index: 1;
+  border-radius: 15px;
+  width: 42px;
+  height: 26px;
+  &:checked + ${ToggleLabel} {
+    background: ${({theme}) => theme.colors.senary};
+    &::after {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-left: 21px;
+      transition: 0.2s;
+    }
+  }
+`
+
 const NavList = () => {
+  const { selectedTheme, toggleTheme } = useContext(AppContext)
   return (
       <NavUl>
         <NavListItem>
@@ -98,6 +150,36 @@ const NavList = () => {
           </NavLink>
           </Link>
         </NavListItem>
+        <NavListItem>
+          <Link href="/rss/feed.xml" passHref legacyBehavior>
+          <NavLink
+            tabIndex={0}   
+          >
+            /RSS
+          </NavLink>
+          </Link>
+        </NavListItem>
+        <NavListItem>
+        <ToggleWrapper>
+          <ToggleInput 
+            type="checkbox" 
+            id="themeToggle"
+            name="themeToggle"
+            aria-label="toggleTheme"
+            disabled={false}
+            checked={selectedTheme.name === 'dark'}
+            onChange={() => toggleTheme()}
+              />
+        <ToggleLabel  
+          tabIndex={0}
+          onKeyDown={() => toggleTheme()}
+          htmlFor="themeToggle">
+          </ToggleLabel>
+        </ToggleWrapper>  
+        </NavListItem>
+        <NavListItem>
+          <SubscribeForm />
+        </NavListItem>
       </NavUl>
   )
 }
@@ -110,7 +192,7 @@ export default function BlogNavbar () {
         <NavWidthLimit>
         <Link href="/blog" passHref legacyBehavior>
           <HomeWrapper >
-            jordan booker <br/>dot com/blog
+            jordan booker <br/>dot com/blog 
           </HomeWrapper>
         </Link>
         <MobileNav>

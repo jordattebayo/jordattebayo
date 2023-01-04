@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { BlogNavbar, BlogThemeShape, StickyFooter } from ".";
+import Modal from "./dialog";
 import ErrorBoundary from "./error-boundary";
 
 const AppWrapper = styled.div`
@@ -15,6 +16,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color:${(props) => props.theme.colors.senary};
+  width: 100vw;
+  max-width: 100%;
 `;
 
 const Content = styled.div`
@@ -24,15 +27,14 @@ const Content = styled.div`
   width: 100vw;
   max-width: ${(props) => props.theme.widths.desktop};
   padding: 2rem;
-  @media(max-width: ${(props) => props.theme.widths.tablet}) {
-    padding: 2rem 0;
-  }
 `
 
 export default function BlogLayout(props) {
+
   return (
     <AppWrapper>
       <BlogNavbar />
+      <Modal />
       <BlogThemeShape />
       <Wrapper>
         <Content>

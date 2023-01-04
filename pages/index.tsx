@@ -2,7 +2,6 @@ import { Layout, ProjectCard, StyledAnimatedTest, ThemeShape }from '../component
 import styled from "styled-components";
 import Project from '../interfaces/project'
 import Hero from '../components/hero'
-import Head from 'next/head';
 
 /* Todo 
     - refactor layout to allow for each section to span full length of page
@@ -144,11 +143,6 @@ const projects: Project[] = [
 export default function Home({ setSelectedTheme }) {
   return (
     <>
-    <Head>
-      <title>
-        Jordan Booker's Homepage
-      </title>
-    </Head>
     <Layout updateTheme={setSelectedTheme}>
       <main>
       <Hero updateTheme={setSelectedTheme} />

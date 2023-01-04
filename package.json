@@ -8,11 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@types/node": "^18.0.6",
     "@types/react": "^18.0.15",
-    "axios": "^0.21.1",
     "date-fns": "^2.29.3",
     "eslint-config-next": "^13.0.5",
+    "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "next": "^13.0.5",
     "react": "^18.2.0",

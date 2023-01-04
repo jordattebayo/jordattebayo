@@ -63,6 +63,9 @@ const NavListItem = styled.li`
 
 const NavLink = styled.a`
   color: ${(props) => props.theme.colors.senary};
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 const HomeWrapper = styled(NavLink)`
@@ -187,6 +190,15 @@ const NavList = ({toggle, setToggle}) => {
             tabIndex={0}   
           >
             /Blog
+          </NavLink>
+          </Link>
+        </NavListItem>
+        <NavListItem>
+          <Link href="/rss/feed.xml" passHref legacyBehavior>
+          <NavLink
+            tabIndex={0}   
+          >
+            /RSS
           </NavLink>
           </Link>
         </NavListItem>

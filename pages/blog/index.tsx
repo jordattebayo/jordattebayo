@@ -1,8 +1,9 @@
-import { BlogLayout, PostCard } from "../../components";
 import styled from "styled-components"
 import Head from 'next/head'
+import { BlogLayout, PostCard } from "../../components";
 import type PostType from '../../interfaces/post'
 import { getAllPosts } from "../../lib/api";
+import { generateRssFeed } from "../../lib/feed";
 
 const CardList = styled.ul`
   padding: 0;
@@ -25,10 +26,19 @@ type BlogProps = {
 export default function Blog({ allPosts } : BlogProps){
   return (
     <>
+    <Head>
+    <title>
+      Jordan Booker's Blog
+    </title>
+    <meta name="title" content="Jordan Booker's Blog" />
+    <meta name="description" content="A lightly techincal frontend blog" key="description" />
+    <meta property="og:title" content="Jordan Booker's blog" key="title"/>
+    <meta property="og:url" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} key="url" />
+    <meta property="og:description" content="A lightly techincal frontend blog" key="descriptionOG"/>
+    <meta property="og:image" content={"/assets/blogOG.png"} key="image" />
+    <meta name="twitter:card" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} />
+    </Head>
       <BlogLayout>
-        <Head>
-          <title>Jordan's blog</title>
-        </Head>
         <CardList>          
           {allPosts && allPosts.map((post, index) => {
             return (
@@ -61,6 +71,8 @@ export const getStaticProps = async () => {
     'excerpt',
     'timeToRead'
   ])
+  await generateRssFeed();
+
   return {
     props: { allPosts },
   }

@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback , useContext} from "react";
 import styled from "styled-components";
+import { AppContext } from "../lib/context";
 
 const FooterWrapper = styled.div<{active: boolean}>`
     position: fixed;
     margin-top: auto;
     margin-left: auto;
-    top: 83vh;
+    top: 85vh;
     right: 10vw;
     z-index: 5;
     background-color:${(props) => props.theme.colors.senary};
-    transform: ${(({active}) => active ? "translateY(0)" : "translateY(20vh)")};
+    transform: ${(({active}) => active ? "translateY(0)" : "translateY(30vh)")};
     transition: transform .25s;
     @media(max-width: ${(props) => props.theme.widths.mobile}) {
         display: none;
@@ -22,7 +22,6 @@ const Footer = styled.div`
     flex-direction: column;
 `
 
-
 const Button = styled.button`
     background-color: transparent;
     border: none;
@@ -31,6 +30,7 @@ const Button = styled.button`
     flex-direction: column;
     :hover{
         cursor: pointer;
+        color:${(props) => props.theme.colors.primary};
     }
 `
 
@@ -39,7 +39,7 @@ const SVGWrapper = styled.span`
     height: 51px;
     width: 40px;
     ${Button}:hover & {
-        border-bottom: 4px solid ${(props) => props.theme.colors.primary};
+        border-bottom: 4px solid black
     }
 `
 
@@ -55,38 +55,48 @@ const ButtonText = styled.span`
     }
 `
 
-const FooterLink = styled.a`
-    font-size: clamp(16px, 5vw, 32px);
-    color: ${(props) => props.theme.colors.primary};
-    margin-top: .25rem;
-    :hover {
-        text-decoration: underline;
-    }
-`
-
 const SettingsButton = styled.button`
+    display: flex;
+    align-items: center;
     background: transparent;
     border: none;
     padding: 0;
-    font-size: clamp(16px,5vw,32px);
+    font-size: clamp(16px, 4vw, 30px);
     font-style:  ${(props) => props.theme.fonts.primary};
     color: ${(props) => props.theme.colors.primary};
     text-align: left;
     cursor: pointer;
-    padding: .25rem 0;
+    padding: .5rem 0;
+    gap: .5rem;
+    position: relative;
 `
 
 const SettingsText = styled.span`
+    visibility: unset;
     ${SettingsButton}:hover & {
         border: 1px ${(props) => props.theme.colors.senary};
-        text-decoration: underline;
+        visibility: hidden;
+    }
+`
+
+const PromptWrapper = styled.span`
+    visibility: hidden;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+    border: 3px solid ${(props) => props.theme.colors.primary};
+    padding: .25rem .5rem;
+    ${SettingsButton}:hover & {
+        visibility: unset;
     }
 `
 
 const Prompt = styled.span`
-    font-size: clamp(16px, 5vw, 20px);
+    position: relative;
+    font-size: clamp(12px, .5vw, 16px);
     border: 1px solid ${(props) => props.theme.colors.primary};
     padding: .25rem;
+    top: -5px;
 `
 
 const FooterText = styled.span`
@@ -106,29 +116,10 @@ function scrollToTop(){
 }
 
 export default function StickyFooter() {
-    const [openSettings, setOpenSettings] = useState<boolean>(false);
+    const { requestDialogOpen } = useContext(AppContext)
     const [active, setActive] = useState<boolean>(false)
-
-
-    const handleUserKeyPress = useCallback(event => {
-        const { key } = event;
-        if(event.ctrlKey == true){
-            if(key === "Enter"){
-                setOpenSettings(true);
-            } 
-        }
-        if (key === "Escape"){
-            setOpenSettings(false);
-        }
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener("keydown", handleUserKeyPress);
-        return () => {
-            window.removeEventListener("keydown", handleUserKeyPress);
-        };
-    }, [handleUserKeyPress]);
-
+    const date = new Date();
+   
     useEffect(() => { 
         const checkPosition = () => {
             if(window.scrollY >= 10){
@@ -141,7 +132,7 @@ export default function StickyFooter() {
         return () => {
             window.removeEventListener('scroll', () => checkPosition())
         }
-      }, [active])
+      }, [])
 
     return (
         <>
@@ -156,21 +147,14 @@ export default function StickyFooter() {
                     </SVGWrapper>
                     <ButtonText style={{fontFamily: "Roboto Mono,monospace"}}>scroll to top</ButtonText>
                 </Button>
-                <Link href="/about#contact" passHref legacyBehavior>
-                    <FooterLink
-                        tabIndex={0}   
-                    >
-                        contact me
-                    </FooterLink>
-                </Link>
                 <SettingsButton
                     type="button"
-                    onClick={() => setOpenSettings(openSettings => !openSettings)}
-                        tabIndex={0}   
+                    onClick={() => requestDialogOpen()}
+                    tabIndex={0}
                     >
-                        <SettingsText>settings</SettingsText> <Prompt>CTRL</Prompt> + <Prompt>ENTER</Prompt>
+                        <SettingsText>open menu</SettingsText><PromptWrapper><Prompt>CTRL</Prompt> + <Prompt>↑ Shift</Prompt></PromptWrapper>
                 </SettingsButton>
-                <FooterText>&copy; 2022 By Jordan Booker</FooterText>
+                <FooterText>&copy; {date.getFullYear()} By Jordan Booker</FooterText>
             </Footer>
         </FooterWrapper>
         </>
