@@ -67,15 +67,15 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤎</text></svg>" />
       <title>
-        Jordan's house! But like digital...
+        Jordan Booker's Homepage
       </title>
       <meta name="theme-color" content="#ff6831"/>
-      <meta property="og:title" content="Jordan's house! But like digital..." key="title" />
+      <meta property="og:title" content="Jordan Booker's Homepage" key="title" />
       <meta property="og:type" content="website" key="type"/>
       <meta property="og:url" content="https://jordanbooker.dev" key="url" />
-      <meta property="og:image" content={"/assets/defaultOG.png"} key="image" />
-      <meta name="description" content="It's where I keep all my stuff, that I want people to see?" key="description" />
-      <meta property="og:description" content="It's where I keep all my stuff, that I want people to see?" key="descriptionOG"/>
+      <meta property="og:image" content="/assets/defaultOG.png" key="image" />
+      <meta name="description" content="It's kinda like my house, but digital and everyone can see inside." key="description" />
+      <meta property="og:description" content="It's kinda like my house, but digital and everyone can see inside." key="descriptionOG"/>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>

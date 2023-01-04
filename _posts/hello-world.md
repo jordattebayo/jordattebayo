@@ -25,3 +25,7 @@ Future implementations:
 Thank you to -> 
 https://souporserious.com/build-a-dialog-component-in-react/
 https://sreetamdas.com/blog/rss-for-nextjs
+
+Lastly here is reference having an inline image in a blog post because I'll inevitably (sp?) forget.
+
+![test image](/assets/blog/amplifierScreenshot.png)
