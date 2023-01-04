@@ -54,15 +54,15 @@ export default function Post({ post, morePosts, preview }: Props) {
     <title>
       {post.title}
     </title>
-    <meta name="title" content={post.title} />
-    <meta name="description" content={post.excerpt}/>
-    <meta property="og:title" content={post.title} />
+    <meta name="title" content={post.title}  />
+    <meta name="description" content={post.excerpt} key="description" />
+    <meta property="og:title" content={post.title} key="title"/>
     <meta property="og:type" content="article" />
-    <meta property="og:url" content={process.env.SITE_URL + post.slug} />
-    <meta property="og:image" content={post.coverImage.path} />
-    <meta property="og:description" content={post.excerpt} />
+    <meta property="og:url" content={process.env.VERCEL_URL + post.slug} key="url" />
+    <meta property="og:image" content={post.coverImage.path} key="image" />
+    <meta property="og:description" content={post.excerpt} key="description"/>
     <meta name="theme-color" content="#1c1c1c"/>
-    <meta name="twitter:card" content={process.env.SITE_URL + post.slug}/>
+    <meta name="twitter:card" content={process.env.VERCEL_URL + post.slug} />
     <meta name="article:published_time" content={post.date} />
     <meta name="article:author" content={post.author.name} />
     {/* add tags later <meta name="article:tag" content={post.author.name} /> */}
