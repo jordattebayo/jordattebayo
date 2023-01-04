@@ -66,6 +66,17 @@ export default function App({ Component, pageProps }: AppProps) {
         type="font/woff2"
         crossOrigin="anonymous"
       />
+      <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤎</text></svg>" />
+      <title>
+        Jordan's house! But like digital...
+      </title>
+      <meta name="theme-color" content="#1c1c1c"/>
+      <meta property="og:title" content="Jordan's house! But like digital lol" />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://jordanbooker.dev" />
+      <meta property="og:image" content={process.env.SITE_URL + "/assets/defaultOG.png"} />
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <ThemeProvider theme={selectedTheme}>
     <GlobalStyle />

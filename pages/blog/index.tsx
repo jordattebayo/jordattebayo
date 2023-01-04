@@ -1,6 +1,5 @@
 import { BlogLayout, PostCard } from "../../components";
 import styled from "styled-components"
-import Head from 'next/head'
 import type PostType from '../../interfaces/post'
 import { getAllPosts } from "../../lib/api";
 import { generateRssFeed } from "../../lib/feed";
@@ -27,9 +26,6 @@ export default function Blog({ allPosts } : BlogProps){
   return (
     <>
       <BlogLayout>
-        <Head>
-          <title>Jordan's blog</title>
-        </Head>
         <CardList>          
           {allPosts && allPosts.map((post, index) => {
             return (
