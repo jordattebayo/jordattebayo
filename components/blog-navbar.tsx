@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { AppContext } from "../lib/context";
+import SubscribeForm from "./subscribe";
 
 
 const NavWrapper = styled.div`
@@ -175,6 +176,9 @@ const NavList = () => {
           htmlFor="themeToggle">
           </ToggleLabel>
         </ToggleWrapper>  
+        </NavListItem>
+        <NavListItem>
+          <SubscribeForm />
         </NavListItem>
       </NavUl>
   )

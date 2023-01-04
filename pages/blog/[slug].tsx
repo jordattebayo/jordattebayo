@@ -38,9 +38,14 @@ const ImageContainer = styled.div`
 `
 
 const CardText = styled.p`
+  color: ${({theme}) => theme.colors.primary};
 `
 
 const ReadTimeText = styled(CardText)`
+`
+
+const ThemeText = styled.p`
+  color: ${({theme}) => theme.colors.primary};
 `
 
 export default function Post({ post, morePosts, preview }: Props) {
@@ -57,12 +62,11 @@ export default function Post({ post, morePosts, preview }: Props) {
     <meta name="title" content={post.title}  />
     <meta name="description" content={post.excerpt} key="description" />
     <meta property="og:title" content={post.title} key="title"/>
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="article" key="type" />
     <meta property="og:url" content={process.env.NEXT_PUBLIC_VERCEL_URL + post.slug} key="url" />
     <meta property="og:image" content={post.coverImage.path} key="image" />
-    <meta property="og:description" content={post.excerpt} key="description"/>
-    <meta name="theme-color" content="#1c1c1c"/>
-    <meta name="twitter:card" content={process.env.NEXT_PUBLIC_VERCEL_URL + post.slug} />
+    <meta property="og:description" content={post.excerpt} key="descriptionOG"/>
+    <meta name="twitter:card" content={post.coverImage.path} />
     <meta name="article:published_time" content={post.date} />
     <meta name="article:author" content={post.author.name} />
     {/* add tags later <meta name="article:tag" content={post.author.name} /> */}
@@ -71,7 +75,7 @@ export default function Post({ post, morePosts, preview }: Props) {
     <BlogLayout >
       <div>
         {router.isFallback ? (
-          <div>Loading…</div>
+          <div><ThemeText>Loading…</ThemeText></div>
         ) : (
           <>
             <Article>
@@ -88,7 +92,7 @@ export default function Post({ post, morePosts, preview }: Props) {
               </ImageContainer>
               <PostBody content={post.content} />
               <DateFormatter dateString={post.date} />
-              <div>By: {post.author.name}</div>
+              <div><ThemeText>By: {post.author.name}</ThemeText></div>
             </Article>
           </>
         )}

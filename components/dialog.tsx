@@ -6,6 +6,8 @@ import SubscribeForm from "./subscribe";
 
 const H3 = styled.h3`
   margin-bottom: .5rem;
+  color: ${(props) => props.theme.colors.primary};
+
 `
 
 const SectionWrapper = styled.div`

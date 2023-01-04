@@ -50,6 +50,10 @@ const SubmitButton = styled.button`
     }
 `
 
+const ResponseText = styled.p`
+    color: ${(props) => props.theme.colors.primary};
+`
+
 export default function SubscribeForm() {
     const [email, setEmail] = useState<string>("")
     const [submitting, setSubmitting] = useState<boolean>(false)
@@ -74,21 +78,22 @@ export default function SubscribeForm() {
             }else {
                 setError(res.statusText)
             }
+            setSubmitting(false)
         })
     }
     if (success){
         return (
-            <div><p>Subscribed!</p></div>
+            <div><ResponseText>Subscribed!</ResponseText></div>
         )
     }
     if (error !== ""){
         return (
-            <div><p>Sorry an error occrued: {error}</p></div>
+            <div><ResponseText>Sorry an error occrued: {error}</ResponseText></div>
         )
     }
     if (submitting){
         return (
-            <div><p>submitting...</p></div>
+            <div><ResponseText>submitting...</ResponseText></div>
         )
     }
     return (
