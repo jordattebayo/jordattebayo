@@ -11,7 +11,7 @@ export const generateRssFeed = async () => {
     'author',
     'excerpt',
   ]);
-  const siteURL = process.env.VERCEL_URL;
+  const siteURL = process.env.NEXT_PUBLIC_VERCEL_URL;
   const date = new Date();
   const author = {
     name: "Jordan booker",

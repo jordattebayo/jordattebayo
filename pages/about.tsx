@@ -27,7 +27,7 @@ export default function About({ setSelectedTheme }) {
       <title>
         About me
       </title>
-      <meta property="og:title" content="About Jordan Booker" />
+      <meta property="og:title" content="About Jordan Booker" key="title" />
     </Head>
     <Layout updateTheme={setSelectedTheme}>
       <AboutWrapper>

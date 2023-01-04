@@ -31,12 +31,12 @@ export default function Blog({ allPosts } : BlogProps){
       Jordan Booker's Blog
     </title>
     <meta name="title" content="Jordan Booker's Blog" />
-    <meta name="description" content="My lightly techincal frontend blog" key="description" />
+    <meta name="description" content="A lightly techincal frontend blog" key="description" />
     <meta property="og:title" content="Jordan Booker's blog" key="title"/>
-    <meta property="og:url" content={process.env.VERCEL_URL + "/blog"} key="url" />
+    <meta property="og:url" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} key="url" />
     <meta property="og:description" content="My lightly techincal frontend blog" key="description"/>
     <meta name="theme-color" content="#1c1c1c"/>
-    <meta name="twitter:card" content={process.env.VERCEL_URL + "/blog"} />
+    <meta name="twitter:card" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/blog"} />
     </Head>
       <BlogLayout>
         <CardList>          

@@ -70,11 +70,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <title>
         Jordan's house! But like digital...
       </title>
-      <meta name="theme-color" content="#1c1c1c"/>
+      <meta name="theme-color" content="#4ea0e9"/>
       <meta property="og:title" content="Jordan's house! But like digital..." key="title" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://jordanbooker.dev" key="url" />
-      <meta property="og:image" content={process.env.VERCEL_URL + "/assets/defaultOG.png"} key="image" />
+      <meta property="og:image" content={process.env.NEXT_PUBLIC_VERCEL_URL + "/assets/defaultOG.png"} key="image" />
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
