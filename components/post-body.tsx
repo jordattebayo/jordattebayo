@@ -5,7 +5,7 @@ type Props = {
 }
 
 const BodyContainer = styled.div`
-	max-width: 740px;
+	max-width: 660px;
 	margin: 0 auto;
 `
 
