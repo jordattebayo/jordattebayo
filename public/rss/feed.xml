@@ -4,7 +4,7 @@
         <title>Jordan Booker's blog</title>
         <link>undefined</link>
         <description>A lightly technical blog to reassure you it's really not you, it's simply that hard.</description>
-        <lastBuildDate>Wed, 04 Jan 2023 02:40:27 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 11 Jan 2023 01:35:03 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -18,15 +18,8 @@
             <link>undefined/blog/hello-world</link>
             <guid>undefined/blog/hello-world</guid>
             <pubDate>Fri, 23 Dec 2022 02:00:00 GMT</pubDate>
-            <author>jordan@jordanbooker.com (Jordan booker)</author>
-        </item>
-        <item>
-            <title><![CDATA[Dynamic Routing]]></title>
-            <link>undefined/blog/dynamic-routing</link>
-            <guid>undefined/blog/dynamic-routing</guid>
-            <pubDate>Mon, 16 Mar 2020 02:00:00 GMT</pubDate>
-            <description><![CDATA[Heres an example of how a blog post could look if I wrote one]]></description>
-            <content:encoded><![CDATA[Heres an example of how a blog post could look if I wrote one]]></content:encoded>
+            <description><![CDATA[All my aspirations and wantings in a single post.]]></description>
+            <content:encoded><![CDATA[All my aspirations and wantings in a single post.]]></content:encoded>
             <author>jordan@jordanbooker.com (Jordan booker)</author>
         </item>
     </channel>

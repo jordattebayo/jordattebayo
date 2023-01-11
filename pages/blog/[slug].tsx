@@ -28,13 +28,25 @@ const H2 = styled.h3`
   max-width: 750px;
   margin: 0;
 `
+const Lead = styled.p`
+  margin: 4rem auto;
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.5;
+  font-weight: 700;
+  max-width: 860px;
+  color: ${({theme}) => theme.colors.tertiary};
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+    padding: 0;
+  }
+`
 
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
   height: clamp(400px, 100vw, 1600px);
-  width: clamp(200px, 80vw, 1068px); 
+  width: clamp(200px, 68vw, 1068px); 
+  margin: auto;
 `
 
 const CardText = styled.p`
@@ -90,6 +102,7 @@ export default function Post({ post, morePosts, preview }: Props) {
                   alt={post.coverImage.alt} 
                 />
               </ImageContainer>
+              <Lead>{post.lead}</Lead>
               <PostBody content={post.content} />
               <DateFormatter dateString={post.date} />
               <div><ThemeText>By: {post.author.name}</ThemeText></div>
@@ -117,7 +130,8 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
     'coverImage',
-    'timeToRead'
+    'timeToRead',
+    'lead'
   ])
   const content = await markdownToHtml(post.content || '')
   console.log(content)

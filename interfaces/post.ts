@@ -16,6 +16,7 @@ type PostType = {
   }
   content: string
   timeToRead: string
+  lead: string
 }
 
 export default PostType

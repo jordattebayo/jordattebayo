@@ -1,6 +1,18 @@
-.mx-auto > div >  p {
-	margin: 3rem 0;
+.mx-auto > div p {
+	margin-top: 3rem;
 	line-height: 22px;
+	font-size: clamp(18px, 1.7rem, 20px);
+	line-height: 1.5;
+}
+.mx-auto > div p > a {
+	color: #0000EE;
+}
+
+.mx-auto > div p ~ ul {
+	margin-top: 1rem;
+	line-height: 22px;
+	font-size: clamp(18px, 1.7rem, 20px);
+	line-height: 1.5;
 }
 
 /**

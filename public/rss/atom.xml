@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id/>
     <title>Jordan Booker's blog</title>
-    <updated>2023-01-04T02:40:27.105Z</updated>
+    <updated>2023-01-11T01:35:03.946Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Jordan booker</name>
@@ -19,24 +19,8 @@
         <id>undefined/blog/hello-world</id>
         <link href="undefined/blog/hello-world"/>
         <updated>2022-12-23T02:00:00.000Z</updated>
-        <author>
-            <name>Jordan booker</name>
-            <email>jordan@jordanbooker.com</email>
-            <uri>www.jordanbooker.dev</uri>
-        </author>
-        <contributor>
-            <name>Jordan booker</name>
-            <email>jordan@jordanbooker.com</email>
-            <uri>www.jordanbooker.dev</uri>
-        </contributor>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Dynamic Routing]]></title>
-        <id>undefined/blog/dynamic-routing</id>
-        <link href="undefined/blog/dynamic-routing"/>
-        <updated>2020-03-16T02:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Heres an example of how a blog post could look if I wrote one]]></summary>
-        <content type="html"><![CDATA[Heres an example of how a blog post could look if I wrote one]]></content>
+        <summary type="html"><![CDATA[All my aspirations and wantings in a single post.]]></summary>
+        <content type="html"><![CDATA[All my aspirations and wantings in a single post.]]></content>
         <author>
             <name>Jordan booker</name>
             <email>jordan@jordanbooker.com</email>
