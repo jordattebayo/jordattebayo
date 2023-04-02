@@ -116,7 +116,7 @@ const ImageContainer = styled.div<ImageContainerProps>`
 
 const RoleText = styled.p`
   font-size: 32px;
-  color: ${(props) => props.theme.colors.octenary};
+  color: ${(props) => props.theme.colors.senary};
 `
 
 const H3 = styled.h3`

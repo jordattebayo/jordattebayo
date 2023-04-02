@@ -98,23 +98,26 @@ const MobileNav = styled.div<MobileNavProps>`
 
 const ToggleWrapper = styled.div`
     position: relative;
-
+    top: -2px;
 `
 const ToggleLabel = styled.label`
   position: absolute;
   top: -2px;
   left: 0;
-  width: 42px;
-  height: 26px;
+  width: 54px;
+  height: 28px;
   border-radius: 15px;
   background: ${({theme}) => theme.colors.senary};
   cursor: pointer;
   &::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
     content: "";
     display: block;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 21px;
+    height: 21px;
     margin: 3px;
     background: ${({theme}) => theme.colors.primary};
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
@@ -124,22 +127,33 @@ const ToggleLabel = styled.label`
 
 const ToggleInput = styled.input`
   opacity: 0;
-  z-index: 1;
+  z-index: 2;
   border-radius: 15px;
-  width: 42px;
-  height: 26px;
+  width: 54px;
+  height: 28px;
   &:checked + ${ToggleLabel} {
     background: ${({theme}) => theme.colors.senary};
     &::after {
       content: "";
       display: block;
       border-radius: 50%;
-      width: 18px;
-      height: 18px;
-      margin-left: 21px;
+      width: 21px;
+      height: 21px;
+      margin-left: 28px;
       transition: 0.2s;
     }
   }
+`
+
+const Emojis = styled.i`
+  position: relative;
+  margin: auto;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  font-style: normal;
+  top: 2px;
+  left: 2px;
 `
 
 /* const CrescentMoon = styled.span`
@@ -170,13 +184,13 @@ const NavList = ({toggle, setToggle}) => {
 
   return (
       <NavUl>
-        <NavListItem>
+        {/* <NavListItem>
           <Link href="/#portfolio" passHref legacyBehavior>
             <NavLink tabIndex={0}>
               /Portfolio
             </NavLink>
           </Link>
-        </NavListItem>
+        </NavListItem> */}
         <NavListItem >
           <Link href="/about" passHref legacyBehavior>
             <NavLink tabIndex={0}>
@@ -193,7 +207,7 @@ const NavList = ({toggle, setToggle}) => {
           </NavLink>
           </Link>
         </NavListItem>
-        <NavListItem>
+        {/* <NavListItem>
           <Link href="/rss/feed.xml" passHref legacyBehavior>
           <NavLink
             tabIndex={0}   
@@ -201,7 +215,7 @@ const NavList = ({toggle, setToggle}) => {
             /RSS
           </NavLink>
           </Link>
-        </NavListItem>
+        </NavListItem> */}
         <NavListItem>
         <ToggleWrapper>
           <ToggleInput 
@@ -218,6 +232,8 @@ const NavList = ({toggle, setToggle}) => {
           onKeyDown={(e) => handleKeyPress(e)}
           htmlFor="themeToggle">
           {/* <CrescentMoon></CrescentMoon> */}
+            <Emojis>🌞 </Emojis> 
+            <Emojis >🌛</Emojis>
           </ToggleLabel>
         </ToggleWrapper>  
         </NavListItem>

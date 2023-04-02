@@ -145,7 +145,7 @@ export default function Home({ setSelectedTheme }) {
     <>
     <Layout updateTheme={setSelectedTheme}>
       <main>
-      <Hero updateTheme={setSelectedTheme} />
+      <Hero />
       <ThemeShape bottomAligned/>
       <ProjectsWrapper id="portfolio">
         {projects.map((project) => {

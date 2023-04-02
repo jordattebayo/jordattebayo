@@ -78,6 +78,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta property="og:description" content="It's kinda like my house, but digital and everyone can see inside." key="descriptionOG"/>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <script src="https://kit.fontawesome.com/00e2e73915.js" crossOrigin="anonymous"></script>
+
     </Head>
     <ThemeProvider theme={selectedTheme}>
     <GlobalStyle />

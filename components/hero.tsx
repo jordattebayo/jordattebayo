@@ -30,17 +30,17 @@ const Intro = styled.p`
 function greet(time): string{
     switch(true){
         case (time < 12):
-            return "Morning";
+            return "⛅ Morning";
         case (time < 18 && time >= 12):
-            return "Afternoon";
+            return "🌞 Afternoon";
         case (time >= 18):
-            return "Evening";
+            return "🌚 Evening";
         default:
             return "Hello"
     }
 }
 
-function Hero({ updateTheme }){
+function Hero(){
     const [date, setDate] = useState<number>()
 
     const themeContext = useContext(ThemeContext)
@@ -60,7 +60,6 @@ function Hero({ updateTheme }){
             <HomeContent>
                 <H2>{greet(date)},</H2>
                 <Intro>My name is Jordan, I'm a Frontend Web Developer. My big dream is to create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</Intro>
-                {/* <button onClick={() => {updateTheme(); console.log("theme context: ", themeContext)}}>Change theme</button> */}
             </HomeContent>
         </HeroWrapper>
 
