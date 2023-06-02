@@ -10,9 +10,10 @@ import ThemeShape from "./theme-shape";
 import PostBody from "./post-body";
 import PostPreview from "./post-preview";
 import BlogThemeShape from "./blog-theme-shape";
-import BlogNavbar from "./blog-navbar";
+import BlogHero from "./blog-hero";
 import PostCard from "./post-card";
 import StickyFooter from "./sticky-footer"
+import BlogNav from "./blog-nav"
 
 export {
     ContactButton,
@@ -27,7 +28,8 @@ export {
     PostBody,
     PostPreview,
     BlogThemeShape,
-    BlogNavbar,
+    BlogHero as BlogNavbar,
     PostCard,
-    StickyFooter
+    StickyFooter,
+    BlogNav
 }
