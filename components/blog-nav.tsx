@@ -18,7 +18,7 @@ const MenuContainer = styled.div`
 const MenuContents = styled.ul<{open: boolean}>`
   display: ${({open}) => open ? "unset" : "none"};
   position: absolute;
-  background-color: white;
+  background-color: transparent;
   bottom: 0;
 `
 
@@ -61,6 +61,43 @@ const LinkListItem = styled.li`
   }
 `
 
+/* theme steps */
+interface ThemeShapeProps {
+  bottomAligned?: boolean;
+  filled?: boolean;
+}
+
+const StepsWrapper = styled.div`
+  position: absolute;
+  padding-bottom: 4rem;
+  margin-top: auto;
+  background-color:${(props) => props.theme.colors.senary};
+  @media(max-width: ${(props) => props.theme.widths.tablet}) {
+      display: none;
+  }
+`
+
+const Step = styled.div`
+  border-bottom: 3px solid ${({theme}) => theme.colors.primary};
+  height: 55px;
+  right: 0;
+`
+
+const StepOne = styled(Step)`
+  width: 20%;
+  top: 0;
+`
+
+const StepTwo = styled(Step)`
+  width: 15%;
+  top: 55px;
+`
+
+const StepThree = styled(Step)`
+  width: 10%;
+  top: 110px;
+`
+
 export default function BlogNav(){
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const toggleMenu = () => {
@@ -68,14 +105,16 @@ export default function BlogNav(){
           setOpenMenu(!openMenu)
     }
     return (
-        <MenuContainer>
+        <StepsWrapper>
+          <StepOne></StepOne>
+          <StepTwo></StepTwo>
         <MenuContents open={openMenu}>
-          <p>
-            Theme toggle here
-          </p>
-          <p>
-            Sign up form here
-          </p>
+            <p>
+              Theme toggle here
+            </p>
+            <p>
+              Sign up form here
+            </p>
           <LinkList>
             <LinkListItem className="first">
               <Link href="/rss/feed.xml" passHref legacyBehavior>
@@ -94,10 +133,12 @@ export default function BlogNav(){
             </LinkListItem>
           </LinkList>
         </MenuContents>
+        <StepThree>
         <MenuToggleButton onClick={toggleMenu}>
           Menu
           <MenuIcon></MenuIcon>
         </MenuToggleButton>
-      </MenuContainer>
+        </StepThree>
+      </StepsWrapper>
     )
 }
