@@ -179,7 +179,7 @@ const NavList = () => {
         </ToggleWrapper>  
         </NavListItem>
         <NavListItem>
-          <SubscribeForm />
+          <SubscribeForm altStyle={false} />
         </NavListItem>
       </NavUl>
   )

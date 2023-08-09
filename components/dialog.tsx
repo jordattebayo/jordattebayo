@@ -203,7 +203,7 @@ export default function Modal() {
         </FieldSet>
         </Form>
         </SectionWrapper>
-        <SubscribeForm />
+        <SubscribeForm altStyle={true}/>
         <div>
         <CloseDialog value="close" onClick={() => requestDialogClose()} >Close</CloseDialog>
         </div>

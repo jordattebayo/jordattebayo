@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import { useOnClickOutside } from "./project-card";
+import { AppContext } from "../lib/context";
+import SubscribeForm from "./subscribe";
 
 const MenuContainer = styled.div`
   border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
@@ -8,14 +11,15 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  top: 272px;
+  top: 275px;
   z-index: 1;
 
 `
 
 const StepsWrapper = styled.div`
   position: absolute;
-  top: 325px;
+  z-index: 3;
+  top: 323px;
   @media(max-width: ${(props: any) => props.theme.widths.tablet}) {
     display: none;
   }
@@ -27,37 +31,60 @@ const MenuContents = styled.ul<{ open: boolean }>`
   position: absolute;
   background-color: transparent;
   bottom: 0;
-  right: ${({ open }) => open ? "-300px" : "-80px"};
+  right: ${({ open }) => open ? "-337px" : "-75px"};
   transition: all .2s ease-in-out;
 `
 
 const MenuItem = styled.li`
   padding-left: 1rem;
-  margin-bottom: auto;
-  border-bottom: 3px solid black;
   height: 50px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  border-bottom: 3px solid ${({theme}) => theme.colors.primary};
+  &:first-child{
+    width: 12vw;
+    max-width: 200px;
+
+  }
+  &:nth-child(2) {
+    width: 16vw;
+    max-width: 250px;
+  }
 `
 
 const MenuLink = styled.a`
   text-decoration: none;
+  &:hover{
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
 `
 
 const MenuText = styled.p`
-  margin-top: auto;
+  white-space: nowrap;
 `
 
 const MenuToggleButton = styled.button`
-
-  background-color: transparent;
+  background-color: ${({theme}) => theme.colors.senary};
+  font-family: Roboto Mono, monospace;
+  font-size: 1rem;
+  font-weight: 400;
   border: none;
   display: flex;
   flex-direction: row;
+  position: relative;
+  bottom: 1px;
+  margin-left: 1rem;
+  color: ${({theme}) => theme.colors.primary};
   &:hover {
     cursor: pointer;
+    font-weight: 600;
   }
 `
 
-const MenuIcon = styled.span`
+const MenuIcon = styled.span<{open: boolean}>`
   background-color: #FF6831;
   display: inline-block;
   position: relative;
@@ -67,6 +94,17 @@ const MenuIcon = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  ${MenuToggleButton}:hover & {
+    background-color: ${({theme}) => theme.colors.secondary}
+  }
+  &:before {
+    content: "X";
+    display: ${({open}) => open ? "unset" : "none" };
+    position: relative;
+    top: 5px;
+    font-weight: 400;
+  }
+  transition: all .1s ease-in-out;
 `
 
 const LinkList = styled.ul`
@@ -78,29 +116,93 @@ const LinkList = styled.ul`
 
 const LinkListItem = styled.li`
   list-style: none;
-  padding-left: 1rem;
+  padding-left: 1.2rem;
   &.first {
     padding-left: 0;
   }
 `
+const ToggleWrapper = styled.div`
+    position: relative;
+
+`
+
+const ToggleLabel = styled.label`
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 45px;
+  height: 28px;
+  border-radius: 15px;
+  background: ${({theme}) => theme.colors.senary};
+  border: 2px solid ${({theme}) => theme.colors.primary};
+  cursor: pointer;
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    background: ${({theme}) => theme.colors.primary};
+    box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+  }
+`
+
+const ToggleInput = styled.input`
+  opacity: 0;
+  z-index: 1;
+  border-radius: 15px;
+  width: 42px;
+  height: 26px;
+  &:checked + ${ToggleLabel} {
+    background: ${({theme}) => theme.colors.senary};
+    &::after {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-left: 21px;
+      transition: 0.2s;
+    }
+  }
+`
+
 export default function BlogNav() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const toggleMenu = () => {
-    console.log(openMenu)
     setOpenMenu(!openMenu)
   }
+  const ref = useRef();
+  useOnClickOutside(ref, () => setOpenMenu(false));
+
+  const { selectedTheme, toggleTheme } = useContext(AppContext)
+
+
   return (
-    <StepsWrapper>
+    <StepsWrapper ref={ref}>
       <MenuContents open={openMenu}>
         <MenuItem>
-          <MenuText>
-            Theme toggle here
-          </MenuText>
+          <ToggleWrapper>
+            <ToggleInput 
+              type="checkbox" 
+              id="themeToggle"
+              name="themeToggle"
+              aria-label="toggleTheme"
+              disabled={false}
+              checked={selectedTheme.name === 'dark'}
+              onChange={() => toggleTheme()}
+                />
+          <ToggleLabel  
+            tabIndex={0}
+            onKeyDown={() => toggleTheme()}
+            htmlFor="themeToggle">
+            </ToggleLabel>
+          </ToggleWrapper>  
         </MenuItem>
         <MenuItem>
-          <MenuText>
-            Sign up form here
-          </MenuText>
+          <SubscribeForm altStyle={true} />
         </MenuItem>
         <MenuItem>
           <LinkList>
@@ -121,8 +223,8 @@ export default function BlogNav() {
             </LinkListItem>
             <LinkListItem>
               <MenuToggleButton onClick={toggleMenu}>
-                Menu
-                <MenuIcon>
+              { openMenu ? "close" : "menu"}
+                <MenuIcon open={openMenu}>
                 </MenuIcon>
               </MenuToggleButton>
             </LinkListItem>
