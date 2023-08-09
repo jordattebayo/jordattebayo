@@ -31,6 +31,11 @@ const GlobalStyle = createGlobalStyle`
         display: block;
     };
 
+    p:has(img) {
+        display: flex;
+        justify-content: center;
+    };
+
     @media only screen and (max-width: 680px){
 
     };

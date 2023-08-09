@@ -116,7 +116,7 @@ const ImageContainer = styled.div<ImageContainerProps>`
 
 const RoleText = styled.p`
   font-size: 32px;
-  color: ${(props) => props.theme.colors.octenary};
+  color: ${(props) => props.theme.colors.senary};
 `
 
 const H3 = styled.h3`
@@ -226,7 +226,7 @@ function CreateTechList(tech: string){
   )
 }
 
-function useOnClickOutside(ref, handler) {
+export function useOnClickOutside(ref, handler) {
   useEffect(
     () => {
       const listener = (event) => {
@@ -269,7 +269,7 @@ function chooseSecondaryColor(id: string, theme: DefaultTheme): DefaultTheme {
 }
 
 export default function ProjectCard ({ data }) {
-  const { id, title, image, role, difficulties, solution, features, tech, live, git,  } = data
+  const { id, title, image, role, difficulties, solution, features, tech, live, git  } = data
   const ref = useRef();
   useOnClickOutside(ref, () => setViewDetails(false));
 

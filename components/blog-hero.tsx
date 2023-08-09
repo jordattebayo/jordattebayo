@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { AppContext } from "../lib/context";
@@ -80,6 +80,7 @@ const ToggleWrapper = styled.div`
     position: relative;
 
 `
+
 const ToggleLabel = styled.label`
   position: absolute;
   top: -2px;
@@ -178,13 +179,14 @@ const NavList = () => {
         </ToggleWrapper>  
         </NavListItem>
         <NavListItem>
-          <SubscribeForm />
+          <SubscribeForm altStyle={false} />
         </NavListItem>
       </NavUl>
   )
 }
 
-export default function BlogNavbar () {
+
+export default function BlogHero () {
 
   return (
     <NavWrapper>

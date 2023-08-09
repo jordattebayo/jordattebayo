@@ -95,13 +95,13 @@ export default function Post({ post, morePosts, preview }: Props) {
                 <H2>{post.title}</H2>
                 <ReadTimeText>{post.timeToRead} read</ReadTimeText>
               </Heading>
-              <ImageContainer>
+              { post.coverImage.path ? <ImageContainer>
                 <Image
                   src={post.coverImage.path} 
                   fill
                   alt={post.coverImage.alt} 
                 />
-              </ImageContainer>
+              </ImageContainer> : null}
               <Lead>{post.lead}</Lead>
               <PostBody content={post.content} />
               <DateFormatter dateString={post.date} />

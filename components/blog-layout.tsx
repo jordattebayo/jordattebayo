@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { BlogNavbar, BlogThemeShape, StickyFooter } from ".";
+import { BlogNavbar, BlogThemeShape, StickyFooter, BlogNav } from ".";
 import Modal from "./dialog";
 import ErrorBoundary from "./error-boundary";
 
@@ -36,6 +36,7 @@ export default function BlogLayout(props) {
       <BlogNavbar />
       <Modal />
       <BlogThemeShape />
+      <BlogNav />
       <Wrapper>
         <Content>
           <ErrorBoundary>
