@@ -231,9 +231,6 @@ const NavList = ({toggle, setToggle}) => {
           tabIndex={0}
           onKeyDown={(e) => handleKeyPress(e)}
           htmlFor="themeToggle">
-          {/* <CrescentMoon></CrescentMoon> */}
-            <Emojis>🌞 </Emojis> 
-            <Emojis >🌛</Emojis>
           </ToggleLabel>
         </ToggleWrapper>  
         </NavListItem>

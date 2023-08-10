@@ -6,7 +6,7 @@ const FooterWrapper = styled.div<{active: boolean}>`
     position: fixed;
     margin-top: auto;
     margin-left: auto;
-    top: 85vh;
+    top: 80vh;
     right: 10vw;
     z-index: 5;
     background-color:${(props) => props.theme.colors.senary};
@@ -75,28 +75,8 @@ const SettingsText = styled.span`
     visibility: unset;
     ${SettingsButton}:hover & {
         border: 1px ${(props) => props.theme.colors.senary};
-        visibility: hidden;
+        text-decoration: underline;
     }
-`
-
-const PromptWrapper = styled.span`
-    visibility: hidden;
-    vertical-align: middle;
-    position: absolute;
-    left: 0;
-    border: 3px solid ${(props) => props.theme.colors.primary};
-    padding: .25rem .5rem;
-    ${SettingsButton}:hover & {
-        visibility: unset;
-    }
-`
-
-const Prompt = styled.span`
-    position: relative;
-    font-size: clamp(12px, .5vw, 16px);
-    border: 1px solid ${(props) => props.theme.colors.primary};
-    padding: .25rem;
-    top: -5px;
 `
 
 const FooterText = styled.span`
@@ -152,7 +132,7 @@ export default function StickyFooter() {
                     onClick={() => requestDialogOpen()}
                     tabIndex={0}
                     >
-                        <SettingsText>open menu</SettingsText><PromptWrapper><Prompt>CTRL</Prompt> + <Prompt>↑ Shift</Prompt></PromptWrapper>
+                        <SettingsText>open menu</SettingsText>
                 </SettingsButton>
                 <FooterText>&copy; {date.getFullYear()} By Jordan Booker</FooterText>
             </Footer>

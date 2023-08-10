@@ -5,17 +5,6 @@ import { useOnClickOutside } from "./project-card";
 import { AppContext } from "../lib/context";
 import SubscribeForm from "./subscribe";
 
-const MenuContainer = styled.div`
-  border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  top: 275px;
-  z-index: 1;
-
-`
-
 const StepsWrapper = styled.div`
   position: absolute;
   z-index: 3;
@@ -24,14 +13,13 @@ const StepsWrapper = styled.div`
     display: none;
   }
 `
-// display: ${({open}) => open ? "unset" : "none"};
 
 const MenuContents = styled.ul<{ open: boolean }>`
   padding: unset;
   position: absolute;
   background-color: transparent;
   bottom: 0;
-  right: ${({ open }) => open ? "-337px" : "-75px"};
+  right: ${({ open }) => open ? "-367px" : "-85px"};
   transition: all .2s ease-in-out;
 `
 
