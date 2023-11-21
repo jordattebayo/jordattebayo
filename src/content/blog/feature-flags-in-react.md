@@ -3,10 +3,10 @@ title: 'Feature Flags in React'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Nov 23 2023'
 heroImage:
-  path: ' '
+  path: ''
   alt: A photo of me and my dog
 ogImage:
-  path: ' '
+  path: ''
   alt: Another image text
 ---
 
@@ -24,6 +24,7 @@ This article will focus on the logic required for your React app, therefore the 
 I've set up my dev environment and ran `npm create vite@latest`. Feel free to use any FE tooling you prefer. If you haven't set up a dev environment before, or want to try out Vite you can follow their quick start guide [here](https://vitejs.dev/guide/). 
 
 Now that I've set up my project I delete a lot of the boilerplate and added a Dialog component. It's important to note, this feature could be anything you wish to toggle. Feel free to make up this feature on your own. It could be as simple as a message in `p` tags or complex as a widget. The choice is yours.
+
 ![Nas MV of The World Is Yours](https://media.giphy.com/media/AB8NHu6NUo15FfbFyu/giphy.gif) 
 
 This Dialog will serve as our "News Update Pop-up", I won't go into too much detail since the code could be it's own tutorial. It's a modal that's using the HTML5 element `dialog`, but React doesn't support it yet so I've had to manually hook up it's unique event listeners into the React lifecycle. 
@@ -81,13 +82,11 @@ VITE_SHOW_NEWS=true
 If you're familiar with environment variables then this will be nothing new to you. the preceding `VITE` is just the syntax Vite requires to expose to the frontend, if you're using a different tooling library then you may need to follow their documentation on environment variables. 
 
 Now we can import the variables in our code. Like this:
-
 ```javascript
 import.meta.env.VITE_SHOW_NEWS
 ```
 
 However I prefer to assign the environment variable to a shorter variable like this:
-
 ```typescript
 const showNews: string = import.meta.env.VITE_SHOW_NEWS;
 ```
@@ -98,9 +97,19 @@ Let's now reference it in our `App.tsx`.
 
 ```javascript
     <>
-      { showNews === "true" ? <Dialog toggleDialog={toggleDialog} requestDialogClose={requestDialogClose} requestDialogOpen={requestDialogOpen} isDialogOpen={isDialogOpen} /> : null }
+      { showNews === "true" ? 
+      <Dialog 
+        toggleDialog={toggleDialog} 
+        requestDialogClose={requestDialogClose} 
+        requestDialogOpen={requestDialogOpen} 
+        isDialogOpen={isDialogOpen} /> 
+        : null }
       <h1>React Feature Toggle</h1>
-      <button onClick={() => requestDialogOpen()} disabled={!(showNews === "true")}>Open News Pop-up</button>
+      <button 
+        onClick={() => requestDialogOpen()} 
+        disabled={!(showNews === "true")}>
+        Open News Pop-up
+      </button>
     </>
 ```
 

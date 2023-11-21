@@ -3,22 +3,30 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
 
-const { href, class: className, ...props } = Astro.props;
+const { href, class: className, id, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive = href === pathname || href === pathname.replace(/\/$/, '');
+const isActive: boolean = href === pathname || href === pathname.replace(/\/$/, '');
 ---
-
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<span class:list={[{active: isActive}]} id={id}>
+<a href={href} class:list={[className]} {...props}>
 	<slot />
 </a>
-<style>
-	a {
-		display: inline-block;
-		text-decoration: none;
+</span>
+<script>
+	// Manually checking if it's a blog post, if it is, just highlight the blog nav item
+	const navLinkElements = document.querySelectorAll("nav a");
+	const navLinks = Array.from(navLinkElements);
+	const currentPath = window.location.pathname.slice(1);
+	const doLinksMatchNavigation = navLinks.filter((link) => {
+		let thisPath: string = ""
+		if (link instanceof HTMLAnchorElement && link.href === currentPath) {
+			const hrefArray = link.href.split("/");
+    		const thisPath = hrefArray[hrefArray.length - 1];
+		}
+		return (currentPath === thisPath)
+	})
+	if (doLinksMatchNavigation.length == 0) {
+		document.querySelector("#blog")?.classList.add("active");
 	}
-	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
-	}
-</style>
+</script>
