@@ -1,0 +1,17 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE, SITE_SUBTITLE } from '../consts';
+
+---
+
+<header class="wrapper">
+	<nav>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<p>I create thoughtful, inclusive, and durable web applications that help people. Feel free to check out some of my projects I've made below.</p>
+		<div class="internal-links">
+			<HeaderLink href="/about">blog</HeaderLink>
+			<HeaderLink href="/journal">journal</HeaderLink>
+			<HeaderLink href="/portfolio">portfolio</HeaderLink>
+		</div>
+	</nav>
+</header>
