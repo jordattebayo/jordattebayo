@@ -75,7 +75,7 @@ Our goal here is to make it so that the `Dialog` component is only available whe
 
 So let's create that .env file and add the below code:
 
-```txt
+```plaintext
 VITE_SHOW_NEWS=true
 ```
 
@@ -115,7 +115,7 @@ Let's now reference it in our `App.tsx`.
 
 That's it! You've created a feature toggle. With this you can flip `VITE_SHOW_NEWS` from `true` to `false` and the dialog will no longer be visible in the application.
 
-![A picture of the show_news dialog enabled](../../Codebases/react-feature-toggle/advanced/ReactWithASPFeatureToggle/reactapp/public/news_flash.gif)
+![A picture of the show_news dialog enabled](/posts/react-feature-toggle/news_flash.gif)
 
 It's pretty straight forward because React helps you organize your code as components but once you begin organizing your features this way too you can quickly see how powerful this pattern can be! 
 

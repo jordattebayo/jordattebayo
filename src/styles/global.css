@@ -39,7 +39,7 @@ h6 {
 	line-height: 1.2;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 2.8em;
 }
 h2 {
 	font-size: 2.241em;
@@ -207,4 +207,29 @@ blockquote {
 
 .no-padding {
 	padding: 0;
+}
+
+p:has(> img) {
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	stroke: none; 
+	fill: white;
+}
+.symbol {
+	stroke: none; 
+	fill: black;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+a > .text {
+	vertical-align: middle;
+	display: inline-block;
 }
