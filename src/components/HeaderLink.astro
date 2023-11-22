@@ -9,9 +9,7 @@ const { pathname } = Astro.url;
 const isActive: boolean = href === pathname || href === pathname.replace(/\/$/, '');
 ---
 <span class:list={[{active: isActive}]} id={id}>
-<a href={href} class:list={[className]} {...props}>
-	<slot />
-</a>
+<a href={href} class:list={[className]} {...props}><slot /></a>
 </span>
 <script>
 	// Manually checking if it's a blog post, if it is, just highlight the blog nav item
@@ -20,12 +18,15 @@ const isActive: boolean = href === pathname || href === pathname.replace(/\/$/, 
 	const currentPath = window.location.pathname.slice(1);
 	const doLinksMatchNavigation = navLinks.filter((link) => {
 		let thisPath: string = ""
-		if (link instanceof HTMLAnchorElement && link.href === currentPath) {
+		if (link instanceof HTMLAnchorElement) {
 			const hrefArray = link.href.split("/");
     		const thisPath = hrefArray[hrefArray.length - 1];
+			console.log(thisPath, currentPath)
+			return (currentPath === thisPath)
 		}
-		return (currentPath === thisPath)
+		return false
 	})
+	console.log(doLinksMatchNavigation, currentPath)
 	if (doLinksMatchNavigation.length == 0) {
 		document.querySelector("#blog")?.classList.add("active");
 	}

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+
+const image = { path: "", alt: "somet text"}
+---
+
+<Layout
+	title="Journal"
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage={image}
+	ogImage={image}
+>
+	<p>
+		This will be where I put my thoughts that aren't as well... thought out.
+	</p>
+
+
+</Layout>

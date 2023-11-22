@@ -1,6 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import ThemeShapes from '../components/ThemeShapes.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
@@ -17,8 +18,19 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+	<style>
+		ul {
+			padding: 1em;
+		}
+		li > *  {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 20% 80%;
+			list-style-type: circle;
+		}
+	</style>
 		<Header />
-		<hr>
+		<ThemeShapes />
 		<main>
 			<section>
 				<h2>Posts</h2>
@@ -26,9 +38,10 @@ const posts = (await getCollection('blog')).sort(
 					{
 						posts.map((post) => (
 							<li>
-								<FormattedDate date={post.data.pubDate} />
 								<a href={`/${post.slug}/`}>
-									<h5 class="inline">{post.data.title}</h5>
+									<FormattedDate date={post.data.pubDate}  class="post-time"/>
+									
+										<h5 class="inline post-title">{post.data.title}</h5>
 								</a>
 							</li>
 						))
@@ -36,6 +49,8 @@ const posts = (await getCollection('blog')).sort(
 				</ul>
 			</section>
 		</main>
+		<!-- <ThemeShapes class="invert" /> -->
 		<Footer />
 	</body>
 </html>
+
