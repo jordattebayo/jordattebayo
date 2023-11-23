@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+
+const image = { path: "/blog-placeholder-about.jpg", alt: "somet text"}
+---
+
+<Layout
+	title="About Me"
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage={image}
+	ogImage={image}
+>
+	<p>
+		I am Frontend Web Developer with Full Stack dreams. I love so much
+		about the web and want to do my best in building it out further into
+		the unknown.
+	</p>
+
+	<p>
+		My objective is to create thoughtful, long lasting, and inclusive web
+		applications that help users share knowledge. If you have questions or
+		would like to learn more about me, please reach out!
+	</p>
+
+
+</Layout>

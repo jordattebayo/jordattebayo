@@ -1,0 +1,56 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import ThemeShapes from '../components/ThemeShapes.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+).reverse();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+	<style>
+		ul {
+			padding: 1em;
+		}
+		li > *  {
+			width: 100%;
+			display: grid;
+			grid-template-columns: 20% 80%;
+			list-style-type: circle;
+		}
+	</style>
+		<Header />
+		<ThemeShapes />
+		<main>
+			<section>
+				<h2>Posts</h2>
+				<ul>
+					{
+						posts.map((post) => (
+							<li>
+								<a href={`/${post.slug}/`}>
+									<FormattedDate date={post.data.pubDate}  class="post-time"/>
+									
+										<h5 class="inline post-title">{post.data.title}</h5>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
+		<ThemeShapes class="invert" />
+		<Footer />
+	</body>
+</html>
+

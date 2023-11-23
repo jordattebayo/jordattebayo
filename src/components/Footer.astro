@@ -1,0 +1,67 @@
+---
+const today = new Date();
+---
+<style>
+	footer {
+		display: flex;
+		justify-content: space-between;
+		color: rgb(var(--gray-dark));
+	}
+	.social-links {
+		display: flex;
+		flex-direction: column;
+	}
+	.test-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 50px;
+		width: 50px;
+		background: rgba(var(--gray-dark), 75%);
+		border-radius: 50%;
+		align-self: center;
+	}
+	.test-icon > span {
+		color: #000;
+		position: absolute;
+		margin-left: 0;
+		margin-top: 0;
+		width: 12px;
+		height: 12px;
+		border-radius: 70% 15%;
+		border: solid 1px white;
+		background-color: white;
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+	.test-icon > span:before {
+		content: '';
+		position: absolute;
+		left: 2px;
+		top: 2px;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		color: white;
+		border: solid 1px rgba(var(--gray-dark), 100%);
+	}
+
+</style>
+<footer class="wrapper">
+	<span>
+		<div class="social-links">
+			<a href="https://mstdn.social/@jordattebayo" target="_blank">
+				Mastodon
+			</a>
+			<a href="https://twitter.com/jordattebayo" target="_blank">
+				Twitter
+			</a>
+			<a href="https://github.com/jordattebayo" target="_blank">
+				GitHub
+			</a>
+		</div>
+		&copy; {today.getFullYear()} Jordan Booker. All rights reserved.
+	</span>	
+	<div class="test-icon"><span></span></div>
+</footer>

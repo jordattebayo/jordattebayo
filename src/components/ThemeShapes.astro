@@ -1,0 +1,35 @@
+---
+const { class: className } = Astro.props;
+---
+<style>
+    .theme-shape {
+        display: flex;
+        flex-direction: column;
+    }
+    .theme-shape > div {
+        height: 20px;
+    }
+    .theme-shape > div:nth-child(1) {
+        border-bottom: 1px solid rgb(var(--black));
+        width: 70%;
+    }
+    .theme-shape > div:nth-child(2) {
+        border-bottom: 1px solid rgb(var(--black));
+        width: 60%;
+    }
+    .theme-shape > div:nth-child(3) {
+        border-bottom: 1px solid rgb(var(--black));
+        width: 50%;
+    }
+    .invert {
+	align-items: end;
+}
+</style>
+<div class:list={["wrapper no-padding theme-shape", className]}>
+    <div>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
+</div>
