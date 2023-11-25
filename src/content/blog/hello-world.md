@@ -4,7 +4,7 @@ excerpt: 'All my aspirations and wantings in a single post.'
 heroImage:
   path: '/posts/hello-world/hello-world-header.jpg'
   alt: A photo of me and my dog
-pubDate: 'Dec 23 2022'
+pubDate: 'Nov 24 2023'
 ogImage:
   path: ' '
   alt: Another image text
@@ -29,23 +29,4 @@ I also have some more things I'd like to build on this website. Which is a great
 - And to make a better readme.md for the GitHub repo
 
 
-Trust me you don't want to miss these gems! Make sure to subscribe in the settings menu (CTRL + SHIFT) and add the rss feed if you use that thang.
-
-Also special thanks to [Travis @souporserious](https://souporserious.com/build-a-dialog-component-in-react/) and to [Sreetam @_SreetamDas](https://sreetamdas.com/blog/rss-for-nextjs) for their helpful posts I referenced building my website. Making this blog would have been much harder with out your help!
-
-------
-# Notes:
-
-Here is reference having an inline image in a blog post because I'll inevitably (sp?) forget.
-
-![test image](/assets/blog/amplifierScreenshot.png)
-
-
-### The gist:
-
-There is something so beautiful about a hello world application. It's the first step in your new jouney whether it's new language, framework, or even software development in general. Once you have gotten to the point where you print those words on the screen the possibilities are endless! Hey I'm Jordan I do stuff, I like this stuff, 
-I want to make something fun, emotionally validating and cross platform. here's why you should listen/read: I'm not sure yet. But I'm making this because I'm grateful to you and want to give back. If you'd like to subscribe for updates feel free to do a cool CTL + SHIFT to bring up the settings menu to subscribe to email alerts. No more than 2 a month and who are am I kidding, probably less. If you're on mobile the subscribe form is at the top of the page. 
-
-
-### Old Content
-Prologue aside I'd really like to use this first post to outline my plans for the future. I mean I have big plans for this blog! Although implementing those plans will take time and I'm quite short on that these days. But you have my word I'll try my best to chip away at it the best I can. Along the way, I'd like to document my journey. 
+Trust me you don't want to miss these gems!
