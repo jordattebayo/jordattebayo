@@ -2,7 +2,7 @@
 title: 'Hello World'
 excerpt: 'All my aspirations and wantings in a single post.'
 heroImage:
-  path: ' '
+  path: '/posts/hello-world/hello-world-header.jpg'
   alt: A photo of me and my dog
 pubDate: 'Dec 23 2022'
 ogImage:

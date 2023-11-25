@@ -8,6 +8,7 @@ heroImage:
 ogImage:
   path: ''
   alt: Another image text
+isDraft: true
 ---
 
 Hey Friends! Welcome to my blog. This is where tutorials, my thoughts, and maybe even some hot takes on software development will live. If you're vibing feel free to subscribe to a news letter that I'm hoping to update regularly (like once a month, and no spam. Ever).

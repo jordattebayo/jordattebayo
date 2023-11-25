@@ -9,6 +9,7 @@ ogImage:
   path: ''
   alt: Another image text
 description: Components are the new UI standard, however they are hard to get right the first time. They end up either prematurely over-engineered or require refactoring to accommodate new use-cases. Choose to create your components iteratively, after you’ve created the page.
+isDraft: true
 ---
 
 It’s settled. The component pattern React popularized is the preferred organization method for web developers client side code. It’s a neat way to package up functionality in your website, it makes your code easier to maintain, and can even help you debug. So that being said when should you reach for this pattern? Short answer: if you see more than three instances of the same component, but only after you’ve completed your task.

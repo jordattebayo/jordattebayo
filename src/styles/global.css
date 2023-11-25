@@ -139,6 +139,11 @@ blockquote {
 	white-space: nowrap;
 }
 
+.internal-links {
+	display: flex;
+	flex-direction: row;
+}
+
 .internal-links > * {
 	margin-right: 2em;
 }
@@ -216,11 +221,17 @@ p:has(> img) {
 
 .button {
 	stroke: none; 
-	fill: white;
+	fill: rgb(var(--light));
 }
+
 .symbol {
 	stroke: none; 
-	fill: black;
+	fill: rgb(var(--black));
+}
+
+.symbol:hover {
+	stroke: none; 
+	fill: var(--accent);
 }
 
 .row {
@@ -233,3 +244,18 @@ a > .text {
 	vertical-align: middle;
 	display: inline-block;
 }
+
+@media(max-width: 500px) {
+	.internal-links {
+		flex-direction: column;
+	}
+
+	.row {
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.post-time {
+		visibility: hidden;
+	}
+} 

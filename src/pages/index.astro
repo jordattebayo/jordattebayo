@@ -3,11 +3,16 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import ThemeShapes from '../components/ThemeShapes.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_SUBTITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog', ({data}) => {
+	if(import.meta.env.DEV){
+			return true;
+	}
+	return data.isDraft !== true;
+})).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 ).reverse();
 ---

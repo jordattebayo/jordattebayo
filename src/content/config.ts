@@ -17,7 +17,8 @@ const blog = defineCollection({
 			path: z.string(),
 			alt: z.string()
 		}),
-		lead: z.string().optional()
+		lead: z.string().optional(),
+		isDraft: z.boolean().default(false)
 	}),
 });
 
