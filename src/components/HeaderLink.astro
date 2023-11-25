@@ -17,7 +17,6 @@ const isActive: boolean = href === pathname || href === pathname.replace(/\/$/, 
 	const navLinks = Array.from(navLinkElements);
 	const currentPath = window.location.pathname.slice(1);
 	const doLinksMatchNavigation = navLinks.filter((link) => {
-		let thisPath: string = ""
 		if (link instanceof HTMLAnchorElement) {
 			const hrefArray = link.href.split("/");
     		const thisPath = hrefArray[hrefArray.length - 1];
