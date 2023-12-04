@@ -1,7 +1,7 @@
 # Intro for introductions sake
 👋 **Hey!** Welcome to my profile and blog repo. Feel free to take a look around.
 
-> JOR-da-tte-ba-yo 
+> JOR-dat-te-ba-yo 
 - (JOR) ➡ the beginning of my name, Jordan 
 - (dat-te-ba-yo) ➡ a reference to the anime Naruto
 
