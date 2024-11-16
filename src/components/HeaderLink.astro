@@ -6,27 +6,27 @@ type Props = HTMLAttributes<'a'>;
 const { href, class: className, id, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
-const isActive: boolean = href === pathname || href === pathname.replace(/\/$/, '');
+const isActive: boolean =
+  href === pathname || href === pathname.replace(/\/$/, '');
 ---
-<span class:list={[{active: isActive}]} id={id}>
-<a href={href} class:list={[className]} {...props}><slot /></a>
+
+<span class:list={[{ active: isActive }]} id={id}>
+  <a href={href} class:list={[className]} {...props}><slot /></a>
 </span>
 <script>
-	// Manually checking if it's a blog post, if it is, just highlight the blog nav item
-	const navLinkElements = document.querySelectorAll("nav a");
-	const navLinks = Array.from(navLinkElements);
-	const currentPath = window.location.pathname.slice(1);
-	const doLinksMatchNavigation = navLinks.filter((link) => {
-		if (link instanceof HTMLAnchorElement) {
-			const hrefArray = link.href.split("/");
-    		const thisPath = hrefArray[hrefArray.length - 1];
-			console.log(thisPath, currentPath)
-			return (currentPath === thisPath)
-		}
-		return false
-	})
-	console.log(doLinksMatchNavigation, currentPath)
-	if (doLinksMatchNavigation.length == 0) {
-		document.querySelector("#blog")?.classList.add("active");
-	}
+  // Manually checking if it's a blog post, if it is, just highlight the blog nav item
+  const navLinkElements = document.querySelectorAll('nav a');
+  const navLinks = Array.from(navLinkElements);
+  const currentPath = window.location.pathname.slice(1);
+  const doLinksMatchNavigation = navLinks.filter((link) => {
+    if (link instanceof HTMLAnchorElement) {
+      const hrefArray = link.href.split('/');
+      const thisPath = hrefArray[hrefArray.length - 1];
+      return currentPath === thisPath;
+    }
+    return false;
+  });
+  if (doLinksMatchNavigation.length == 0) {
+    document.querySelector('#blog')?.classList.add('active');
+  }
 </script>

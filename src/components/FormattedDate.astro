@@ -1,18 +1,63 @@
 ---
 interface Props {
-	date: Date;
-	class?: string
+  date: Date;
+  class?: string;
 }
 
 const { date, class: className } = Astro.props;
 ---
 
-<time datetime={date.toISOString()} class={className ? className : ""}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+<time datetime={date.toISOString()} class={className ? className : ''}>
+  {
+    date.toLocaleDateString('en-us', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  }
 </time>
+<script>
+  type ScreenSize = 'large' | 'small' | null;
+  const LARGE_SCREEN: ScreenSize = 'large';
+  const SMALL_SCREEN: ScreenSize = 'small';
+
+  const initialWidth: ScreenSize =
+    window.innerWidth >= 651 ? LARGE_SCREEN : SMALL_SCREEN;
+
+  // changes date to either short string or numeric date
+  // depending on screen size
+  function fitDateToScreen(screenSize: ScreenSize) {
+    const timeElements: NodeListOf<HTMLTimeElement> =
+      document.querySelectorAll('time');
+    let options = {};
+    if (screenSize === LARGE_SCREEN) {
+      options = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      };
+    }
+    if (timeElements && timeElements.length > 0) {
+      timeElements.forEach((el) => {
+        const dateAsNumber = new Date(el.innerText);
+        el.innerText = dateAsNumber.toLocaleDateString('en-us', options);
+      });
+    }
+  }
+
+  function onResize() {
+    let newWidth = window.innerWidth;
+    let prevScreenSize: ScreenSize = null;
+    let currentScreenSize: ScreenSize =
+      newWidth >= 651 ? LARGE_SCREEN : SMALL_SCREEN;
+    // check if screensize is different from the previous size
+    // to reduce unnecessary element updates
+    if (prevScreenSize != currentScreenSize) {
+      prevScreenSize = currentScreenSize;
+      fitDateToScreen(currentScreenSize);
+    }
+  }
+
+  window.addEventListener('resize', onResize);
+  fitDateToScreen(initialWidth);
+</script>
