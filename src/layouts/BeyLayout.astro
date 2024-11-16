@@ -1,0 +1,28 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <style>
+      ul {
+        padding: 1em;
+      }
+      li > * {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        list-style-type: circle;
+      }
+    </style>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
