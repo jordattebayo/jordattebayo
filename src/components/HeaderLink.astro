@@ -18,15 +18,29 @@ const isActive: boolean =
   const navLinkElements = document.querySelectorAll('nav a');
   const navLinks = Array.from(navLinkElements);
   const currentPath = window.location.pathname.slice(1);
-  const doLinksMatchNavigation = navLinks.filter((link) => {
+  const isLinkCurrentPath = navLinks.filter((link) => {
     if (link instanceof HTMLAnchorElement) {
       const hrefArray = link.href.split('/');
       const thisPath = hrefArray[hrefArray.length - 1];
+      console.log(thisPath, currentPath);
       return currentPath === thisPath;
     }
     return false;
   });
-  if (doLinksMatchNavigation.length == 0) {
-    document.querySelector('#blog')?.classList.add('active');
+  if (isLinkCurrentPath.length == 0) {
+    if (currentPath.includes('journal')) {
+      const journalLink = document.querySelector('#journal');
+
+      if (journalLink) {
+        journalLink.classList.add('active');
+        // maybe update it to be back button
+      }
+    } else {
+      const blogLink = document.querySelector('#blog');
+      if (blogLink) {
+        blogLink.classList.add('active');
+        // maybe update it to be back button
+      }
+    }
   }
 </script>
