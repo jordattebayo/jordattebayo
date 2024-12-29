@@ -8,7 +8,7 @@ heroImage:
 ogImage:
   path: ''
   alt: Another image text
-isDraft: true
+isDraft: false
 ---
 
 Hey Friends! Welcome to my blog. This is where tutorials, my thoughts, and maybe even some hot takes on software development will live. If you're vibing feel free to subscribe to a news letter that I'm hoping to update regularly (like once a month, and no spam. Ever).
@@ -126,110 +126,8 @@ Now I'll be the first to admit environment variables alone aren't full on featur
 
 You can go for broke and use Azure Configuration Manager and have a UI toggle Azure Administrators can use! 
 
-
-
 The benefits here are great. Firstly you now don't have to restart your React app just to change the configuration since env variables are only assigned at application build time. Secondly you can pair your .NET web app with Azure Configuration manager to do some pretty fancy feature management, like A/B testing, conditionals, filters, and staged roll outs.
 
 Thanks so much for sticking to the end. 
 
 Until next time nerds <3
-
-
-# Script
-
----
-
-[Opening Shot: Visuals of coding environment]
-
-[Background Music: Upbeat and motivational]
-
----
-
-**Introduction:**
-
-[Slide: Feature Flags in Action]
-
-"Hey there, tech enthusiasts! Welcome back to [Your Blog/Vlog Name]. Today, we're diving into the world of feature flags – a powerful technique that empowers software providers with better control and experimentation over their products."
-
----
-
-**Transition to Frontend Developers:**
-
-[Slide: Frontend Devs, this one's for you]
-
-"Now, I know the term 'deploy' might have triggered a DevOps alert in your minds, but Frontend devs, stick around. This one's crafted with you in mind."
-
----
-
-**What Are Feature Flags:**
-
-[Slide: Feature Flags Definition]
-
-"Feature flags, also known as feature toggles or switches, allow you to toggle functionality on and off during runtime, without deploying new code. Imagine having the ability to control and experiment with your features without causing downtime. That's the magic of feature flags!"
-
----
-
-**Scenario: Using Feature Flags in a React App:**
-
-[Slide: Implementing Feature Flags in React]
-
-"Let's paint a scenario. You're tasked with adding a pop-up for a news update on a React website. The catch? The product owner wants the ability to turn it off with minimal downtime. Enter feature flags!"
-
----
-
-**Code Implementation in React:**
-
-[Live Coding Section]
-
-"I've got a sample React application set up with Vite, a lightning-fast build tool. If you're using something else, no worries; the principles remain the same."
-
-[Code Screen: .env file]
-
-"In your `.env` file, we set up a variable: `VITE_SHOW_NEWS=true`. This variable will control whether our news feature is visible or not."
-
----
-
-[Code Screen: App.tsx]
-
-"Now, let's jump into our React code. We import the environment variable and use it to conditionally render our News Update feature."
-
-[Code: Conditional Rendering]
-
-jsx
-
-`{ showNews === "true" ? <Dialog toggleDialog={toggleDialog} requestDialogClose={requestDialogClose} requestDialogOpen={requestDialogOpen} isDialogOpen={isDialogOpen} /> : null }`
-
-[Explanation]
-
-"Our goal is simple: the `Dialog` component should only appear when we want it. By flipping the value of `VITE_SHOW_NEWS`, you control the visibility of your feature without restarting your app."
-
----
-
-**Benefits of Feature Flags:**
-
-[Slide: Benefits]
-
-"So, why bother with feature flags? First, no need to restart your app just to change configuration. Second, you can integrate with tools like Azure Configuration Manager for advanced feature management, including A/B testing and staged rollouts."
-
----
-
-**Advanced Example: .NET Web API**
-
-[Slide: .NET Web API]
-
-"I've even got an advanced example in the same repo, featuring a .NET web API using the `Microsoft.FeatureManagement` nuget package. The pattern remains the same – frontend calls an API to check the feature flag."
-
----
-
-**Closing:**
-
-[Closing Shot: Thank you message]
-
-"Thanks for sticking with me until the end, nerds! Feature flags might seem like a simple concept, but their impact is immense. Experiment, iterate, and until next time, happy coding! <3"
-
----
-
-[Outro: End Screen with Social Media Links]
-
-[Background Music: Fades out]
-
