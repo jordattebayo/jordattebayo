@@ -4,7 +4,7 @@ excerpt: ''
 heroImage:
   path: ' '
   alt: Man under box
-pubDate: 'Jan 01 2023'
+pubDate: 'Jan 01 2024'
 ogImage:
   path: ''
   alt: Another image text

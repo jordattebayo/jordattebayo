@@ -1,10 +1,10 @@
 ---
 title: 'Feature Flags in React'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Nov 23 2023'
+description: 'An exploration into what feature flags in react could look like'
+pubDate: 'Nov 23 2024'
 heroImage:
   path: ''
-  alt: A photo of me and my dog
+  alt: ''
 ogImage:
   path: ''
   alt: Another image text
