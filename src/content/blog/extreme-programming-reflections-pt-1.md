@@ -9,7 +9,7 @@ ogImage:
   path: ''
   alt: Another image text
 description: My reflections on reading the first handful of chapters of Extreme Programming Explained. 
-isDraft: true
+isDraft: false
 ---
 There’s so much I’d like to preface this post with. Never before have I had to confront myself as deeply as I have while reading Extreme Programming Explained by Kent Beck. It feels a bit silly, honestly. I’ve been programming for 4+ years now. I've made a solid impact at my job and proven myself as a dependable software developer. Me aside, it’s been 20 years since the book was first published, and many of the practices it promotes are now commonplace. So why does this book still challenge me so deeply?
 
