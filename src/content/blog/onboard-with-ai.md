@@ -1,7 +1,7 @@
 ---
 title: "On Board with AI"
 description: "After a long stint as an AI skeptic I've reconsidered it's effectiveness."
-pubDate: "Jul 04 2025"
+pubDate: "July 04 2025"
 heroImage:
   path: "/posts/onboard-with-ai/ai-computer.jpg"
   alt: An AI generated image of an 80's personal computer
