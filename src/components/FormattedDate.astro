@@ -36,6 +36,12 @@ const { date, class: className } = Astro.props;
         month: 'short',
         day: 'numeric',
       };
+    } else {
+      options = {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+      };
     }
     if (timeElements && timeElements.length > 0) {
       timeElements.forEach((el) => {
