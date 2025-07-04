@@ -1,21 +1,23 @@
 ---
-title: 'On Board with AI'
-description: "After a long stint as a ai-hype skeptic I've gotten on board"
-pubDate: 'Jul 02 2025'
+title: "On Board with AI"
+description: "After a long stint as a AI skeptic I've reconsidered it's effectiveness."
+pubDate: "Jul 04 2025"
 heroImage:
-  path: ' '
-  alt: '/blog-placeholder-1.jpg'
+  path: "/posts/onboard-with-ai/ai-computer.jpg"
+  alt: An AI generated image of an 80's personal computer
 ogImage:
-  path: ' '
+  path: " "
   alt: Another image text
-isDraft: true
+isDraft: false
 ---
 
-Some time ago I was talking to my mom about AI. I felt compelled to convey my thoughts regarding AI's efficiencies and shortcomings to her. I had just obtained the Microsoft AI Engineer Certificate and my ego was in need of some check.
+## My initial thoughts
 
-My opinion was that I thought AI was just hype, it wasn't all the applicably useful - executives all just collectively agreed it was the future. 
+I was talking to my mom about AI. I felt compelled to convey my thoughts regarding AI's efficiencies and shortcomings to her. I had just obtained the Microsoft AI Engineer Certificate and my ego was in need of some check.
 
-I felt that they were pushing vaporware in order to claim market share. That way if AI suddenly did something useful they would be poised to rake in the dough. 
+My opinion was that I thought AI was just hype, it wasn't all the applicably useful - executives all just collectively agreed it was the future.
+
+I felt that they were pushing vaporware in order to claim market share. That way if AI suddenly did something useful they would be poised to rake in the dough.
 
 To be clear I thought AI was amazing, particularly LLMs. I thought it was so cool to actually hold a real conversation with a bot.
 
@@ -38,15 +40,16 @@ The books ruined. The copy written work taken, it may not be illegal I'm sad to 
 I was skeptical about so many things regarding AI.
 
 ---
+
 ## Fast Forward a Year
 
-AI still is mentioned in every engineering podcast, talk, presentation, YouTube video, and blog post. 
+AI still is mentioned in every engineering podcast, talk, presentation, YouTube video, and blog post.
 
 **I felt I was going to pull my hair out if I heard another one more dev mention it.**
 
 But I have to concede that models have come incredibly far and new revolutionary tools hit the internet seemingly every week.
 
-At work I'm now using cursor for projects and I doubt I could go back. I'm at least 25% faster of a dev than I was before it. 
+At work I'm now using cursor for projects and I doubt I could go back. I'm at least 25% faster of a dev than I was before it.
 
 Cursor wrote functions I knew I wanted to write but would have had to think for minutes on how to create.
 
@@ -56,9 +59,10 @@ It implemented application-level architecture across multiple files effortlessly
 
 I even felt the need to use the IDE for personal projects.
 
-I also now use Warp which to a lesser degree has helped boost my productivity but it still has come in clutch on numerous occasions. 
+I also now use Warp which to a lesser degree has helped boost my productivity but it still has come in clutch on numerous occasions.
 
 ---
+
 ## Building an Agent
 
 This week I had some free time and decided to create a Slack app that uses LangGraph to call OpenAI models and give it tools to use for various dev-related tasks, to make an agent.
@@ -97,13 +101,13 @@ They were probably able to retire or find a place in their orgs where they didn'
 
 **But a lot of people also adopted early.**
 
-They had the advantage of getting a head start learning the new way of doing business. They could become power users, boost productivity, and even have career opportunities. 
+They had the advantage of getting a head start learning the new way of doing business. They could become power users, boost productivity, and even have career opportunities.
 
 ---
 
 ## My Realization
 
-Hearing that anecdote resonated with me. History may not repeat itself but it rhymes. In such a short time peoples work changed dramatically. Maybe even more so when things were digitized. 
+Hearing that anecdote resonated with me. History may not repeat itself but it rhymes. In such a short time peoples work changed dramatically. Maybe even more so when things were digitized.
 
 AI at this point isn't going to replace anyone, but it is a new tool that changes the way we do our work.
 
@@ -112,4 +116,3 @@ AI at this point isn't going to replace anyone, but it is a new tool that change
 There are a lot of difficulties it poses but this is the new normal so we may as well embrace our new workflow because there's no putting it back in the bottle.
 
 I see it now. I'm on board.
-
