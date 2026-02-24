@@ -7,7 +7,15 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "astro check",
+    "test": "vitest run",
+    "ci:local": "pnpm run lint && pnpm run test && pnpm run build",
+    "hooks:install": "git config core.hooksPath .shared-git-hooks",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:install": "playwright install --with-deps chromium"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -16,5 +24,9 @@
     "@astrojs/sitemap": "3.7.0",
     "astro": "5.17.2",
     "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4",
+    "@playwright/test": "^1.55.0"
   }
 }

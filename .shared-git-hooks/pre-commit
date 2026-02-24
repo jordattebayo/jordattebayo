@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+set -e
+
+echo "Running local CI checks (lint, test, build)..."
+pnpm run ci:local
