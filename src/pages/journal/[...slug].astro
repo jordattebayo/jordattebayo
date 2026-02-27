@@ -2,6 +2,8 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const entries = await getCollection('journal', ({ data }) => {
     if (import.meta.env.DEV) {
@@ -9,14 +11,16 @@ export async function getStaticPaths() {
     }
     return data.isDraft !== true;
   });
+
   return entries.map((entry) => ({
     params: { slug: entry.slug },
     props: entry,
   }));
 }
+
 type Props = CollectionEntry<'journal'>;
 
-const entry = Astro.props;
+const entry = Astro.props as Props;
 const { Content } = await entry.render();
 ---
 

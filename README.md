@@ -22,3 +22,8 @@ If you're using an AI coding agent, start there for setup, validation, and editi
 - Unit tests (watch): `pnpm run test:watch`
 - E2E tests: `pnpm run test:e2e`
 - Install Playwright browser (first time): `pnpm run test:e2e:install`
+
+## Supabase (Hybrid)
+
+This project uses a hybrid setup approach (Supabase managed directly, Vercel env vars managed manually).
+See [docs/supabase-hybrid-setup.md](docs/supabase-hybrid-setup.md) for setup details.

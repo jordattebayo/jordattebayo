@@ -1,0 +1,396 @@
+---
+type Props = {
+  postSlug: string;
+};
+
+const { postSlug } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+---
+
+<section
+  class="comments-shell"
+  data-comments-root
+  data-post-slug={postSlug}
+  data-turnstile-site-key={turnstileSiteKey}
+>
+  <h2>Comments</h2>
+  <p class="comments-status" data-comments-status>Loading comments...</p>
+
+  <div class="auth-box">
+    <p class="auth-state" data-auth-state>Checking session...</p>
+    <button class="signout-btn" type="button" data-signout-btn hidden>Sign out</button>
+    <form class="magic-link-form" data-magic-link-form>
+      <label for={`comment-email-${postSlug}`}>Sign in with email</label>
+      <div class="auth-row">
+        <input id={`comment-email-${postSlug}`} name="email" type="email" placeholder="you@example.com" required />
+        <button type="submit">Send magic link</button>
+      </div>
+    </form>
+    <form class="comment-form" data-comment-form hidden>
+      <label for={`comment-author-${postSlug}`}>Display name (optional)</label>
+      <input id={`comment-author-${postSlug}`} name="authorLabel" type="text" maxlength="60" placeholder="Jordan" />
+      <label for={`comment-body-${postSlug}`}>Comment (markdown supported)</label>
+      <textarea
+        id={`comment-body-${postSlug}`}
+        name="bodyMarkdown"
+        rows="6"
+        maxlength="5000"
+        placeholder="Write your comment..."
+        required
+      ></textarea>
+      {
+        turnstileSiteKey ? (
+          <div class="captcha-wrap">
+            <div class="cf-turnstile" data-turnstile-widget data-sitekey={turnstileSiteKey}></div>
+          </div>
+        ) : (
+          <p class="captcha-warning">Comment posting disabled: missing `PUBLIC_TURNSTILE_SITE_KEY`.</p>
+        )
+      }
+      <button type="submit" data-comment-submit>Post comment</button>
+    </form>
+  </div>
+
+  <ul class="comments-list informal-list" data-comments-list></ul>
+</section>
+
+<script>
+  // @ts-nocheck
+  function createCommentListItem(comment) {
+    const item = document.createElement('li');
+    item.className = 'comment-item';
+
+    const meta = document.createElement('p');
+    meta.className = 'comment-meta';
+    const date = new Date(comment.created_at);
+    const label = comment.author_label || 'Anonymous';
+    meta.textContent = `${label} on ${date.toLocaleString()}`;
+
+    const body = document.createElement('div');
+    body.className = 'comment-body';
+    body.innerHTML = comment.body_html;
+
+    item.appendChild(meta);
+    item.appendChild(body);
+
+    return item;
+  }
+
+  async function fetchSession() {
+    const response = await fetch('/api/auth/session', { method: 'GET' });
+    if (!response.ok) {
+      return null;
+    }
+    const data = await response.json();
+    return data.session ?? null;
+  }
+
+  async function fetchComments(postSlug) {
+    const response = await fetch(`/api/comments?slug=${encodeURIComponent(postSlug)}`, { method: 'GET' });
+    if (!response.ok) {
+      throw new Error('Failed to load comments.');
+    }
+    const data = await response.json();
+    return data.comments ?? [];
+  }
+
+  function setStatus(root, message) {
+    const status = root.querySelector('[data-comments-status]');
+    if (status) {
+      status.textContent = message;
+    }
+  }
+
+  function setAuthUi(session, ui) {
+    if (session?.user?.email) {
+      ui.authState.textContent = `Signed in as ${session.user.email}`;
+      ui.magicLinkForm.setAttribute('hidden', 'hidden');
+      ui.commentForm.removeAttribute('hidden');
+      ui.signoutBtn.removeAttribute('hidden');
+    } else {
+      ui.authState.textContent = 'Sign in to leave a comment.';
+      ui.magicLinkForm.removeAttribute('hidden');
+      ui.commentForm.setAttribute('hidden', 'hidden');
+      ui.signoutBtn.setAttribute('hidden', 'hidden');
+    }
+  }
+
+  function renderCommentList(root, list, comments) {
+    list.innerHTML = '';
+
+    if (comments.length === 0) {
+      setStatus(root, 'No approved comments yet.');
+      return;
+    }
+
+    setStatus(root, `${comments.length} comment${comments.length === 1 ? '' : 's'}`);
+    for (const comment of comments) {
+      list.appendChild(createCommentListItem(comment));
+    }
+  }
+
+  function getTurnstileToken(root) {
+    const widget = root.querySelector('[data-turnstile-widget]');
+    if (!widget) {
+      return '';
+    }
+    if (!window.turnstile || typeof window.turnstile.getResponse !== 'function') {
+      return '';
+    }
+    return window.turnstile.getResponse(widget) || '';
+  }
+
+  function resetTurnstile(root) {
+    const widget = root.querySelector('[data-turnstile-widget]');
+    if (!widget) {
+      return;
+    }
+    if (!window.turnstile || typeof window.turnstile.reset !== 'function') {
+      return;
+    }
+    window.turnstile.reset(widget);
+  }
+
+  async function initComments(root) {
+    const postSlug = root.getAttribute('data-post-slug') || '';
+    const turnstileKey = root.getAttribute('data-turnstile-site-key') || '';
+    const list = root.querySelector('[data-comments-list]');
+    const authState = root.querySelector('[data-auth-state]');
+    const magicLinkForm = root.querySelector('[data-magic-link-form]');
+    const commentForm = root.querySelector('[data-comment-form]');
+    const signoutBtn = root.querySelector('[data-signout-btn]');
+
+    if (!postSlug || !list || !authState || !magicLinkForm || !commentForm || !signoutBtn) {
+      return;
+    }
+
+    const ui = { authState, magicLinkForm, commentForm, signoutBtn };
+    let session = null;
+
+    try {
+      session = await fetchSession();
+      setAuthUi(session, ui);
+    } catch {
+      authState.textContent = 'Session check failed. You can still browse comments.';
+      setAuthUi(null, ui);
+    }
+
+    magicLinkForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form) {
+        return;
+      }
+      const emailInput = form.querySelector('input[name="email"]');
+      const email = emailInput?.value?.trim();
+
+      if (!email) {
+        authState.textContent = 'Email is required.';
+        return;
+      }
+
+      authState.textContent = 'Sending magic link...';
+      const response = await fetch('/api/auth/magic-link', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          redirectPath: window.location.pathname,
+        }),
+      });
+
+      if (!response.ok) {
+        authState.textContent = 'Unable to send magic link. Please try again.';
+        return;
+      }
+
+      authState.textContent = 'Magic link sent. Check your email.';
+      form.reset();
+    });
+
+    signoutBtn.addEventListener('click', async () => {
+      signoutBtn.setAttribute('disabled', 'disabled');
+      const response = await fetch('/api/auth/sign-out', { method: 'POST' });
+      signoutBtn.removeAttribute('disabled');
+
+      if (!response.ok) {
+        authState.textContent = 'Sign out failed. Please try again.';
+        return;
+      }
+
+      session = null;
+      setAuthUi(null, ui);
+      authState.textContent = 'Signed out.';
+    });
+
+    commentForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form) {
+        return;
+      }
+
+      if (!turnstileKey) {
+        authState.textContent = 'Cannot post: missing captcha site key.';
+        return;
+      }
+
+      const bodyField = form.querySelector('textarea[name="bodyMarkdown"]');
+      const authorField = form.querySelector('input[name="authorLabel"]');
+      const bodyMarkdown = bodyField?.value?.trim() ?? '';
+      const authorLabel = authorField?.value?.trim() ?? '';
+      const captchaToken = getTurnstileToken(root);
+
+      if (!bodyMarkdown) {
+        authState.textContent = 'Comment body is required.';
+        return;
+      }
+      if (!captchaToken) {
+        authState.textContent = 'Please complete captcha before posting.';
+        return;
+      }
+
+      const submitBtn = form.querySelector('[data-comment-submit]');
+      submitBtn?.setAttribute('disabled', 'disabled');
+      authState.textContent = 'Posting comment...';
+
+      const response = await fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          postSlug,
+          bodyMarkdown,
+          authorLabel,
+          captchaToken,
+        }),
+      });
+
+      submitBtn?.removeAttribute('disabled');
+      resetTurnstile(root);
+
+      if (!response.ok) {
+        authState.textContent = 'Unable to post comment. Please try again.';
+        return;
+      }
+
+      const result = await response.json();
+      form.reset();
+
+      if (result.moderation === 'pending') {
+        authState.textContent = 'Comment submitted for moderation.';
+        return;
+      }
+
+      authState.textContent = 'Comment posted.';
+
+      try {
+        const comments = await fetchComments(postSlug);
+        renderCommentList(root, list, comments);
+      } catch {
+        setStatus(root, 'Comment posted, but refresh failed.');
+      }
+    });
+
+    try {
+      const comments = await fetchComments(postSlug);
+      renderCommentList(root, list, comments);
+    } catch {
+      setStatus(root, 'Failed to load comments.');
+    }
+  }
+
+  document.querySelectorAll('[data-comments-root]').forEach((root) => void initComments(root));
+</script>
+{
+  turnstileSiteKey && (
+    <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  )
+}
+
+<style>
+  .comments-shell {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--gray-light));
+  }
+
+  .comments-status {
+    margin-bottom: 1rem;
+  }
+
+  .auth-box {
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: rgba(var(--gray-light), 0.3);
+  }
+
+  .auth-state {
+    margin: 0 0 0.5rem;
+  }
+
+  .magic-link-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+
+  .auth-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .auth-row input {
+    flex: 1;
+  }
+
+  .comment-form {
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 0.75rem;
+  }
+
+  .comment-form textarea {
+    min-height: 7rem;
+  }
+
+  .captcha-wrap {
+    margin-top: 0.35rem;
+  }
+
+  .captcha-warning {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+    color: rgb(var(--gray));
+  }
+
+  .signout-btn {
+    margin-bottom: 0.75rem;
+  }
+
+  .comment-item {
+    padding: 0.85rem;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 8px;
+  }
+
+  .comment-meta {
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem;
+    color: rgb(var(--gray));
+  }
+
+  .comment-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 700px) {
+    .auth-row {
+      flex-direction: column;
+    }
+  }
+</style>
