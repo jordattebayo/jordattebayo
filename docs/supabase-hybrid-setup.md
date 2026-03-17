@@ -76,6 +76,55 @@ Recommended baseline:
 - Add CAPTCHA verification server-side for abuse control.
 - Add moderation workflow before publishing comments by default.
 
+## 8. Comment Moderation (via Supabase SQL Editor)
+
+First-time commenters start as `pending`. Users with 1+ approved comments auto-approve.
+
+**Approve all pending comments:**
+```sql
+UPDATE public.comments
+SET status = 'approved', approved_at = now()
+WHERE status = 'pending';
+```
+
+**Approve a specific comment:**
+```sql
+UPDATE public.comments
+SET status = 'approved', approved_at = now()
+WHERE id = '<comment-uuid>';
+```
+
+**Reject a comment (with reason):**
+```sql
+UPDATE public.comments
+SET status = 'rejected', moderation_reason = 'spam'
+WHERE id = '<comment-uuid>';
+```
+
+**Mark as spam:**
+```sql
+UPDATE public.comments
+SET status = 'spam', moderation_reason = 'automated flag'
+WHERE id = '<comment-uuid>';
+```
+
+**View all pending comments:**
+```sql
+SELECT id, post_slug, author_label, body_markdown, created_at
+FROM public.comments
+WHERE status = 'pending' AND is_deleted = false
+ORDER BY created_at ASC;
+```
+
+**Soft-delete a comment:**
+```sql
+UPDATE public.comments
+SET status = 'archived', is_deleted = true, deleted_at = now()
+WHERE id = '<comment-uuid>';
+```
+
+Note: these queries must be run as service_role (the SQL Editor does this by default) to bypass RLS.
+
 ## API Contracts Added
 - `POST /api/auth/magic-link`
   - body: `{ "email": "you@example.com", "redirectPath": "/" }`

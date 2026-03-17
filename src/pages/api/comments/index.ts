@@ -14,6 +14,7 @@ import {
 type CommentRow = {
   id: string;
   post_slug: string;
+  user_id: string;
   author_label: string;
   body_html: string;
   created_at: string;
@@ -31,7 +32,7 @@ function parseApprovedCount(contentRange: string | null): number {
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, cookies }) => {
   if (!hasSupabasePublicConfig()) {
     return new Response(JSON.stringify({ comments: [], disabled: true }), {
       status: 200,
@@ -48,7 +49,7 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   const query = new URLSearchParams({
-    select: 'id,post_slug,author_label,body_html,created_at',
+    select: 'id,post_slug,user_id,author_label,body_html,created_at',
     post_slug: `eq.${slug}`,
     status: 'eq.approved',
     is_deleted: 'eq.false',
@@ -67,7 +68,20 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   const rows = (await response.json()) as CommentRow[];
-  return new Response(JSON.stringify({ comments: rows }), {
+
+  const accessToken = getAccessToken(cookies);
+  let currentUserId: string | null = null;
+  if (accessToken) {
+    const user = await getAuthenticatedUser(accessToken);
+    currentUserId = user?.id ?? null;
+  }
+
+  const comments = rows.map(({ user_id, ...rest }) => ({
+    ...rest,
+    is_owner: currentUserId !== null && user_id === currentUserId,
+  }));
+
+  return new Response(JSON.stringify({ comments }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
   });

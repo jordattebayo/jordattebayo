@@ -3,7 +3,7 @@ import { getSiteUrl, hasSupabasePublicConfig } from '../../../lib/server/env';
 import { clearSessionCookies, setSessionCookies } from '../../../lib/server/auth-session';
 import { supabaseAuthRequest } from '../../../lib/server/supabase-rest';
 
-const ALLOWED_TYPES = new Set(['magiclink', 'recovery', 'invite', 'signup']);
+const ALLOWED_TYPES = new Set(['magiclink', 'recovery', 'invite', 'signup', 'email']);
 
 export const prerender = false;
 

@@ -1,4 +1,4 @@
-function escapeHtml(input: string): string {
+export function escapeHtml(input: string): string {
   return input
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -7,7 +7,7 @@ function escapeHtml(input: string): string {
     .replaceAll("'", '&#39;');
 }
 
-function formatInline(line: string): string {
+export function formatInline(line: string): string {
   let formatted = line;
 
   // Inline code first so later formatting does not alter code segments.

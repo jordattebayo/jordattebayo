@@ -14,28 +14,27 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
   data-turnstile-site-key={turnstileSiteKey}
 >
   <h2>Comments</h2>
-  <p class="comments-status" data-comments-status>Loading comments...</p>
+  <p class="comments-status" data-comments-status>loading comments...</p>
 
   <div class="auth-box">
-    <p class="auth-state" data-auth-state>Checking session...</p>
-    <button class="signout-btn" type="button" data-signout-btn hidden>Sign out</button>
+    <p class="auth-state" data-auth-state>checking session...</p>
+    <button class="signout-btn" type="button" data-signout-btn hidden>sign out</button>
     <form class="magic-link-form" data-magic-link-form>
-      <label for={`comment-email-${postSlug}`}>Sign in with email</label>
       <div class="auth-row">
         <input id={`comment-email-${postSlug}`} name="email" type="email" placeholder="you@example.com" required />
-        <button type="submit">Send magic link</button>
+        <button type="submit">send magic link</button>
       </div>
     </form>
     <form class="comment-form" data-comment-form hidden>
-      <label for={`comment-author-${postSlug}`}>Display name (optional)</label>
-      <input id={`comment-author-${postSlug}`} name="authorLabel" type="text" maxlength="60" placeholder="Jordan" />
-      <label for={`comment-body-${postSlug}`}>Comment (markdown supported)</label>
+      <label for={`comment-author-${postSlug}`}>display name (optional)</label>
+      <input id={`comment-author-${postSlug}`} name="authorLabel" type="text" maxlength="60" placeholder="Lamborghini Reganomics" />
+      <label for={`comment-body-${postSlug}`}>comment</label>
       <textarea
         id={`comment-body-${postSlug}`}
         name="bodyMarkdown"
         rows="6"
         maxlength="5000"
-        placeholder="Write your comment..."
+        placeholder="inline markdown is supported!"
         required
       ></textarea>
       {
@@ -44,10 +43,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
             <div class="cf-turnstile" data-turnstile-widget data-sitekey={turnstileSiteKey}></div>
           </div>
         ) : (
-          <p class="captcha-warning">Comment posting disabled: missing `PUBLIC_TURNSTILE_SITE_KEY`.</p>
+          <p class="captcha-warning">comment posting disabled: missing `PUBLIC_TURNSTILE_SITE_KEY`.</p>
         )
       }
-      <button type="submit" data-comment-submit>Post comment</button>
+      <button type="submit" data-comment-submit>post comment</button>
     </form>
   </div>
 
@@ -63,7 +62,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     const meta = document.createElement('p');
     meta.className = 'comment-meta';
     const date = new Date(comment.created_at);
-    const label = comment.author_label || 'Anonymous';
+    const label = comment.author_label || 'anonymous';
     meta.textContent = `${label} on ${date.toLocaleString()}`;
 
     const body = document.createElement('div');
@@ -72,6 +71,15 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
     item.appendChild(meta);
     item.appendChild(body);
+
+    if (comment.is_owner) {
+      const archiveBtn = document.createElement('button');
+      archiveBtn.className = 'archive-btn';
+      archiveBtn.type = 'button';
+      archiveBtn.textContent = 'delete';
+      archiveBtn.setAttribute('data-comment-id', comment.id);
+      item.appendChild(archiveBtn);
+    }
 
     return item;
   }
@@ -103,12 +111,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
   function setAuthUi(session, ui) {
     if (session?.user?.email) {
-      ui.authState.textContent = `Signed in as ${session.user.email}`;
+      ui.authState.textContent = `signed in as ${session.user.email}`;
       ui.magicLinkForm.setAttribute('hidden', 'hidden');
       ui.commentForm.removeAttribute('hidden');
       ui.signoutBtn.removeAttribute('hidden');
     } else {
-      ui.authState.textContent = 'Sign in to leave a comment.';
+      ui.authState.textContent = 'sign in to leave a comment.';
       ui.magicLinkForm.removeAttribute('hidden');
       ui.commentForm.setAttribute('hidden', 'hidden');
       ui.signoutBtn.setAttribute('hidden', 'hidden');
@@ -119,7 +127,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     list.innerHTML = '';
 
     if (comments.length === 0) {
-      setStatus(root, 'No approved comments yet.');
+      setStatus(root, 'be the first to comment!');
       return;
     }
 
@@ -171,7 +179,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       session = await fetchSession();
       setAuthUi(session, ui);
     } catch {
-      authState.textContent = 'Session check failed. You can still browse comments.';
+      authState.textContent = 'session check failed. you can still browse comments.';
       setAuthUi(null, ui);
     }
 
@@ -185,11 +193,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       const email = emailInput?.value?.trim();
 
       if (!email) {
-        authState.textContent = 'Email is required.';
+        authState.textContent = 'email is required.';
         return;
       }
 
-      authState.textContent = 'Sending magic link...';
+      authState.textContent = 'sending magic link...';
       const response = await fetch('/api/auth/magic-link', {
         method: 'POST',
         headers: {
@@ -202,11 +210,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       });
 
       if (!response.ok) {
-        authState.textContent = 'Unable to send magic link. Please try again.';
+        authState.textContent = 'unable to send magic link. please try again.';
         return;
       }
 
-      authState.textContent = 'Magic link sent. Check your email.';
+      authState.textContent = 'magic link sent. check your email.';
       form.reset();
     });
 
@@ -216,13 +224,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       signoutBtn.removeAttribute('disabled');
 
       if (!response.ok) {
-        authState.textContent = 'Sign out failed. Please try again.';
+        authState.textContent = 'sign out failed. please try again.';
         return;
       }
 
       session = null;
       setAuthUi(null, ui);
-      authState.textContent = 'Signed out.';
+      authState.textContent = 'signed out.';
     });
 
     commentForm.addEventListener('submit', async (event) => {
@@ -233,7 +241,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       }
 
       if (!turnstileKey) {
-        authState.textContent = 'Cannot post: missing captcha site key.';
+        authState.textContent = 'cannot post: missing captcha site key.';
         return;
       }
 
@@ -244,17 +252,17 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       const captchaToken = getTurnstileToken(root);
 
       if (!bodyMarkdown) {
-        authState.textContent = 'Comment body is required.';
+        authState.textContent = 'comment body is required.';
         return;
       }
       if (!captchaToken) {
-        authState.textContent = 'Please complete captcha before posting.';
+        authState.textContent = 'please complete captcha before posting.';
         return;
       }
 
       const submitBtn = form.querySelector('[data-comment-submit]');
       submitBtn?.setAttribute('disabled', 'disabled');
-      authState.textContent = 'Posting comment...';
+      authState.textContent = 'posting comment...';
 
       const response = await fetch('/api/comments', {
         method: 'POST',
@@ -273,7 +281,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       resetTurnstile(root);
 
       if (!response.ok) {
-        authState.textContent = 'Unable to post comment. Please try again.';
+        authState.textContent = 'unable to post comment. please try again.';
         return;
       }
 
@@ -281,17 +289,37 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       form.reset();
 
       if (result.moderation === 'pending') {
-        authState.textContent = 'Comment submitted for moderation.';
+        authState.textContent = 'comment submitted — pending moderation. it\u2019ll appear once approved.';
         return;
       }
 
-      authState.textContent = 'Comment posted.';
+      authState.textContent = 'comment posted!';
 
       try {
         const comments = await fetchComments(postSlug);
         renderCommentList(root, list, comments);
       } catch {
-        setStatus(root, 'Comment posted, but refresh failed.');
+        setStatus(root, 'comment posted, but refresh failed.');
+      }
+    });
+
+    list.addEventListener('click', async (event) => {
+      const btn = event.target.closest('.archive-btn');
+      if (!btn) return;
+      const commentId = btn.getAttribute('data-comment-id');
+      if (!commentId || !confirm('delete this comment?')) return;
+
+      btn.disabled = true;
+      const resp = await fetch(`/api/comments/${commentId}/archive`, { method: 'POST' });
+      if (resp.ok) {
+        btn.closest('.comment-item')?.remove();
+        const remaining = list.querySelectorAll('.comment-item').length;
+        setStatus(root, remaining === 0
+          ? 'no comments yet.'
+          : `${remaining} comment${remaining === 1 ? '' : 's'}`);
+      } else {
+        btn.disabled = false;
+        authState.textContent = 'failed to delete comment.';
       }
     });
 
@@ -299,7 +327,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
       const comments = await fetchComments(postSlug);
       renderCommentList(root, list, comments);
     } catch {
-      setStatus(root, 'Failed to load comments.');
+      setStatus(root, 'failed to load comments.');
     }
   }
 
@@ -325,8 +353,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
   .auth-box {
     margin-bottom: 1.5rem;
     padding: 0.75rem;
+    border: 1px solid rgb(var(--gray-light));
     border-radius: 8px;
-    background: rgba(var(--gray-light), 0.3);
   }
 
   .auth-state {
@@ -352,6 +380,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
     display: grid;
     gap: 0.45rem;
     margin-top: 0.75rem;
+    justify-items: start;
+  }
+
+  .comment-form textarea,
+  .comment-form input {
+    width: 100%;
   }
 
   .comment-form textarea {
@@ -373,9 +407,17 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
   }
 
   .comment-item {
-    padding: 0.85rem;
-    border: 1px solid rgb(var(--gray-light));
-    border-radius: 8px;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgb(var(--gray-light));
+  }
+
+  .comment-item:first-child {
+    padding-top: 0;
+  }
+
+  .comment-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .comment-meta {
@@ -386,6 +428,22 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
   .comment-body :global(p:last-child) {
     margin-bottom: 0;
+  }
+
+  .archive-btn {
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85rem;
+    color: rgb(var(--gray));
+    background: none;
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .archive-btn:hover {
+    color: #c00;
+    border-color: #c00;
   }
 
   @media (max-width: 700px) {
