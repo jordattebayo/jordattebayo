@@ -1,19 +1,19 @@
-import { requireEnv, getSiteUrl, hasSupabasePublicConfig } from '../src/lib/server/env';
+import { requireEnv, getSiteUrl, hasSupabaseConfig } from '../src/lib/server/env';
 
 describe('requireEnv', () => {
   afterEach(() => {
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_URL;
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_ANON_KEY;
+    delete (import.meta.env as Record<string, unknown>).SUPABASE_URL;
+    delete (import.meta.env as Record<string, unknown>).SUPABASE_ANON_KEY;
     delete (import.meta.env as Record<string, unknown>).PUBLIC_SITE_URL;
   });
 
   test('returns value when env var is set', () => {
-    (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_URL = 'https://x.supabase.co';
-    expect(requireEnv('PUBLIC_SUPABASE_URL')).toBe('https://x.supabase.co');
+    (import.meta.env as Record<string, unknown>).SUPABASE_URL = 'https://x.supabase.co';
+    expect(requireEnv('SUPABASE_URL')).toBe('https://x.supabase.co');
   });
 
   test('throws when env var is missing', () => {
-    expect(() => requireEnv('PUBLIC_SUPABASE_URL')).toThrow('Missing required environment variable');
+    expect(() => requireEnv('SUPABASE_URL')).toThrow('Missing required environment variable');
   });
 });
 
@@ -34,29 +34,29 @@ describe('getSiteUrl', () => {
   });
 });
 
-describe('hasSupabasePublicConfig', () => {
+describe('hasSupabaseConfig', () => {
   afterEach(() => {
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_URL;
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_ANON_KEY;
+    delete (import.meta.env as Record<string, unknown>).SUPABASE_URL;
+    delete (import.meta.env as Record<string, unknown>).SUPABASE_ANON_KEY;
   });
 
   test('returns true when both vars set', () => {
-    (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_URL = 'https://x.supabase.co';
-    (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_ANON_KEY = 'key123';
-    expect(hasSupabasePublicConfig()).toBe(true);
+    (import.meta.env as Record<string, unknown>).SUPABASE_URL = 'https://x.supabase.co';
+    (import.meta.env as Record<string, unknown>).SUPABASE_ANON_KEY = 'key123';
+    expect(hasSupabaseConfig()).toBe(true);
   });
 
   test('returns false when URL missing', () => {
-    (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_ANON_KEY = 'key123';
-    expect(hasSupabasePublicConfig()).toBe(false);
+    (import.meta.env as Record<string, unknown>).SUPABASE_ANON_KEY = 'key123';
+    expect(hasSupabaseConfig()).toBe(false);
   });
 
   test('returns false when anon key missing', () => {
-    (import.meta.env as Record<string, unknown>).PUBLIC_SUPABASE_URL = 'https://x.supabase.co';
-    expect(hasSupabasePublicConfig()).toBe(false);
+    (import.meta.env as Record<string, unknown>).SUPABASE_URL = 'https://x.supabase.co';
+    expect(hasSupabaseConfig()).toBe(false);
   });
 
   test('returns false when both missing', () => {
-    expect(hasSupabasePublicConfig()).toBe(false);
+    expect(hasSupabaseConfig()).toBe(false);
   });
 });

@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
 import { getAccessToken } from '../../../lib/server/auth-session';
-import { hasSupabasePublicConfig } from '../../../lib/server/env';
+import { hasSupabaseConfig } from '../../../lib/server/env';
 import { getAuthenticatedUser } from '../../../lib/server/supabase-rest';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ cookies }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     return new Response(JSON.stringify({ session: null, disabled: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

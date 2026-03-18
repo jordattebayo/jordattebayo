@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getAccessToken } from '../../../lib/server/auth-session';
 import { renderSafeMarkdown } from '../../../lib/server/comment-markdown';
-import { hasSupabasePublicConfig } from '../../../lib/server/env';
+import { hasSupabaseConfig } from '../../../lib/server/env';
 import { isRateLimited } from '../../../lib/server/rate-limit';
 import {
   getAuthenticatedUser,
@@ -33,7 +33,7 @@ function parseApprovedCount(contentRange: string | null): number {
 export const prerender = false;
 
 export const GET: APIRoute = async ({ url, cookies }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     return new Response(JSON.stringify({ comments: [], disabled: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
@@ -88,7 +88,7 @@ export const GET: APIRoute = async ({ url, cookies }) => {
 };
 
 export const POST: APIRoute = async ({ request, cookies }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     return new Response(JSON.stringify({ error: 'Comments are not configured yet.' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' },

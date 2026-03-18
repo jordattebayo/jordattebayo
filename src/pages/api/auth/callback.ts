@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSiteUrl, hasSupabasePublicConfig } from '../../../lib/server/env';
+import { getSiteUrl, hasSupabaseConfig } from '../../../lib/server/env';
 import { clearSessionCookies, setSessionCookies } from '../../../lib/server/auth-session';
 import { supabaseAuthRequest } from '../../../lib/server/supabase-rest';
 
@@ -8,7 +8,7 @@ const ALLOWED_TYPES = new Set(['magiclink', 'recovery', 'invite', 'signup', 'ema
 export const prerender = false;
 
 export const GET: APIRoute = async ({ url, cookies, redirect, request }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     clearSessionCookies(cookies);
     return redirect('/?auth=not-configured');
   }

@@ -2,8 +2,8 @@ import { requireEnv } from './env';
 
 function getSupabaseConfig() {
   return {
-    url: requireEnv('PUBLIC_SUPABASE_URL'),
-    anonKey: requireEnv('PUBLIC_SUPABASE_ANON_KEY'),
+    url: requireEnv('SUPABASE_URL'),
+    anonKey: requireEnv('SUPABASE_ANON_KEY'),
     serviceRoleKey: import.meta.env.SUPABASE_SERVICE_ROLE_KEY,
   };
 }

@@ -16,12 +16,14 @@
 - UI polish: lowercase messages, border box, comment separators
 
 ## Next Implementation Steps
-1. **Enable comments on journal entries** — pass `postSlug={entry.slug}` in `src/pages/journal/[...slug].astro` (one-liner)
-2. **Custom SMTP for magic links** — Supabase free tier limits to 3 emails/hour. Set up Resend or Postmark in Supabase dashboard → Settings → Auth → SMTP
-3. **Add CSP security headers** — no Content-Security-Policy configured yet. Add via `vercel.json` for defense-in-depth with user-generated comment HTML
-4. Optional: API route tests for comment create/archive
-5. Optional: e2e coverage for comment submit flow
-6. Optional: move raw `fetch` wrappers to `@supabase/supabase-js`
+1. **Add env vars to Vercel** — all 6 required env vars (see below) must be set in Vercel project → Settings → Environment Variables, then redeploy. Use Turnstile test keys until real ones are created.
+2. **Enable comments on journal entries** — pass `postSlug={entry.slug}` in `src/pages/journal/[...slug].astro` (one-liner)
+3. **Custom SMTP for magic links** — Supabase free tier limits to 3 emails/hour. Set up Resend or Postmark in Supabase dashboard → Settings → Auth → SMTP
+4. **Real Turnstile keys** — create at Cloudflare dashboard → Turnstile, add your Vercel domain, replace test keys in Vercel env vars
+5. **Add CSP security headers** — no Content-Security-Policy configured yet. Add via `vercel.json` for defense-in-depth with user-generated comment HTML
+6. Optional: API route tests for comment create/archive
+7. Optional: e2e coverage for comment submit flow
+8. Optional: move raw `fetch` wrappers to `@supabase/supabase-js`
 
 ## Supabase Email Template Setup
 Both **Confirm signup** and **Magic Link** templates must use:
@@ -31,8 +33,8 @@ Both **Confirm signup** and **Magic Link** templates must use:
 Default `{{ .ConfirmationURL }}` uses implicit flow (fragment-based) which doesn't work with server-side auth.
 
 ## Required Environment Variables
-- `PUBLIC_SUPABASE_URL`
-- `PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY` (server only)
 - `PUBLIC_SITE_URL`
 - `PUBLIC_TURNSTILE_SITE_KEY`

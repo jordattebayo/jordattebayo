@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getSiteUrl, hasSupabasePublicConfig } from '../../../lib/server/env';
+import { getSiteUrl, hasSupabaseConfig } from '../../../lib/server/env';
 import { isRateLimited } from '../../../lib/server/rate-limit';
 import { getClientIp, supabaseAuthRequest } from '../../../lib/server/supabase-rest';
 
@@ -8,7 +8,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     return new Response(JSON.stringify({ error: 'Auth is not configured yet.' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' },

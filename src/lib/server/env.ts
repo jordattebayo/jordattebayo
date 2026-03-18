@@ -10,6 +10,6 @@ export function getSiteUrl(request: Request): string {
   return import.meta.env.PUBLIC_SITE_URL ?? new URL(request.url).origin;
 }
 
-export function hasSupabasePublicConfig(): boolean {
-  return Boolean(import.meta.env.PUBLIC_SUPABASE_URL && import.meta.env.PUBLIC_SUPABASE_ANON_KEY);
+export function hasSupabaseConfig(): boolean {
+  return Boolean(import.meta.env.SUPABASE_URL && import.meta.env.SUPABASE_ANON_KEY);
 }

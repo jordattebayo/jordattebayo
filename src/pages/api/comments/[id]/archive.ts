@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getAccessToken } from '../../../../lib/server/auth-session';
-import { hasSupabasePublicConfig } from '../../../../lib/server/env';
+import { hasSupabaseConfig } from '../../../../lib/server/env';
 import { getAuthenticatedUser, supabaseRestAsUser } from '../../../../lib/server/supabase-rest';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -16,7 +16,7 @@ function resolveAccessToken(request: Request, cookieToken: string | null): strin
 export const prerender = false;
 
 export const POST: APIRoute = async ({ params, request, cookies }) => {
-  if (!hasSupabasePublicConfig()) {
+  if (!hasSupabaseConfig()) {
     return new Response(JSON.stringify({ error: 'Comments are not configured yet.' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' },

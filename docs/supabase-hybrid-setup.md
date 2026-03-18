@@ -21,15 +21,15 @@ This repository uses a hybrid approach:
 ## 2. Configure Local Environment
 1. Copy `.env.example` to `.env.local` (or `.env`).
 2. Fill:
-   - `PUBLIC_SUPABASE_URL`
-   - `PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `PUBLIC_SITE_URL`
    - `PUBLIC_TURNSTILE_SITE_KEY`
    - `TURNSTILE_SECRET_KEY`
 
 Security rules:
-- `PUBLIC_*` values may be used in browser code.
+- `SUPABASE_URL` and `SUPABASE_ANON_KEY` are server-only (no `PUBLIC_` prefix).
 - `SUPABASE_SERVICE_ROLE_KEY` must only be used server-side.
 - Never commit `.env*` files with real values.
 
@@ -45,8 +45,8 @@ In Supabase Auth settings:
 
 ## 4. Configure Vercel Manually
 Set env vars in Vercel project settings for all required environments:
-- `PUBLIC_SUPABASE_URL`
-- `PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY` (server only)
 - `PUBLIC_SITE_URL`
 - `PUBLIC_TURNSTILE_SITE_KEY`
