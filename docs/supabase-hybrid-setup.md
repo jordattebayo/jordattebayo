@@ -24,7 +24,7 @@ This repository uses a hybrid approach:
    - `SUPABASE_URL`
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
-   - `PUBLIC_SITE_URL`
+   - `SITE_URL`
    - `PUBLIC_TURNSTILE_SITE_KEY`
    - `TURNSTILE_SECRET_KEY`
 
@@ -48,7 +48,7 @@ Set env vars in Vercel project settings for all required environments:
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY` (server only)
-- `PUBLIC_SITE_URL`
+- `SITE_URL`
 - `PUBLIC_TURNSTILE_SITE_KEY`
 - `TURNSTILE_SECRET_KEY`
 

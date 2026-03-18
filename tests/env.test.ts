@@ -4,7 +4,7 @@ describe('requireEnv', () => {
   afterEach(() => {
     delete (import.meta.env as Record<string, unknown>).SUPABASE_URL;
     delete (import.meta.env as Record<string, unknown>).SUPABASE_ANON_KEY;
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SITE_URL;
+    delete (import.meta.env as Record<string, unknown>).SITE_URL;
   });
 
   test('returns value when env var is set', () => {
@@ -19,11 +19,11 @@ describe('requireEnv', () => {
 
 describe('getSiteUrl', () => {
   afterEach(() => {
-    delete (import.meta.env as Record<string, unknown>).PUBLIC_SITE_URL;
+    delete (import.meta.env as Record<string, unknown>).SITE_URL;
   });
 
-  test('returns PUBLIC_SITE_URL when set', () => {
-    (import.meta.env as Record<string, unknown>).PUBLIC_SITE_URL = 'https://mysite.com';
+  test('returns SITE_URL when set', () => {
+    (import.meta.env as Record<string, unknown>).SITE_URL = 'https://mysite.com';
     const req = new Request('https://fallback.com/path');
     expect(getSiteUrl(req)).toBe('https://mysite.com');
   });

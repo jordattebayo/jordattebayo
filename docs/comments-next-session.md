@@ -36,7 +36,7 @@ Default `{{ .ConfirmationURL }}` uses implicit flow (fragment-based) which doesn
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY` (server only)
-- `PUBLIC_SITE_URL`
+- `SITE_URL`
 - `PUBLIC_TURNSTILE_SITE_KEY`
 - `TURNSTILE_SECRET_KEY`
 

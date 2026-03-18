@@ -7,7 +7,7 @@ export function requireEnv(name: keyof ImportMetaEnv): string {
 }
 
 export function getSiteUrl(request: Request): string {
-  return import.meta.env.PUBLIC_SITE_URL ?? new URL(request.url).origin;
+  return import.meta.env.SITE_URL ?? new URL(request.url).origin;
 }
 
 export function hasSupabaseConfig(): boolean {
