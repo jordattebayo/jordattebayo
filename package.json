@@ -22,7 +22,7 @@
     "@astrojs/mdx": "4.3.13",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "3.7.0",
-    "@astrojs/vercel": "^9.0.4",
+    "@astrojs/vercel": "^10.0.2",
     "@supabase/supabase-js": "^2.98.0",
     "astro": "5.18.0",
     "typescript": "^5.2.2"
