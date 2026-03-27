@@ -46,7 +46,7 @@ const entries = (
           {
             entries.map((entry) => (
               <li>
-                <a class="internal-link" href={`/journal/${entry.slug}/`}>
+                <a class="internal-link" href={`/journal/${entry.id}/`}>
                   <FormattedDate date={entry.data.pubDate} class="post-time" />
 
                   <h5 class="inline post-title">{entry.data.title}</h5>

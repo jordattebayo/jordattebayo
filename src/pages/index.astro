@@ -46,7 +46,7 @@ const posts = (
           {
             posts.map((post) => (
               <li>
-                <a class="internal-link" href={`/${post.slug}/`}>
+                <a class="internal-link" href={`/${post.id}/`}>
                   <FormattedDate date={post.data.pubDate} class="post-time" />
 
                   <h5 class="inline post-title">{post.data.title}</h5>
