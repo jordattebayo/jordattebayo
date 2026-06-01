@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.0"
   },
   "pnpm": {
     "overrides": {
